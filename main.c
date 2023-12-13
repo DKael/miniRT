@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:44 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/10/07 16:05:32 by hyungdki         ###   ########.fr       */
+/*   Updated: 2023/12/13 21:09:12 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 int main(int argc, char **argv)
 {
+	t_data data;
 
+	
 }
