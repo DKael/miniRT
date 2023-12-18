@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/13 10:34:32 by hyungdki         ###   ########.fr       */
+/*   Updated: 2023/12/14 12:34:32 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <fcntl.h>
 # include <string.h>
 # include <math.h>
-# include "../minilibx/mlx.h"
-# include "../minilibx/mlx_keycode.h"
+# include "minilibx/mlx.h"
+# include "minilibx/mlx_keycode.h"
 
 # if !defined(TRUE) && !defined(FALSE)
 #  define TRUE 1
