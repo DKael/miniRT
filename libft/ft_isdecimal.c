@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isdecimal.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 16:04:44 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/24 18:19:04 by hyungdki         ###   ########.fr       */
+/*   Created: 2023/09/24 22:37:12 by hyungdki          #+#    #+#             */
+/*   Updated: 2023/09/24 22:37:31 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+t_bool	ft_isdecimal(char *str)
 {
-	t_data data;
+	int	idx;
 
-	
-
-	data.mlx_ptr = mlx_init();
-	if (data.mlx_ptr == T_NULL)
+	idx = 0;
+	if (str[0] == '-' || str[0] == '+')
+		idx++;
+	while (str[idx] != '\0')
 	{
-		exit(1);
+		if (!('0' <= str[idx] && str[idx] <= '9'))
+			return (FALSE);
+		idx++;
 	}
+	return (TRUE);
 }

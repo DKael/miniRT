@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 16:04:44 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/24 18:19:04 by hyungdki         ###   ########.fr       */
+/*   Created: 2023/05/04 17:37:48 by hyungdki          #+#    #+#             */
+/*   Updated: 2023/09/24 22:32:46 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+char	*ft_strndup(char *src, size_t n)
 {
-	t_data data;
+	size_t	index;
+	char	*replica;
 
-	
-
-	data.mlx_ptr = mlx_init();
-	if (data.mlx_ptr == T_NULL)
+	replica = (char *)malloc(sizeof(char) * (n + 1));
+	if (replica == T_NULL)
+		return (T_NULL);
+	index = 0;
+	while (src[index] != '\0' && index < n)
 	{
-		exit(1);
+		replica[index] = src[index];
+		index++;
 	}
+	replica[index] = '\0';
+	return (replica);
 }

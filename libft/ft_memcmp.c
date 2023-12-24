@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 16:04:44 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/24 18:19:04 by hyungdki         ###   ########.fr       */
+/*   Created: 2023/05/03 20:27:47 by hyungdki          #+#    #+#             */
+/*   Updated: 2023/09/24 22:31:03 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	t_data data;
+	size_t			index;
+	unsigned char	*s1_cptr;
+	unsigned char	*s2_cptr;
 
-	
-
-	data.mlx_ptr = mlx_init();
-	if (data.mlx_ptr == T_NULL)
+	index = -1;
+	s1_cptr = (unsigned char *)s1;
+	s2_cptr = (unsigned char *)s2;
+	while (++index < n)
 	{
-		exit(1);
+		if (s1_cptr[index] != s2_cptr[index])
+			return ((int)(s1_cptr[index] - s2_cptr[index]));
 	}
+	return (0);
 }

@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 16:04:44 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/24 18:19:04 by hyungdki         ###   ########.fr       */
+/*   Created: 2023/09/24 22:55:42 by hyungdki          #+#    #+#             */
+/*   Updated: 2023/09/25 19:08:22 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+char	*ft_strcpy(char *dest, char *src)
 {
-	t_data data;
+	int	index;
 
-	
-
-	data.mlx_ptr = mlx_init();
-	if (data.mlx_ptr == T_NULL)
+	index = 0;
+	while (src[index] != '\0')
 	{
-		exit(1);
+		dest[index] = src[index];
+		index++;
 	}
+	dest[index] = '\0';
+	return (dest);
 }

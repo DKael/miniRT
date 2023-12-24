@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 16:04:44 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/24 18:19:04 by hyungdki         ###   ########.fr       */
+/*   Created: 2023/05/03 20:28:04 by hyungdki          #+#    #+#             */
+/*   Updated: 2023/05/30 14:37:41 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-
-int main(int argc, char **argv)
+char	*ft_strrchr(const char *s, int c)
 {
-	t_data data;
+	int		index;
 
-	
-
-	data.mlx_ptr = mlx_init();
-	if (data.mlx_ptr == T_NULL)
+	index = 0;
+	while (s[index] != '\0')
+		index++;
+	while (index >= 0)
 	{
-		exit(1);
+		if (s[index] == (char)c)
+			return ((char *)s + index);
+		index--;
 	}
+	return ((void *)0);
 }

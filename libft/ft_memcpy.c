@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 16:04:44 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/24 18:19:04 by hyungdki         ###   ########.fr       */
+/*   Created: 2023/05/03 20:27:48 by hyungdki          #+#    #+#             */
+/*   Updated: 2023/09/24 22:31:07 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	t_data data;
+	size_t			index;
+	unsigned char	*dst_char;
+	unsigned char	*src_char;
 
-	
-
-	data.mlx_ptr = mlx_init();
-	if (data.mlx_ptr == T_NULL)
+	if (dst != T_NULL || src != T_NULL)
 	{
-		exit(1);
+		index = 0;
+		dst_char = (unsigned char *)dst;
+		src_char = (unsigned char *)src;
+		while (index < n)
+		{
+			dst_char[index] = src_char[index];
+			index++;
+		}
 	}
+	return (dst);
 }
