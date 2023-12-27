@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 20:28:09 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/09/25 19:07:42 by hyungdki         ###   ########.fr       */
+/*   Updated: 2023/12/26 22:32:42 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 
 typedef int	t_bool;
 
+double		ft_atof(const char *str);
 int			ft_atoi_int(const char *str);
 int			ft_atoi(const char *str);
 long long	ft_atoll(const char *str);

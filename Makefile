@@ -1,0 +1,79 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/05/03 20:30:42 by hyungdki          #+#    #+#              #
+#    Updated: 2023/12/26 23:12:12 by hyungdki         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+SRCS =	main.c \
+		
+OBJS = 	${SRCS:.c=.o}
+
+SRCS_BONUS =	bonus/main_bonus.c \
+				
+OBJS_BONUS = ${SRCS_BONUS:.c=.o}
+
+CC = cc
+
+CFLAGS = -Wall -Wextra 
+
+NAME = minirt
+
+INCLUDE = -I.
+
+LIBDLL_DIR = libdll
+LIBFT_DIR = libft
+LIBGNL_DIR = libgnl
+
+MLX_DIR = minilibx
+
+MLX_DYLIB = libmlx.dylib
+
+WITH_BONUS = 0
+
+ifeq ($(WITH_BONUS),1)
+	TOTAL_OBJS = ${OBJS_BONUS}
+else
+	TOTAL_OBJS = ${OBJS}
+endif
+
+LDFLAGS = -L./${LIBDLL_DIR} -L./${LIBGNL_DIR} -L./${LIBFT_DIR}  -ldll -lgnl -lft -L. -lmlx
+
+${NAME} : ${TOTAL_OBJS}
+	@make -C ${LIBDLL_DIR} all
+	@make -C ${LIBGNL_DIR} all
+	@make -C ${LIBFT_DIR} all
+	@make -C ${MLX_DIR} all
+	mv ${MLX_DIR}/${MLX_DYLIB} .
+	${CC} ${CFLAGS} ${TOTAL_OBJS} -g ${INCLUDE} ${LDFLAGS} -framework OpenGL -framework Appkit -o $@
+
+%.o :%.c
+	${CC} ${CFLAGS} -c -I. $< -o $@
+
+all : ${NAME}
+
+clean:
+	@make -C ${LIBDLL_DIR} fclean
+	@make -C ${LIBGNL_DIR} fclean
+	@make -C ${LIBFT_DIR} fclean
+	@make -C ${MLX_DIR} clean
+	rm -f ${OBJS} ${OBJS_BONUS}
+
+fclean:
+	make clean
+	rm -f ${MLX_DYLIB}
+	rm -rf ${NAME}
+
+re: 
+	make fclean
+	make all
+
+bonus:
+	@make WITH_BONUS=1
+
+.PHONY: all clean fclean re bonus

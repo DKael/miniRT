@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/24 18:14:53 by hyungdki         ###   ########.fr       */
+/*   Updated: 2023/12/27 15:12:25 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "minilibx/mlx_keycode.h"
 # include "libgnl/get_next_line.h"
 # include "libft/libft.h"
+# include "libdll/double_linked_list.h"
 
 # if !defined(TRUE) && !defined(FALSE)
 #  define TRUE 1
@@ -31,6 +32,16 @@
 # ifndef T_NULL
 #  define T_NULL (void *)0
 # endif
+
+typedef enum
+{
+	A,
+	C,
+	L,
+	sp,
+	pl,
+	cy
+}	t_type;
 
 typedef int	t_bool;
 
@@ -54,7 +65,6 @@ typedef struct s_alight
 {
 	double	ratio;
 	t_color	color;
-
 }	t_alight;
 
 typedef struct s_camera
@@ -69,7 +79,6 @@ typedef struct s_light
 	t_pnt	cor;
 	double	ratio;
 	t_color	color;
-
 }	t_light;
 
 typedef struct s_sp
@@ -95,13 +104,19 @@ typedef	struct s_cy
 	t_color	color;
 }	t_cy;
 
-
 typedef struct s_data
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img_ptr[2];
-	char	*img_addr[2];
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	char		*img_addr;
+	t_alight	al;
+	int			al_cnt;
+	t_camera	cam;
+	int			cam_cnt;
+	t_light		l;
+	int			l_cnt;
+	t_dll		objs;
 }	t_data;
 
 

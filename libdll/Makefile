@@ -6,64 +6,23 @@
 #    By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 20:28:31 by hyungdki          #+#    #+#              #
-#    Updated: 2023/12/26 23:18:02 by hyungdki         ###   ########.fr        #
+#    Updated: 2023/09/24 23:18:47 by hyungdki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC =cc
+CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS =	ft_atof.c \
-		ft_atoi_int.c \
-		ft_atoi.c \
-		ft_atoll.c \
-		ft_bzero.c \
-		ft_calloc.c \
-		ft_isalnum.c \
-		ft_isalpha.c \
-		ft_isascii.c \
-		ft_isblank.c \
-		ft_isdecimal.c \
-		ft_isdigit.c \
-		ft_isndecimal.c \
-		ft_isprint.c \
-		ft_itoa.c \
-		ft_memchr.c \
-		ft_memcmp.c \
-		ft_memcpy.c \
-		ft_memmove.c \
-		ft_memset.c \
-		ft_putchar_fd.c \
-		ft_putendl_fd.c \
-		ft_putnbr_fd.c \
-		ft_putstr_fd.c \
-		ft_split.c \
-		ft_strchr.c \
-		ft_strcmp.c \
-		ft_strcpy.c \
-		ft_strdup.c \
-		ft_striteri.c \
-		ft_strjoin.c \
-		ft_strjoin2.c \
-		ft_strlcat.c \
-		ft_strlcpy.c \
-		ft_strlen.c \
-		ft_strmapi.c \
-		ft_strncmp.c \
-		ft_strncpy.c \
-		ft_strndup.c \
-		ft_strnstr.c \
-		ft_strrchr.c \
-		ft_strstr.c \
-		ft_strtrim.c \
-		ft_substr.c \
-		ft_tolower.c \
-		ft_toupper.c \
+SRCS =	double_linked_list1.c 	\
+		double_linked_list2.c 	\
+		double_linked_list3.c 	\
+		double_linked_list4.c 	\
+		double_linked_list5.c
 
 OBJS = 	${SRCS:.c=.o}
 
-NAME = libft.a
+NAME = libdll.a
 
 TOTAL_OBJS = $(OBJS)
 
