@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   vec_operation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gan <gan@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:17:25 by gan               #+#    #+#             */
-/*   Updated: 2023/12/28 14:17:27 by gan              ###   ########.fr       */
+/*   Updated: 2023/12/28 20:11:29 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec.h"
 
-t_vec	vec_add(t_vec u, t_vec v) {
+inline t_vec	vec_add(t_vec u, t_vec v) {
 	t_vec result;
 
 	result.x = u.x + v.x;
@@ -21,7 +21,7 @@ t_vec	vec_add(t_vec u, t_vec v) {
 	return (result);
 }
 
-t_vec	vec_sub(t_vec u, t_vec v) {
+inline t_vec	vec_sub(t_vec u, t_vec v) {
 	t_vec result;
 
 	result.x = u.x - v.x;
@@ -30,7 +30,7 @@ t_vec	vec_sub(t_vec u, t_vec v) {
 	return (result);
 }
 
-t_vec	vec_multi(t_vec v, double d) {
+inline t_vec	vec_multi(t_vec v, double d) {
 	t_vec	result;
 
 	result.x = v.x * d;
@@ -39,6 +39,6 @@ t_vec	vec_multi(t_vec v, double d) {
 	return (result);
 }
 
-double	vec_length(t_vec v) {
+inline double	vec_length(t_vec v) {
 	return (sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)));
 }

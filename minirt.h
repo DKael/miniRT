@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/28 16:29:25 by hyungdki         ###   ########.fr       */
+/*   Updated: 2023/12/28 20:14:49 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@
 #  define T_NULL (void *)0
 # endif
 
+# define WINDOW_SIZE_X 1280
+# define WINDOW_SIZE_Y 1024
+
 typedef enum e_type
 {
 	A,
@@ -44,21 +47,20 @@ typedef enum e_type
 	cy
 }	t_type;
 
-typedef int	t_bool;
-
-typedef struct s_pnt
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_pnt;
-
+typedef int		t_bool;
+typedef t_vec	t_pnt;
 typedef struct s_color
 {
 	int	r;
 	int	g;
 	int	b;
 }	t_color;
+
+typedef struct s_ray
+{
+	t_pnt	orig;
+	t_vec	dir;
+}	t_ray;
 
 typedef struct s_alight
 {
@@ -71,6 +73,7 @@ typedef struct s_camera
 	t_pnt	view_pnt;
 	t_vec	ori_vec;
 	double	fov;
+	double	focal_length;
 }	t_camera;
 
 typedef struct s_light
@@ -109,6 +112,11 @@ typedef struct s_data
 	void		*win_ptr;
 	void		*img_ptr;
 	char		*img_addr;
+	int			win_size_x;
+	int			win_size_y;
+	int			bpp;
+	int			size_line;
+	int			endian;
 	t_alight	al;
 	int			al_cnt;
 	t_camera	cam;
@@ -122,6 +130,12 @@ typedef struct s_data
 int		extension_check(const char *file_name);
 void	essential_elements_chk(t_data *data);
 t_bool	check_real_num_str(char *str);
+// draw.c
+void	draw(t_data *data);
+void	mlx_pixel_put_at_mem(t_data *data, int x, int y, t_color color);
+// event.c
+int		quit_program(int keycode, t_data *data);
+int		press_cross_on_window_frame(t_data *data);
 // free_resource.c
 void	*ft_free(void **ptr);
 void	*free_2d_array1(void ***arr_ptr, int num);
@@ -144,5 +158,7 @@ void	error_exit(t_data *data, char *msg);
 void	delete_obj(void *obj_ptr);
 // parsing1.c
 void	read_rt_file(t_data *data, char *file_name);
+// ray.c
+t_pnt	at(t_ray ray, double t);
 
 #endif

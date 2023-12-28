@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:44 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/28 15:30:22 by hyungdki         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:34:11 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,22 @@ int main(int argc, char **argv)
 	}
 	//----------------------------------------------------------------
 
-	// data.mlx_ptr = mlx_init();
-	// if (data.mlx_ptr == T_NULL)
-	// 	error_exit(&data, "mlx init error!");
-	dll_clear(&data.objs, delete_obj);
+	data.mlx_ptr = mlx_init();
+	if (data.mlx_ptr == T_NULL)
+		error_exit(&data, "mlx_init() error!");
+	data.win_ptr = mlx_new_window(data.mlx_ptr, data.win_size_x, data.win_size_y, "miniRT");
+	if (data.win_ptr == T_NULL)
+		error_exit(&data, "mlx_new_window() error!");
+	data.img_ptr = mlx_new_image(data.mlx_ptr, data.win_size_x, data.win_size_y);
+	if (data.img_ptr == T_NULL)
+		error_exit(&data, "mlx_new_image() error!");
+	data.img_addr = mlx_get_data_addr(data.img_ptr, &(data.bpp), &(data.size_line), &(data.endian));
+	draw(&data);
+	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
+	mlx_key_hook(data.win_ptr, quit_program, &data);
+	mlx_hook(data.win_ptr, 17, 0, press_cross_on_window_frame, &data);
+	mlx_loop(data.mlx_ptr);
+
+	
 	system("leaks minirt");
 }

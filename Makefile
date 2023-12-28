@@ -6,12 +6,14 @@
 #    By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 20:30:42 by hyungdki          #+#    #+#              #
-#    Updated: 2023/12/28 15:19:35 by hyungdki         ###   ########.fr        #
+#    Updated: 2023/12/28 20:15:33 by hyungdki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	main.c \
 		check_func.c \
+		draw.c \
+		event.c \
 		free_resource.c \
 		get_element_value1.c \
 		get_element_value2.c \
@@ -20,7 +22,10 @@ SRCS =	main.c \
 		parsing1.c \
 		parsing2.c \
 		parsing3.c \
-		parsing4.c
+		parsing4.c \
+		vec/vec_operation.c \
+		vec/vec_product.c \
+		vec/vec_unit.c
 		
 OBJS = 	${SRCS:.c=.o}
 

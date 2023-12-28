@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_product.c                                      :+:      :+:    :+:   */
+/*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/28 14:32:40 by gan               #+#    #+#             */
-/*   Updated: 2023/12/28 20:11:23 by hyungdki         ###   ########.fr       */
+/*   Created: 2023/06/26 19:47:42 by hyungdki          #+#    #+#             */
+/*   Updated: 2023/12/28 17:50:18 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec.h"
+#include "minirt.h"
 
-inline double	vec_dot(t_vec u, t_vec v) {
-	return (u.x * v.x + u.y * v.y + u.z * v.z);
+int	quit_program(int keycode, t_data *data)
+{
+	if (keycode == 53)
+	{
+		dll_clear(&data->objs, delete_obj);
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		system("leaks minirt");
+		exit(0);
+	}
+	return (0);
 }
 
-inline t_vec	vec_cross(t_vec u, t_vec v) {
-	t_vec	result;
-
-	result.x = u.y * v.z - u.z * v.y;
-	result.y = u.z * v.x - u.x * v.z;
-	result.z = u.x * v.y - u.y * v.x;
-	return (result);
+int	press_cross_on_window_frame(t_data *data)
+{
+	dll_clear(&data->objs, delete_obj);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	system("leaks minirt");
+	exit(0);
 }
