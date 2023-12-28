@@ -1,6 +1,8 @@
 {
 	"files.associations": {
 		"__locale": "c",
-		"fcntl.h": "c"
+		"fcntl.h": "c",
+		"mlx.h": "c",
+		"mlx_keycode.h": "c"
 	}
 }

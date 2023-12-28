@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/28 16:09:31 by hyungdki         ###   ########.fr       */
+/*   Updated: 2023/12/28 16:29:25 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "libgnl/get_next_line.h"
 # include "libft/libft.h"
 # include "libdll/double_linked_list.h"
+# include "vec/vec.h"
 
 # if !defined(TRUE) && !defined(FALSE)
 #  define TRUE 1
@@ -44,13 +45,6 @@ typedef enum e_type
 }	t_type;
 
 typedef int	t_bool;
-
-typedef struct s_vec
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_vec;
 
 typedef struct s_pnt
 {
