@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/27 15:12:25 by hyungdki         ###   ########.fr       */
+/*   Updated: 2023/12/28 16:09:31 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 #  define T_NULL (void *)0
 # endif
 
-typedef enum
+typedef enum e_type
 {
 	A,
 	C,
@@ -52,7 +52,12 @@ typedef struct s_vec
 	double	z;
 }	t_vec;
 
-typedef t_vec t_pnt;
+typedef struct s_pnt
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_pnt;
 
 typedef struct s_color
 {
@@ -95,7 +100,7 @@ typedef struct s_pl
 	t_color	color;
 }	t_pl;
 
-typedef	struct s_cy
+typedef struct s_cy
 {
 	t_pnt	center;
 	t_vec	n_vec;
@@ -119,5 +124,31 @@ typedef struct s_data
 	t_dll		objs;
 }	t_data;
 
+// check_func.c
+int		extension_check(const char *file_name);
+void	essential_elements_chk(t_data *data);
+t_bool	check_real_num_str(char *str);
+// free_resource.c
+void	*ft_free(void **ptr);
+void	*free_2d_array1(void ***arr_ptr, int num);
+void	*free_2d_array2(void ***arr_ptr);
+// get_element_value1.c
+int		element_split(char *buffer, char ***split_result, int cnt, char del);
+int		get_ratio(char *str, double *val);
+int		get_positive_double_value(char *str, double *val);
+// get_element_value2.c
+int		get_rgb(char *str, int *r, int *g, int *b);
+int		get_cor(char *str, double *x, double *y, double *z);
+int		get_normalized_vec(char *str, double *x, double *y, double *z);
+int		get_fov(char *str, double *val);
+// init.c
+void	data_init(t_data *data);
+// on_error.c
+void	read_error(t_data *data, int return_code, int fd);
+void	error_msg_write(char *msg);
+void	error_exit(t_data *data, char *msg);
+void	delete_obj(void *obj_ptr);
+// parsing1.c
+void	read_rt_file(t_data *data, char *file_name);
 
-# endif
+#endif

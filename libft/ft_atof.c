@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 21:35:39 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/26 22:34:02 by hyungdki         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:36:36 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ double	ft_atof(const char *str)
 	double	below_point;
 	double	sign;
 	int		idx;
-	
+
 	result = 0.0;
 	below_point = 0.1;
 	sign = 1.0;
