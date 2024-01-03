@@ -6,15 +6,18 @@
 #    By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 20:30:42 by hyungdki          #+#    #+#              #
-#    Updated: 2023/12/28 20:15:33 by hyungdki         ###   ########.fr        #
+#    Updated: 2024/01/03 14:50:13 by hyungdki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	main.c \
 		check_func.c \
+		color.c \
+		cylinder.c \
 		draw.c \
 		event.c \
 		free_resource.c \
+		gap.c \
 		get_element_value1.c \
 		get_element_value2.c \
 		init.c \
@@ -23,6 +26,9 @@ SRCS =	main.c \
 		parsing2.c \
 		parsing3.c \
 		parsing4.c \
+		plane.c \
+		ray.c \
+		sphere.c \
 		vec/vec_operation.c \
 		vec/vec_product.c \
 		vec/vec_unit.c

@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/28 20:14:49 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:03:45 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 
 # define WINDOW_SIZE_X 1280
 # define WINDOW_SIZE_Y 1024
+# define PI 3.1415926535897932385
+# define DBL_MIN 2.2250738585072014e-308
+# define DBL_MAX 1.7976931348623157e+308
 
 typedef enum e_type
 {
@@ -106,6 +109,20 @@ typedef struct s_cy
 	t_color	color;
 }	t_cy;
 
+typedef struct s_hit_rec
+{
+	t_pnt	pnt;
+	t_vec	n_vec;
+	double	t;
+	t_bool	from_outside;
+}	t_hit_rec;
+
+typedef struct s_gap
+{
+	double	t_min;
+	double	t_max;
+}	t_gap;
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
@@ -130,6 +147,9 @@ typedef struct s_data
 int		extension_check(const char *file_name);
 void	essential_elements_chk(t_data *data);
 t_bool	check_real_num_str(char *str);
+// color.c
+void	color_set(t_color *origin, int _r, int _g, int _b);
+t_color	color_make(int _r, int _g, int _b);
 // draw.c
 void	draw(t_data *data);
 void	mlx_pixel_put_at_mem(t_data *data, int x, int y, t_color color);
@@ -140,6 +160,12 @@ int		press_cross_on_window_frame(t_data *data);
 void	*ft_free(void **ptr);
 void	*free_2d_array1(void ***arr_ptr, int num);
 void	*free_2d_array2(void ***arr_ptr);
+// gap.c
+void	gap_init(t_gap *gap);
+void	gap_set(t_gap *origin, double _t_min, double _t_max);
+t_gap	gap_make(double _t_min, double _t_max);
+t_bool	gap_contains(t_gap gap, double x);
+t_bool	gap_surrounds(t_gap gap, double x);
 // get_element_value1.c
 int		element_split(char *buffer, char ***split_result, int cnt, char del);
 int		get_ratio(char *str, double *val);
@@ -159,6 +185,7 @@ void	delete_obj(void *obj_ptr);
 // parsing1.c
 void	read_rt_file(t_data *data, char *file_name);
 // ray.c
-t_pnt	at(t_ray ray, double t);
-
+t_pnt	ray_at(t_ray ray, double t);
+// sphere.c
+t_bool	sphere_hit(t_sp	sp, t_ray ray, t_gap gap, t_hit_rec *rec);
 #endif

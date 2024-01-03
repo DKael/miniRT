@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_unit.c                                         :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/28 14:40:23 by gan               #+#    #+#             */
-/*   Updated: 2024/01/03 17:06:51 by hyungdki         ###   ########.fr       */
+/*   Created: 2024/01/03 14:27:10 by hyungdki          #+#    #+#             */
+/*   Updated: 2024/01/03 17:02:07 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec.h"
+#include "minirt.h"
 
-inline t_vec	vec_unit_vec(t_vec v)
+inline void	color_set(t_color *origin, int _r, int _g, int _b)
 {
-	return (vec_multi(v, (1 / vec_length(v))));
+	origin->r = _r;
+	origin->g = _g;
+	origin->b = _b;
 }
 
-inline void	vec_set(t_vec *origin, double _x, double _y, double _z)
+inline t_color	color_make(int _r, int _g, int _b)
 {
-	origin->x = _x;
-	origin->y = _y;
-	origin->z = _z;
-}
+	t_color	tmp;
 
-inline t_vec   vec_make(double _x, double _y, double _z)
-{
-	t_vec target;
-
-	target.x = _x;
-	target.y = _y;
-	target.z = _z;
-	return (target);
+	tmp.r = _r;
+	tmp.g = _g;
+	tmp.b = _b;
+	return tmp;
 }

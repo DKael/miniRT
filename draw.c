@@ -6,46 +6,84 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 17:33:02 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/28 20:26:57 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:10:00 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	draw_test1(t_data *data)
+// void	draw_test1(t_data *data)
+// {
+// 	double lf_r;
+// 	double lf_g;
+// 	double lf_b;
+
+// 	t_color tmp;
+
+// 	for (int j = 0; j < data->win_size_y; ++j) {
+//         for (int i = 0; i < data->win_size_x; ++i) {
+//             lf_r = (double)i / (data->win_size_x-1);
+//             lf_g = (double)j / (data->win_size_y-1);
+//             lf_b = 0;
+
+//             tmp.r = (int)(255.999 * lf_r);
+//             tmp.g = (int)(255.999 * lf_g);
+//             tmp.b = (int)(255.999 * lf_b);
+
+// 			mlx_pixel_put_at_mem(data, i, j, tmp);
+//         }
+//     }
+// }
+
+inline double	degrees_to_radians(double degrees)
 {
-	double lf_r;
-	double lf_g;
-	double lf_b;
-
-	t_color tmp;
-
-	for (int j = 0; j < data->win_size_y; ++j) {
-        for (int i = 0; i < data->win_size_x; ++i) {
-            lf_r = (double)i / (data->win_size_x-1);
-            lf_g = (double)j / (data->win_size_y-1);
-            lf_b = 0;
-
-            tmp.r = (int)(255.999 * lf_r);
-            tmp.g = (int)(255.999 * lf_g);
-            tmp.b = (int)(255.999 * lf_b);
-
-			mlx_pixel_put_at_mem(data, i, j, tmp);
-        }
-    }
+    return (degrees * PI / 180.0);
 }
 
-t_color ray_color(t_ray r)
+t_bool	hit_chk(t_data *data, t_ray ray, t_gap gap, t_hit_rec *rec)
+{
+	t_hit_rec	tmp_rec;
+	t_bool		hit_anything;
+	t_dllnode	*node_ptr;
+	t_bool		result;
+
+	hit_anything = FALSE;
+	node_ptr = data->objs.head.back;
+	while (node_ptr != &(data->objs.tail))
+	{
+		result = FALSE;
+		if (node_ptr->type == sp)
+			result = sphere_hit(*(t_sp *)node_ptr->contents, ray, gap, &tmp_rec);
+		else if (node_ptr->type == pl)
+			;
+		else if (node_ptr->type == cy)
+			;
+		if (result == TRUE)
+		{
+			hit_anything = TRUE;
+			gap.t_max = tmp_rec.t;
+			(*rec) = tmp_rec;
+		}
+		node_ptr = node_ptr->back;
+	}
+	return hit_anything;
+}
+
+t_color ray_color(t_data *data, t_ray r)
 {
     t_vec unit_direction;
 	t_color tmp;
+	t_hit_rec rec;
 	
-	unit_direction = vec_unit_vec(r.dir);
-    double a = 0.5 * (unit_direction.x + 1.0);
+	if(hit_chk(data, r, gap_make(0, DBL_MAX), &rec) == TRUE)
+		return (color_make((rec.n_vec.x + 1) * 0.5 * 255.999, (rec.n_vec.y + 1) * 0.5 * 255.999, (rec.n_vec.z + 1) * 0.5 * 255.999));
 
-	tmp.r = (1.0 - a) * 255 + a * 0.5 * 255;
-	tmp.g = (1.0 - a) * 255 + a * 0.7 * 255; 
-	tmp.b = (1.0 - a) * 255 + a * 0.4 * 255;
+	unit_direction = vec_unit_vec(r.dir);
+    double a = 0.5 * (unit_direction.y + 1.0);
+
+	tmp.r = 255.999 * (1.0 - 0.7 * a);
+	tmp.g = 255.999 * (1.0 - 0.5 * a); 
+	tmp.b = 255;
     return tmp;
 }
 
@@ -64,7 +102,7 @@ void	draw(t_data *data)
 	t_pnt pixel_center;
 	t_ray	tmp_ray;
 
-	aspect_ratio = data->win_size_x / data->win_size_y;
+	aspect_ratio = (double)data->win_size_x / (double)data->win_size_y;
 	viewport_height = 2.0;
 	viewport_width = viewport_height * aspect_ratio;
 
@@ -81,10 +119,10 @@ void	draw(t_data *data)
 	viewport_v.y = -viewport_height;
 	viewport_v.z = 0;
 
-	pixel_delta_u = vec_multi(viewport_u, 1 / data->win_size_x);
-	pixel_delta_v = vec_multi(viewport_v, 1 / data->win_size_y);
+	pixel_delta_u = vec_multi(viewport_u, 1.0 / data->win_size_x);
+	pixel_delta_v = vec_multi(viewport_v, 1.0 / data->win_size_y);
 
-	viewport_upper_left = vec_sub(tmp_cam.view_pnt ,vec_set_xyz(0, 0, tmp_cam.focal_length));
+	viewport_upper_left = vec_sub(tmp_cam.view_pnt ,vec_make(0, 0, tmp_cam.focal_length));
 	viewport_upper_left = vec_sub(viewport_upper_left, vec_multi(viewport_u, 0.5));
 	viewport_upper_left = vec_sub(viewport_upper_left, vec_multi(viewport_v, 0.5));
 
@@ -96,7 +134,7 @@ void	draw(t_data *data)
 			tmp_ray.orig = tmp_cam.view_pnt;
 			tmp_ray.dir = vec_sub(pixel_center, tmp_cam.view_pnt);
 
-			mlx_pixel_put_at_mem(data, i, j, ray_color(tmp_ray));
+			mlx_pixel_put_at_mem(data, i, j, ray_color(data, tmp_ray));
         }
     }
 }
