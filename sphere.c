@@ -6,18 +6,13 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:01:28 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/03 17:11:30 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:22:23 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	set_n_vec_dir(t_ray ray, t_hit_rec *rec)
-{
-	rec->from_outside = (vec_dot(ray.dir, rec->n_vec) < 0);
-	if (rec->from_outside == FALSE)
-		rec->n_vec = vec_multi(rec->n_vec, -1.0);
-}
+
 
 /*
 tmp[0] means a

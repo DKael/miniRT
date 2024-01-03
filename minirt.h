@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/03 17:03:45 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:26:36 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,8 @@ int		get_rgb(char *str, int *r, int *g, int *b);
 int		get_cor(char *str, double *x, double *y, double *z);
 int		get_normalized_vec(char *str, double *x, double *y, double *z);
 int		get_fov(char *str, double *val);
+// hit_record.c
+void	set_n_vec_dir(t_ray ray, t_hit_rec *rec);
 // init.c
 void	data_init(t_data *data);
 // on_error.c
