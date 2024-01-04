@@ -20,7 +20,12 @@ SRCS =	main.c \
 		parsing1.c \
 		parsing2.c \
 		parsing3.c \
-		parsing4.c
+		parsing4.c \
+		render_pl/render_pl.c \
+		render_pl/reflection.c \
+		vec/vec_unit.c\
+		vec/vec_operation.c \
+		vec/vec_product.c
 		
 OBJS = 	${SRCS:.c=.o}
 

@@ -60,6 +60,12 @@ typedef struct s_color
 	int	b;
 }	t_color;
 
+typedef struct s_ray
+{
+	t_pnt	orig;
+	t_vec	dir;
+}	t_ray;
+
 typedef struct s_alight
 {
 	double	ratio;
@@ -92,6 +98,7 @@ typedef struct s_pl
 	t_pnt	cor;
 	t_vec	n_vec;
 	t_color	color;
+	int		con;
 }	t_pl;
 
 typedef struct s_cy
@@ -144,5 +151,10 @@ void	error_exit(t_data *data, char *msg);
 void	delete_obj(void *obj_ptr);
 // parsing1.c
 void	read_rt_file(t_data *data, char *file_name);
+
+t_bool	hit_plane(t_pl pl, t_ray ray);
+t_bool	hit_cylinder(t_cy cy, t_ray ray);
+t_vec	vec_reflection(t_vec ray, t_vec normal_vec);
+double	diffuse(t_vec n_vec, t_pnt node, t_pnt l);
 
 #endif
