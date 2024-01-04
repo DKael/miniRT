@@ -6,11 +6,12 @@
 #    By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 20:30:42 by hyungdki          #+#    #+#              #
-#    Updated: 2024/01/03 14:50:13 by hyungdki         ###   ########.fr        #
+#    Updated: 2024/01/04 16:07:08 by hyungdki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	main.c \
+		camera.c \
 		check_func.c \
 		color.c \
 		cylinder.c \
@@ -20,6 +21,7 @@ SRCS =	main.c \
 		gap.c \
 		get_element_value1.c \
 		get_element_value2.c \
+		hit_record.c \
 		init.c \
 		on_error.c \
 		parsing1.c \

@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:07:56 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/28 17:22:15 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:52:36 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	data_init(t_data *data)
 	data->img_addr = T_NULL;
 	data->win_size_x = WINDOW_SIZE_X;
 	data->win_size_y = WINDOW_SIZE_Y;
+	data->aspect_ratio = (double)data->win_size_x / (double)data->win_size_y;
 }

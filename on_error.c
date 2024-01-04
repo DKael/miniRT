@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:04:16 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/28 15:30:19 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:01:39 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	read_error(t_data *data, int return_code, int fd)
 		msg = "Mutiple camera exist!";
 	else if (return_code == 6)
 		msg = "Mutiple light exist!";
+	else if (return_code == 7)
+		msg = "vector not normalized!";
 	close(fd);
 	error_exit(data, msg);
 }

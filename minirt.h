@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/03 17:26:36 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/04 18:38:33 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 # define PI 3.1415926535897932385
 # define DBL_MIN 2.2250738585072014e-308
 # define DBL_MAX 1.7976931348623157e+308
+# define RADIAN 0.017453292519943
+# define EPSILON 0.0000000001
 
 typedef enum e_type
 {
@@ -52,6 +54,13 @@ typedef enum e_type
 
 typedef int		t_bool;
 typedef t_vec	t_pnt;
+
+typedef struct s_spherical_cor
+{
+	double	r;
+	double	theta;
+	double	phi;
+}	t_spherical_cor;
 typedef struct s_color
 {
 	int	r;
@@ -77,6 +86,15 @@ typedef struct s_camera
 	t_vec	ori_vec;
 	double	fov;
 	double	focal_length;
+	double	viewport_width;
+	double	viewport_height;
+	t_vec viewport_u;
+	t_vec viewport_v;
+	t_vec pixel_delta_u;
+	t_vec pixel_delta_v;
+	t_pnt viewport_upper_left;
+	t_pnt pixel00_loc;
+	t_pnt pixel_center;
 }	t_camera;
 
 typedef struct s_light
@@ -131,6 +149,7 @@ typedef struct s_data
 	char		*img_addr;
 	int			win_size_x;
 	int			win_size_y;
+	double		aspect_ratio;
 	int			bpp;
 	int			size_line;
 	int			endian;
@@ -143,6 +162,8 @@ typedef struct s_data
 	t_dll		objs;
 }	t_data;
 
+// camera.c
+void	cam_init(t_data *data);
 // check_func.c
 int		extension_check(const char *file_name);
 void	essential_elements_chk(t_data *data);

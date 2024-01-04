@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:43:45 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/28 16:05:48 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/04 19:19:15 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,11 @@ int	get_normalized_vec(char *str, double *x, double *y, double *z)
 	*y = ft_atof(spl[1]);
 	*z = ft_atof(spl[2]);
 	free_2d_array2((void ***)&spl);
-	if (!((-1.0 <= *x && *x <= 1.0)
-			&& (-1.0 <= *y && *y <= 1.0)
+	if (!((-1.0 <= *x && *x <= 1.0) && (-1.0 <= *y && *y <= 1.0)
 			&& (-1.0 <= *z && *z <= 1.0)))
 		return (3);
+	if (fabs(pow(*x, 2) + pow(*y, 2) + pow(*z, 2) - 1.0) > EPSILON)
+		return (7);
 	return (0);
 }
 

@@ -5,6 +5,7 @@
 		"mlx.h": "c",
 		"mlx_keycode.h": "c",
 		"minirt.h": "c",
-		"vec.h": "c"
+		"vec.h": "c",
+		"complex": "c"
 	}
 }
