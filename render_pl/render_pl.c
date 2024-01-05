@@ -34,16 +34,77 @@ t_bool	hit_plane(t_pl pl, t_ray ray) {
 	return (TRUE);
 }
 
-t_bool	hit_cylinder(t_cy cy, t_ray ray) {
-	t_vec	cross;
-	t_vec	tmp;
-	double	distance;
-
-	cross = vec_cross(cy.n_vec, ray.dir);
-	tmp = vec_set_xyz(cy.center.x - ray.orig.x, cy.center.y - ray.orig.y, cy.center.z - ray.orig.z);
-	distance = vec_length(vec_multi(cross, vec_dot(cross, tmp) / pow(vec_length(cross), 2)));
-	if (distance > cy.diameter)
+t_bool	isinheight(t_cy cy, double result) 
+{
+	if (-cy.height / 2 <= result && result <= cy.height / 2)
+		return (TRUE);
+	else
 		return (FALSE);
-	//printf("0 0 255\n");
+}
+
+t_bool	hit_cylinder(t_cy cy, t_ray ray) {
+	t_vec	new_orig;
+	int		i;
+	double	d;
+	double	con;
+	double	t;
+	double	dot;
+	double	tmp[9];
+	double	result[2];
+
+	con = cy.n_vec.x * cy.center.x + cy.n_vec.y * cy.center.y + cy.n_vec.z * cy.center.z;
+	t = (con - (cy.n_vec.x * ray.orig.x + cy.n_vec.y * ray.orig.y + cy.n_vec.z * ray.orig.z)) / \
+	(cy.n_vec.x * ray.dir.x + cy.n_vec.y * ray.dir.y + cy.n_vec.z * ray.dir.z);
+	new_orig = vec_set_xyz(ray.dir.x * t + ray.orig.x, ray.dir.y * t + ray.orig.y, ray.dir.z * t + ray.orig.z);
+	dot = vec_dot(vec_unit_vec(cy.n_vec), vec_unit_vec(ray.dir));
+	i = 0;
+	if (!dot) {
+		t = 0;
+		tmp[i++] = ray.orig.x - cy.center.x;
+		tmp[i++] = ray.orig.y - cy.center.y;
+		tmp[i++] = ray.orig.z - cy.center.z;
+		tmp[i++] = pow(ray.dir.x, 2) + pow(ray.dir.y, 2) + pow(ray.dir.z, 2);
+		tmp[i++] = ray.dir.x * tmp[0] + ray.dir.y * tmp[1] + ray.dir.z * tmp[2];
+		tmp[i++] = pow(tmp[0], 2) + pow(tmp[1], 2) + pow(tmp[2], 2) - pow(cy.diameter, 2);
+		d = pow(tmp[4], 2) - tmp[3] * tmp[5];
+	}
+	else {
+		tmp[i++] = vec_unit_vec(cy.n_vec).x - vec_unit_vec(ray.dir).x / dot;
+		tmp[i++] = cy.center.x - new_orig.x;
+		tmp[i++] = vec_unit_vec(cy.n_vec).y - vec_unit_vec(ray.dir).y / dot;
+		tmp[i++] = cy.center.y - new_orig.y;
+		tmp[i++] = vec_unit_vec(cy.n_vec).z - vec_unit_vec(ray.dir).z / dot;
+		tmp[i++] = cy.center.z - new_orig.z;
+		tmp[i++] = pow(tmp[0], 2) + pow(tmp[2], 2) + pow(tmp[4], 2);
+		tmp[i++] = tmp[0] * tmp[1] + tmp[2] * tmp[3] + tmp[4] * tmp[5];
+		tmp[i++] = pow(tmp[1], 2) + pow(tmp[3], 2) + pow(tmp[5], 2) - pow(cy.diameter, 2);
+		d =	pow(tmp[7], 2) - tmp[6] * tmp[8];
+	}
+	if (d < 0)
+		return (FALSE);
+	else {
+		result[0] = -tmp[i - 2] + sqrt(d) / tmp[i - 3];
+		result[1] = -tmp[i - 2] - sqrt(d) / tmp[i - 3];
+		if (!d)
+			if (!isinheight(cy, result[0]))
+				return (FALSE);
+		else if (d)
+			;
+	}
+	printf("0 0 255\n");
 	return (TRUE);
 }
+
+// t_bool	hit_cylinder(t_cy cy, t_ray ray) {
+// 	t_vec	cross;
+// 	t_vec	tmp;
+// 	double	distance;
+
+// 	cross = vec_cross(cy.n_vec, ray.dir);
+// 	tmp = vec_set_xyz(cy.center.x - ray.orig.x, cy.center.y - ray.orig.y, cy.center.z - ray.orig.z);
+// 	distance = vec_length(vec_multi(cross, vec_dot(cross, tmp) / pow(vec_length(cross), 2)));
+// 	if (distance > cy.diameter)
+// 		return (FALSE);
+// 	printf("0 0 255\n");
+// 	return (TRUE);
+// }

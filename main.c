@@ -85,7 +85,7 @@ int main(int argc, char **argv)
 	ray.orig.z = 0;
 	for (int j = 0; j < image_height; ++j) {
 		for (int i = 0; i < image_width; ++i) {
-			ray.dir = vec_set_xyz(256, i - 128, j - 128);
+			ray.dir = vec_unit_vec(vec_set_xyz(256, i - 128, j - 128));
 			if (!hit_cylinder(cy ,ray))
 				printf("0 0 0\n");
 		}
