@@ -5,7 +5,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": ["test.rt"],
+            "args": ["test2.rt"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],

@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:01:33 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/28 16:08:59 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:30:03 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int	case_cy(t_data *data, char *buffer)
 	result = element_split(buffer, &spl, 6, ' ');
 	if (result != 0)
 		return (result);
-	result = get_cor(spl[1], &cy_obj.center.x,
-			&cy_obj.center.y, &cy_obj.center.z);
+	result = get_cor(spl[1], &cy_obj.center);
 	if (result != 0)
 	{
 		free_2d_array2((void ***)&spl);
@@ -38,8 +37,7 @@ static inline int	case_cy2(t_data *data, char **spl, t_cy cy_obj)
 {
 	int	result;
 
-	result = get_normalized_vec(spl[2], &cy_obj.n_vec.x,
-			&cy_obj.n_vec.y, &cy_obj.n_vec.z);
+	result = get_normalized_vec(spl[2], &cy_obj.n_vec);
 	if (result != 0)
 	{
 		free_2d_array2((void ***)&spl);
@@ -65,8 +63,7 @@ static inline int	case_cy3(t_data *data, char **spl, t_cy cy_obj)
 	int		result;
 	t_cy	*heap_cy;
 
-	result = get_rgb(spl[5], &cy_obj.color.r,
-			&cy_obj.color.g, &cy_obj.color.b);
+	result = get_rgb(spl[5], &cy_obj.color);
 	free_2d_array2((void ***)&spl);
 	if (result != 0)
 		return (result);

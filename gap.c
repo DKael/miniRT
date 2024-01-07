@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:15:13 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/03 17:03:52 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:16:25 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 inline void	gap_init(t_gap *gap)
 {
-	gap->t_min = DBL_MIN;
+	gap->t_min = EPSILON;
 	gap->t_max = DBL_MAX;
 }
 

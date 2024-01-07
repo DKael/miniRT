@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/04 18:38:33 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:13:55 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define DBL_MAX 1.7976931348623157e+308
 # define RADIAN 0.017453292519943
 # define EPSILON 0.0000000001
+# define COLOR_OFFSET 255.999
 
 typedef enum e_type
 {
@@ -63,9 +64,12 @@ typedef struct s_spherical_cor
 }	t_spherical_cor;
 typedef struct s_color
 {
-	int	r;
-	int	g;
-	int	b;
+	int		r;
+	int		g;
+	int		b;
+	double	rr;
+	double	rg;
+	double	rb;
 }	t_color;
 
 typedef struct s_ray
@@ -78,6 +82,7 @@ typedef struct s_alight
 {
 	double	ratio;
 	t_color	color;
+	t_color rc;
 }	t_alight;
 
 typedef struct s_camera
@@ -90,8 +95,8 @@ typedef struct s_camera
 	double	viewport_height;
 	t_vec viewport_u;
 	t_vec viewport_v;
-	t_vec pixel_delta_u;
-	t_vec pixel_delta_v;
+	t_vec pixel_du;
+	t_vec pixel_dv;
 	t_pnt viewport_upper_left;
 	t_pnt pixel00_loc;
 	t_pnt pixel_center;
@@ -102,6 +107,7 @@ typedef struct s_light
 	t_pnt	cor;
 	double	ratio;
 	t_color	color;
+	t_color rc;
 }	t_light;
 
 typedef struct s_sp
@@ -133,6 +139,7 @@ typedef struct s_hit_rec
 	t_vec	n_vec;
 	double	t;
 	t_bool	from_outside;
+	t_color	albedo;
 }	t_hit_rec;
 
 typedef struct s_gap
@@ -148,7 +155,9 @@ typedef struct s_data
 	void		*img_ptr;
 	char		*img_addr;
 	int			win_size_x;
+	int			win_size_x_2x;
 	int			win_size_y;
+	int			win_size_y_2x;
 	double		aspect_ratio;
 	int			bpp;
 	int			size_line;
@@ -160,6 +169,7 @@ typedef struct s_data
 	t_light		l;
 	int			l_cnt;
 	t_dll		objs;
+	t_color		*color_map;
 }	t_data;
 
 // camera.c
@@ -171,6 +181,10 @@ t_bool	check_real_num_str(char *str);
 // color.c
 void	color_set(t_color *origin, int _r, int _g, int _b);
 t_color	color_make(int _r, int _g, int _b);
+t_bool	color_radius_chk(int rgb);
+t_color	color_apply_ratio(t_color ori, double ratio);
+t_color	color_add(t_color c1, t_color c2);
+t_color	color_reflection(t_color c1, t_color obj_color);
 // draw.c
 void	draw(t_data *data);
 void	mlx_pixel_put_at_mem(t_data *data, int x, int y, t_color color);
@@ -192,9 +206,9 @@ int		element_split(char *buffer, char ***split_result, int cnt, char del);
 int		get_ratio(char *str, double *val);
 int		get_positive_double_value(char *str, double *val);
 // get_element_value2.c
-int		get_rgb(char *str, int *r, int *g, int *b);
-int		get_cor(char *str, double *x, double *y, double *z);
-int		get_normalized_vec(char *str, double *x, double *y, double *z);
+int		get_rgb(char *str, t_color *color);
+int		get_cor(char *str, t_pnt *pnt);
+int		get_normalized_vec(char *str, t_vec *nvec);
 int		get_fov(char *str, double *val);
 // hit_record.c
 void	set_n_vec_dir(t_ray ray, t_hit_rec *rec);

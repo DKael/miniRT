@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:01:28 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/03 17:22:23 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:42:39 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ t_bool	sphere_hit(t_sp	sp, t_ray ray, t_gap gap, t_hit_rec *rec)
 	t_vec	oc;
 	double	tmp[6];
 
-	oc = vec_sub(ray.orig, sp.center);
-	tmp[0] = vec_length_squared(ray.dir);
-	tmp[1] = vec_dot(oc, ray.dir);
-	tmp[2] = vec_length_squared(oc) - sp.diameter * sp.diameter;
+	oc = v_sub(ray.orig, sp.center);
+	tmp[0] = v_len_squared(ray.dir);
+	tmp[1] = v_dot(oc, ray.dir);
+	tmp[2] = v_len_squared(oc) - sp.diameter * sp.diameter;
 	tmp[3] = tmp[1] * tmp[1] - tmp[0] * tmp[2];
 	if (tmp[3] < 0)
 		return (FALSE);
@@ -44,7 +44,8 @@ t_bool	sphere_hit(t_sp	sp, t_ray ray, t_gap gap, t_hit_rec *rec)
 	}
 	rec->t = tmp[5];
 	rec->pnt = ray_at(ray, tmp[5]);
-	rec->n_vec = vec_multi(vec_sub(rec->pnt, sp.center), 1 / sp.diameter);
+	rec->n_vec = v_mul(v_sub(rec->pnt, sp.center), 1 / sp.diameter);
+	rec->albedo = sp.color;
 	set_n_vec_dir(ray, rec);
 	return (TRUE);
 }

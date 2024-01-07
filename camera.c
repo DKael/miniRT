@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 11:10:56 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/04 19:23:43 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:12:01 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,19 @@ void	cam_init(t_data *data)
 	ptr->viewport_width = 2.0 * cos(theta) * diagonal_len;
 	ptr->viewport_height = 2.0 * sin(theta) * diagonal_len;
 	if (ptr->ori_vec.x == 0 && ptr->ori_vec.y == 0)
-		tmp_vec = vec_sub(vec_multi(ptr->ori_vec, ptr->focal_length), vec_make(0, ptr->viewport_height / 2.0, 0));
+		tmp_vec = v_sub(v_mul(ptr->ori_vec, ptr->focal_length), v_make(0, ptr->viewport_height / 2.0, 0));
 	else
 	{
 		tmp_vec = get_rotated_point(ptr->ori_vec, -atan(ptr->viewport_height / (2.0 * ptr->focal_length)), 0);
-		tmp_vec = vec_multi(tmp_vec, sqrt(pow(ptr->focal_length, 2) + pow((ptr->viewport_height) / 2.0, 2)));
+		tmp_vec = v_mul(tmp_vec, sqrt(pow(ptr->focal_length, 2) + pow((ptr->viewport_height) / 2.0, 2)));
 	}
-	printf("viewport width : %lf\n", ptr->viewport_width);
-	printf("viewport heigh : %lf\n", ptr->viewport_height);
-	printf("tmp_vec : %lf,%lf,%lf\n", tmp_vec.x, tmp_vec.y, tmp_vec.z);
-	printf("ori_vec : %lf,%lf,%lf\n", ptr->ori_vec.x, ptr->ori_vec.y, ptr->ori_vec.z);
-	ptr->viewport_v = vec_multi(vec_sub(vec_multi(ptr->ori_vec, ptr->focal_length), tmp_vec), 2);
-	ptr->viewport_u = vec_cross(ptr->ori_vec, vec_multi(ptr->viewport_v, 1.0 / vec_length(ptr->viewport_v)));
-	ptr->viewport_u = vec_multi(ptr->viewport_u, ptr->viewport_width);
-	ptr->pixel_delta_u = vec_multi(ptr->viewport_u, 1.0 / data->win_size_x);
-	ptr->pixel_delta_v = vec_multi(ptr->viewport_v, 1.0 / data->win_size_y);
-	ptr->viewport_upper_left = vec_add(ptr->view_pnt , vec_multi(ptr->ori_vec, ptr->focal_length));
-	ptr->viewport_upper_left = vec_sub(ptr->viewport_upper_left, vec_multi(ptr->viewport_u, 0.5));
-	ptr->viewport_upper_left = vec_sub(ptr->viewport_upper_left, vec_multi(ptr->viewport_v, 0.5));
-	ptr->pixel00_loc = vec_add(ptr->viewport_upper_left, vec_multi(vec_add(ptr->pixel_delta_u, ptr->pixel_delta_v), 0.5));
+	ptr->viewport_v = v_mul(v_sub(v_mul(ptr->ori_vec, ptr->focal_length), tmp_vec), 2);
+	ptr->viewport_u = v_cross(ptr->ori_vec, v_mul(ptr->viewport_v, 1.0 / v_len(ptr->viewport_v)));
+	ptr->viewport_u = v_mul(ptr->viewport_u, ptr->viewport_width);
+	ptr->pixel_du = v_mul(ptr->viewport_u, 1.0 / data->win_size_x_2x);
+	ptr->pixel_dv = v_mul(ptr->viewport_v, 1.0 / data->win_size_y_2x);
+	ptr->viewport_upper_left = v_add(ptr->view_pnt , v_mul(ptr->ori_vec, ptr->focal_length));
+	ptr->viewport_upper_left = v_sub(ptr->viewport_upper_left, v_mul(ptr->viewport_u, 0.5));
+	ptr->viewport_upper_left = v_sub(ptr->viewport_upper_left, v_mul(ptr->viewport_v, 0.5));
+	ptr->pixel00_loc = v_add(ptr->viewport_upper_left, v_mul(v_add(ptr->pixel_du, ptr->pixel_dv), 0.5));
 }

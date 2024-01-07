@@ -6,13 +6,13 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:17:25 by gan               #+#    #+#             */
-/*   Updated: 2024/01/03 13:56:21 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:39:14 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec.h"
 
-inline t_vec	vec_add(t_vec u, t_vec v)
+inline t_vec	v_add(t_vec u, t_vec v)
 {
 	t_vec result;
 
@@ -22,7 +22,7 @@ inline t_vec	vec_add(t_vec u, t_vec v)
 	return (result);
 }
 
-inline t_vec	vec_sub(t_vec u, t_vec v)
+inline t_vec	v_sub(t_vec u, t_vec v)
 {
 	t_vec result;
 
@@ -32,7 +32,7 @@ inline t_vec	vec_sub(t_vec u, t_vec v)
 	return (result);
 }
 
-inline t_vec	vec_multi(t_vec v, double d)
+inline t_vec	v_mul(t_vec v, double d)
 {
 	t_vec	result;
 
@@ -42,12 +42,12 @@ inline t_vec	vec_multi(t_vec v, double d)
 	return (result);
 }
 
-inline double	vec_length(t_vec v)
+inline double	v_len(t_vec v)
 {
 	return (sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)));
 }
 
-inline double	vec_length_squared(t_vec v)
+inline double	v_len_squared(t_vec v)
 {
 	return (pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2));
 }

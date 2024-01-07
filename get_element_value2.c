@@ -6,16 +6,17 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:43:45 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/04 19:19:15 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:33:43 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	get_rgb(char *str, int *r, int *g, int *b)
+int	get_rgb(char *str, t_color *color)
 {
 	char	**spl;
 	int		result;
+	int		c[3];
 
 	result = element_split(str, &spl, 3, ',');
 	if (result != 0)
@@ -26,18 +27,19 @@ int	get_rgb(char *str, int *r, int *g, int *b)
 		free_2d_array2((void ***)&spl);
 		return (3);
 	}
-	*r = ft_atoi(spl[0]);
-	*g = ft_atoi(spl[1]);
-	*b = ft_atoi(spl[2]);
+	c[0] = ft_atoi(spl[0]);
+	c[1] = ft_atoi(spl[1]);
+	c[2] = ft_atoi(spl[2]);
 	free_2d_array2((void ***)&spl);
-	if (!((0 <= *r && *r <= 255)
-			&& (0 <= *b && *b <= 255)
-			&& (0 <= *g && *g <= 255)))
+	if (!(color_radius_chk(c[0])
+			&& color_radius_chk(c[1])
+			&& color_radius_chk(c[2])))
 		return (3);
+	color_set(color, c[0], c[1], c[2]);
 	return (0);
 }
 
-int	get_cor(char *str, double *x, double *y, double *z)
+int	get_cor(char *str, t_pnt *pnt)
 {
 	char	**spl;
 	int		result;
@@ -52,14 +54,14 @@ int	get_cor(char *str, double *x, double *y, double *z)
 		free_2d_array2((void ***)&spl);
 		return (3);
 	}
-	*x = ft_atof(spl[0]);
-	*y = ft_atof(spl[1]);
-	*z = ft_atof(spl[2]);
+	pnt->x = ft_atof(spl[0]);
+	pnt->y = ft_atof(spl[1]);
+	pnt->z = ft_atof(spl[2]);
 	free_2d_array2((void ***)&spl);
 	return (0);
 }
 
-int	get_normalized_vec(char *str, double *x, double *y, double *z)
+int	get_normalized_vec(char *str, t_vec *nvec)
 {
 	char	**spl;
 	int		result;
@@ -74,14 +76,16 @@ int	get_normalized_vec(char *str, double *x, double *y, double *z)
 		free_2d_array2((void ***)&spl);
 		return (3);
 	}
-	*x = ft_atof(spl[0]);
-	*y = ft_atof(spl[1]);
-	*z = ft_atof(spl[2]);
+	nvec->x = ft_atof(spl[0]);
+	nvec->y = ft_atof(spl[1]);
+	nvec->z = ft_atof(spl[2]);
 	free_2d_array2((void ***)&spl);
-	if (!((-1.0 <= *x && *x <= 1.0) && (-1.0 <= *y && *y <= 1.0)
-			&& (-1.0 <= *z && *z <= 1.0)))
+	if (!((-1.0 <= nvec->x && nvec->x <= 1.0)
+			&& (-1.0 <= nvec->y && nvec->y <= 1.0)
+			&& (-1.0 <= nvec->z && nvec->z <= 1.0)))
 		return (3);
-	if (fabs(pow(*x, 2) + pow(*y, 2) + pow(*z, 2) - 1.0) > EPSILON)
+	if (fabs(pow(nvec->x, 2) + pow(nvec->y, 2)
+		+ pow(nvec->z, 2) - 1.0) > EPSILON)
 		return (7);
 	return (0);
 }
