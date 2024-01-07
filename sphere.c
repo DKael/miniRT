@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:01:28 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/07 14:42:39 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:46:58 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ t_bool	sphere_hit(t_sp	sp, t_ray ray, t_gap gap, t_hit_rec *rec)
 	rec->n_vec = v_mul(v_sub(rec->pnt, sp.center), 1 / sp.diameter);
 	rec->albedo = sp.color;
 	set_n_vec_dir(ray, rec);
+	rec->type = TYPE_SP;
 	return (TRUE);
 }

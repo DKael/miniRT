@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:44 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/07 14:10:01 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/07 20:02:59 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	if (data.img_ptr == T_NULL)
 		error_exit(&data, "mlx_new_image() error!");
 	data.img_addr = mlx_get_data_addr(data.img_ptr, &(data.bpp), &(data.size_line), &(data.endian));
-	data.color_map = (t_color *)malloc(sizeof(t_color) * (data.win_size_y_2x * data.win_size_x_2x));
+	data.color_map = (t_color *)malloc(sizeof(t_color) * (data.win_size_y_nx * data.win_size_x_nx));
 	if (data.color_map == T_NULL)
 		exit(1);
 	draw(&data);

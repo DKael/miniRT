@@ -6,7 +6,7 @@
 #    By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 20:30:42 by hyungdki          #+#    #+#              #
-#    Updated: 2024/01/04 16:07:08 by hyungdki         ###   ########.fr        #
+#    Updated: 2024/01/07 17:00:50 by hyungdki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,8 @@ SRCS =	main.c \
 		sphere.c \
 		vec/vec_operation.c \
 		vec/vec_product.c \
-		vec/vec_unit.c
-    render_pl/render_pl.c \
+		vec/vec_unit.c \
+    	render_pl/render_pl.c \
 		render_pl/reflection.c \
 		
 OBJS = 	${SRCS:.c=.o}

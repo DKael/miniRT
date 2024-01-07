@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:55:09 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/07 14:29:43 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:52:01 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static inline int	case_sp2(t_data *data, char **spl, t_sp sp_obj)
 		free(heap_sp);
 		return (1);
 	}
-	data->objs.tail.front->type = sp;
+	data->objs.tail.front->type = TYPE_SP;
 	return (0);
 }
 
@@ -106,6 +106,6 @@ static inline int	case_pl2(t_data *data, char **spl, t_pl pl_obj)
 		free(heap_pl);
 		return (1);
 	}
-	data->objs.tail.front->type = pl; 
+	data->objs.tail.front->type = TYPE_PL; 
 	return (0);
 }

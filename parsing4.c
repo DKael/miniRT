@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:01:33 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/07 14:30:03 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:52:26 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ static inline int	case_cy3(t_data *data, char **spl, t_cy cy_obj)
 		free(heap_cy);
 		return (1);
 	}
-	data->objs.tail.front->type = cy;
+	data->objs.tail.front->type = TYPE_CY;
 	return (0);
 }

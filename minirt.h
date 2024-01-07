@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/07 15:13:55 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/07 20:02:59 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,12 @@
 # define RADIAN 0.017453292519943
 # define EPSILON 0.0000000001
 # define COLOR_OFFSET 255.999
-
-typedef enum e_type
-{
-	A,
-	C,
-	L,
-	sp,
-	pl,
-	cy
-}	t_type;
+# define TYPE_A 0
+# define TYPE_C 1
+# define TYPE_L 2
+# define TYPE_SP 3
+# define TYPE_PL 4
+# define TYPE_CY 5
 
 typedef int		t_bool;
 typedef t_vec	t_pnt;
@@ -141,6 +137,7 @@ typedef struct s_hit_rec
 	double	t;
 	t_bool	from_outside;
 	t_color	albedo;
+	int		type;
 }	t_hit_rec;
 
 typedef struct s_gap
@@ -156,9 +153,9 @@ typedef struct s_data
 	void		*img_ptr;
 	char		*img_addr;
 	int			win_size_x;
-	int			win_size_x_2x;
+	int			win_size_x_nx;
 	int			win_size_y;
-	int			win_size_y_2x;
+	int			win_size_y_nx;
 	double		aspect_ratio;
 	int			bpp;
 	int			size_line;
@@ -171,6 +168,8 @@ typedef struct s_data
 	int			l_cnt;
 	t_dll		objs;
 	t_color		*color_map;
+	int			max_depth;
+	int			aa_ratio;
 }	t_data;
 
 // camera.c
