@@ -6,26 +6,36 @@
 #    By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 20:30:42 by hyungdki          #+#    #+#              #
-#    Updated: 2023/12/28 15:19:35 by hyungdki         ###   ########.fr        #
+#    Updated: 2024/01/04 16:07:08 by hyungdki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	main.c \
+		camera.c \
 		check_func.c \
+		color.c \
+		cylinder.c \
+		draw.c \
+		event.c \
 		free_resource.c \
+		gap.c \
 		get_element_value1.c \
 		get_element_value2.c \
+		hit_record.c \
 		init.c \
 		on_error.c \
 		parsing1.c \
 		parsing2.c \
 		parsing3.c \
 		parsing4.c \
-		render_pl/render_pl.c \
-		render_pl/reflection.c \
-		vec/vec_unit.c\
+		plane.c \
+		ray.c \
+		sphere.c \
 		vec/vec_operation.c \
-		vec/vec_product.c
+		vec/vec_product.c \
+		vec/vec_unit.c
+    render_pl/render_pl.c \
+		render_pl/reflection.c \
 		
 OBJS = 	${SRCS:.c=.o}
 

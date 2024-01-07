@@ -3,24 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   vec_unit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gan <gan@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:40:23 by gan               #+#    #+#             */
-/*   Updated: 2023/12/28 14:40:25 by gan              ###   ########.fr       */
+/*   Updated: 2024/01/07 14:40:07 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec.h"
 
-t_vec	vec_unit_vec(t_vec v) {
-	return (vec_multi(v, (1 / vec_length(v))));
+inline t_vec	v_unit_vec(t_vec v)
+{
+	return (v_mul(v, (1 / v_len(v))));
 }
 
-t_vec   vec_set_xyz(double x, double y, double z) {
+inline void	v_set(t_vec *origin, double _x, double _y, double _z)
+{
+	origin->x = _x;
+	origin->y = _y;
+	origin->z = _z;
+}
+
+inline t_vec   v_make(double _x, double _y, double _z)
+{
 	t_vec target;
 
-	target.x = x;
-	target.y = y;
-	target.z = z;
+	target.x = _x;
+	target.y = _y;
+	target.z = _z;
 	return (target);
 }

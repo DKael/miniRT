@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:55:09 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/28 16:08:26 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:29:43 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int	case_sp(t_data *data, char *bf)
 	result = element_split(bf, &spl, 4, ' ');
 	if (result != 0)
 		return (result);
-	result = get_cor(spl[1], &sp_obj.center.x,
-			&sp_obj.center.y, &sp_obj.center.z);
+	result = get_cor(spl[1], &sp_obj.center);
 	if (result != 0)
 	{
 		free_2d_array2((void ***)&spl);
@@ -45,8 +44,7 @@ static inline int	case_sp2(t_data *data, char **spl, t_sp sp_obj)
 	int		result;
 	t_sp	*heap_sp;
 
-	result = get_rgb(spl[3], &sp_obj.color.r,
-			&sp_obj.color.g, &sp_obj.color.b);
+	result = get_rgb(spl[3], &sp_obj.color);
 	free_2d_array2((void ***)&spl);
 	if (result != 0)
 		return (result);
@@ -72,15 +70,13 @@ int	case_pl(t_data *data, char *bf)
 	result = element_split(bf, &spl, 4, ' ');
 	if (result != 0)
 		return (result);
-	result = get_cor(spl[1], &pl_obj.cor.x,
-			&pl_obj.cor.y, &pl_obj.cor.z);
+	result = get_cor(spl[1], &pl_obj.cor);
 	if (result != 0)
 	{
 		free_2d_array2((void ***)&spl);
 		return (result);
 	}
-	result = get_normalized_vec(spl[2], &pl_obj.n_vec.x,
-			&pl_obj.n_vec.y, &pl_obj.n_vec.z);
+	result = get_normalized_vec(spl[2], &pl_obj.n_vec);
 	if (result != 0)
 	{
 		free_2d_array2((void ***)&spl);
@@ -94,9 +90,10 @@ static inline int	case_pl2(t_data *data, char **spl, t_pl pl_obj)
 	int		result;
 	t_pl	*heap_pl;
 
-	result = get_rgb(spl[3], &pl_obj.color.r,
-			&pl_obj.color.g, &pl_obj.color.b);
+
+	result = get_rgb(spl[3], &pl_obj.color);
 	pl_obj.con = pl_obj.cor.x * pl_obj.n_vec.x + pl_obj.cor.y * pl_obj.n_vec.y + pl_obj.cor.z * pl_obj.n_vec.z;
+
 	free_2d_array2((void ***)&spl);
 	if (result != 0)
 		return (result);

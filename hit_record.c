@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_product.c                                      :+:      :+:    :+:   */
+/*   hit_record.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/28 14:32:40 by gan               #+#    #+#             */
-/*   Updated: 2024/01/07 14:39:33 by hyungdki         ###   ########.fr       */
+/*   Created: 2024/01/03 16:01:51 by hyungdki          #+#    #+#             */
+/*   Updated: 2024/01/07 14:39:23 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec.h"
+#include "minirt.h"
 
-inline double	v_dot(t_vec u, t_vec v) {
-	return (u.x * v.x + u.y * v.y + u.z * v.z);
-}
-
-inline t_vec	v_cross(t_vec u, t_vec v) {
-	t_vec	result;
-
-	result.x = u.y * v.z - u.z * v.y;
-	result.y = u.z * v.x - u.x * v.z;
-	result.z = u.x * v.y - u.y * v.x;
-	return (result);
+void	set_n_vec_dir(t_ray ray, t_hit_rec *rec)
+{
+	rec->from_outside = (v_dot(ray.dir, rec->n_vec) < 0);
+	if (rec->from_outside == FALSE)
+		rec->n_vec = v_mul(rec->n_vec, -1.0);
 }
