@@ -24,7 +24,6 @@ int main(int argc, char **argv)
 	read_rt_file(&data, argv[1]);
 	essential_elements_chk(&data);
 
-
 	data.mlx_ptr = mlx_init();
 	if (data.mlx_ptr == T_NULL)
 		error_exit(&data, "mlx_init() error!");
@@ -43,6 +42,7 @@ int main(int argc, char **argv)
 	mlx_key_hook(data.win_ptr, quit_program, &data);
 	mlx_hook(data.win_ptr, 17, 0, press_cross_on_window_frame, &data);
 	mlx_loop(data.mlx_ptr);
+
 }
 
 

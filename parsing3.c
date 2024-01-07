@@ -90,7 +90,10 @@ static inline int	case_pl2(t_data *data, char **spl, t_pl pl_obj)
 	int		result;
 	t_pl	*heap_pl;
 
+
 	result = get_rgb(spl[3], &pl_obj.color);
+	pl_obj.con = pl_obj.cor.x * pl_obj.n_vec.x + pl_obj.cor.y * pl_obj.n_vec.y + pl_obj.cor.z * pl_obj.n_vec.z;
+
 	free_2d_array2((void ***)&spl);
 	if (result != 0)
 		return (result);
@@ -103,6 +106,6 @@ static inline int	case_pl2(t_data *data, char **spl, t_pl pl_obj)
 		free(heap_pl);
 		return (1);
 	}
-	data->objs.tail.front->type = pl;
+	data->objs.tail.front->type = pl; 
 	return (0);
 }

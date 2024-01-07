@@ -122,6 +122,7 @@ typedef struct s_pl
 	t_pnt	cor;
 	t_vec	n_vec;
 	t_color	color;
+	int		con;
 }	t_pl;
 
 typedef struct s_cy
@@ -225,4 +226,11 @@ void	read_rt_file(t_data *data, char *file_name);
 t_pnt	ray_at(t_ray ray, double t);
 // sphere.c
 t_bool	sphere_hit(t_sp	sp, t_ray ray, t_gap gap, t_hit_rec *rec);
+
+
+t_bool	hit_plane(t_pl pl, t_ray ray);
+t_bool	hit_cylinder(t_cy cy, t_ray ray);
+t_vec	vec_reflection(t_vec ray, t_vec normal_vec);
+double	diffuse(t_vec n_vec, t_pnt node, t_pnt l);
+
 #endif

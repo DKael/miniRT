@@ -34,6 +34,8 @@ SRCS =	main.c \
 		vec/vec_operation.c \
 		vec/vec_product.c \
 		vec/vec_unit.c
+    render_pl/render_pl.c \
+		render_pl/reflection.c \
 		
 OBJS = 	${SRCS:.c=.o}
 
