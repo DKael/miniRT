@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/07 20:02:59 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/08 18:17:36 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ typedef struct s_pl
 	t_pnt	cor;
 	t_vec	n_vec;
 	t_color	color;
-	int		con;
+	double	con;
 }	t_pl;
 
 typedef struct s_cy
@@ -126,8 +126,11 @@ typedef struct s_cy
 	t_pnt	center;
 	t_vec	n_vec;
 	double	diameter;
+	double	radius;
 	double	height;
 	t_color	color;
+	t_pnt	top;
+	t_pnt	bot;
 }	t_cy;
 
 typedef struct s_hit_rec
@@ -185,6 +188,8 @@ t_bool	color_radius_chk(int rgb);
 t_color	color_apply_ratio(t_color ori, double ratio);
 t_color	color_add(t_color c1, t_color c2);
 t_color	color_reflection(t_color c1, t_color obj_color);
+// cylinder.c
+t_bool	cy_hit(t_cy cy, t_ray ray, t_gap gap, t_hit_rec *rec);
 // draw.c
 void	draw(t_data *data);
 void	mlx_pixel_put_at_mem(t_data *data, int x, int y, t_color color);
@@ -221,15 +226,11 @@ void	error_exit(t_data *data, char *msg);
 void	delete_obj(void *obj_ptr);
 // parsing1.c
 void	read_rt_file(t_data *data, char *file_name);
+// plane.c
+t_bool	pl_hit(t_pl pl, t_ray ray, t_gap gap, t_hit_rec *rec);
 // ray.c
 t_pnt	ray_at(t_ray ray, double t);
 // sphere.c
-t_bool	sphere_hit(t_sp	sp, t_ray ray, t_gap gap, t_hit_rec *rec);
-
-
-t_bool	hit_plane(t_pl pl, t_ray ray);
-t_bool	hit_cylinder(t_cy cy, t_ray ray);
-t_vec	vec_reflection(t_vec ray, t_vec normal_vec);
-double	diffuse(t_vec n_vec, t_pnt node, t_pnt l);
+t_bool	sp_hit(t_sp	sp, t_ray ray, t_gap gap, t_hit_rec *rec);
 
 #endif

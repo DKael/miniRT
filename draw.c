@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 17:33:02 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/07 20:17:39 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:06:36 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ int	hit_chk(t_data *data, t_ray ray, t_gap gap, t_hit_rec *rec)
 	{
 		result = FALSE;
 		if (node_ptr->type == TYPE_SP)
-			result = sphere_hit(*(t_sp *)node_ptr->contents, ray, gap, &tmp_rec);
+			result = sp_hit(*(t_sp *)node_ptr->contents, ray, gap, &tmp_rec);
 		else if (node_ptr->type == TYPE_PL)
-			;
+			result = pl_hit(*(t_pl *)node_ptr->contents, ray, gap, &tmp_rec);
 		else if (node_ptr->type == TYPE_CY)
-			;
+			result = cy_hit(*(t_cy *)node_ptr->contents, ray, gap, &tmp_rec);
 		if (result == TRUE)
 		{
 			hit_anything = 1;
@@ -84,7 +84,7 @@ t_color calc_diffuse(t_data *data, t_hit_rec *rec)
 	if (pnt_is_same(rec->pnt, rec2.pnt) == FALSE)
 		return (color_make(0,0,0));
 	kd = fmax(v_dot(rec->n_vec, v_mul(light.dir, -1)), 0.0);
-	diffuse = color_apply_ratio(data->l.color, kd);
+	diffuse = color_apply_ratio(data->l.rc, kd);
 	return (diffuse);
 }
 
