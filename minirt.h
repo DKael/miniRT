@@ -45,13 +45,14 @@ typedef enum e_type
 }	t_type;
 
 typedef int	t_bool;
+typedef t_vec	t_pnt;
 
-typedef struct s_pnt
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_pnt;
+// typedef struct s_pnt
+// {
+// 	double	x;
+// 	double	y;
+// 	double	z;
+// }	t_pnt;
 
 typedef struct s_color
 {
@@ -98,7 +99,7 @@ typedef struct s_pl
 	t_pnt	cor;
 	t_vec	n_vec;
 	t_color	color;
-	int		con;
+	double	con;
 }	t_pl;
 
 typedef struct s_cy
@@ -108,7 +109,28 @@ typedef struct s_cy
 	double	diameter;
 	double	height;
 	t_color	color;
+	double	con;
 }	t_cy;
+
+typedef	struct s_par_cy
+{
+	double	dot;
+	double	origin;
+	double	d;
+	double	result[2];
+	double	closer;
+	double	node;
+	t_bool	side;
+}	t_par_cy;
+
+
+typedef struct s_hit_rec
+{
+	t_pnt	pnt;
+	t_vec	n_vec;
+	double	t;
+	t_bool	from_outside;
+}	t_hit_rec;
 
 typedef struct s_data
 {
@@ -152,8 +174,8 @@ void	delete_obj(void *obj_ptr);
 // parsing1.c
 void	read_rt_file(t_data *data, char *file_name);
 
-t_bool	hit_plane(t_pl pl, t_ray ray);
-t_bool	hit_cylinder(t_cy cy, t_ray ray);
+t_bool	hit_plane(t_pl pl, t_ray ray, t_hit_rec* rec);
+t_bool	hit_cylinder(t_cy cy, t_ray ray, t_hit_rec* rec);
 t_vec	vec_reflection(t_vec ray, t_vec normal_vec);
 double	diffuse(t_vec n_vec, t_pnt node, t_pnt l);
 

@@ -12,8 +12,8 @@
 
 #include "vec.h"
 
-t_vec	vec_unit_vec(t_vec v) {
-	return (vec_multi(v, (1 / vec_length(v))));
+t_vec	v_unit_vec(t_vec v) {
+	return (v_mul(v, (1 / v_length(v))));
 }
 
 t_vec   vec_set_xyz(double x, double y, double z) {

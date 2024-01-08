@@ -12,11 +12,11 @@
 
 #include "vec.h"
 
-double	vec_dot(t_vec u, t_vec v) {
+double	v_dot(t_vec u, t_vec v) {
 	return (u.x * v.x + u.y * v.y + u.z * v.z);
 }
 
-t_vec	vec_cross(t_vec u, t_vec v) {
+t_vec	v_cross(t_vec u, t_vec v) {
 	t_vec	result;
 
 	result.x = u.y * v.z - u.z * v.y;

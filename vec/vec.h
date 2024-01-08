@@ -22,13 +22,13 @@ typedef struct s_vec
 	double	z;
 }	t_vec;
 
-t_vec	vec_add(t_vec u, t_vec v);
-t_vec	vec_sub(t_vec u, t_vec v);
-t_vec	vec_multi(t_vec v, double d);
-double	vec_length(t_vec v);
-double	vec_dot(t_vec u, t_vec v);
-t_vec	vec_cross(t_vec u, t_vec v);
-t_vec	vec_unit_vec(t_vec v);
+t_vec	v_add(t_vec u, t_vec v);
+t_vec	v_sub(t_vec u, t_vec v);
+t_vec	v_mul(t_vec v, double d);
+double	v_length(t_vec v);
+double	v_dot(t_vec u, t_vec v);
+t_vec	v_cross(t_vec u, t_vec v);
+t_vec	v_unit_vec(t_vec v);
 t_vec   vec_set_xyz(double x, double y, double z);
 
 #endif

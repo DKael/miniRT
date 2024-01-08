@@ -12,7 +12,7 @@
 
 #include "vec.h"
 
-t_vec	vec_add(t_vec u, t_vec v) {
+t_vec	v_add(t_vec u, t_vec v) {
 	t_vec result;
 
 	result.x = u.x + v.x;
@@ -21,7 +21,7 @@ t_vec	vec_add(t_vec u, t_vec v) {
 	return (result);
 }
 
-t_vec	vec_sub(t_vec u, t_vec v) {
+t_vec	v_sub(t_vec u, t_vec v) {
 	t_vec result;
 
 	result.x = u.x - v.x;
@@ -30,7 +30,7 @@ t_vec	vec_sub(t_vec u, t_vec v) {
 	return (result);
 }
 
-t_vec	vec_multi(t_vec v, double d) {
+t_vec	v_mul(t_vec v, double d) {
 	t_vec	result;
 
 	result.x = v.x * d;
@@ -39,6 +39,6 @@ t_vec	vec_multi(t_vec v, double d) {
 	return (result);
 }
 
-double	vec_length(t_vec v) {
+double	v_length(t_vec v) {
 	return (sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)));
 }

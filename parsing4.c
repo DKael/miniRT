@@ -70,6 +70,7 @@ static inline int	case_cy3(t_data *data, char **spl, t_cy cy_obj)
 	free_2d_array2((void ***)&spl);
 	if (result != 0)
 		return (result);
+	cy_obj.con = v_dot(cy_obj.n_vec, cy_obj.center);
 	heap_cy = (t_cy *)malloc(sizeof(t_cy));
 	if (heap_cy == T_NULL)
 		return (1);

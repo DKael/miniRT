@@ -64,19 +64,21 @@ int main(int argc, char **argv)
 	int image_height = 256;
 	t_pl	tmp;
 	t_cy	cy;
+	t_hit_rec	rec;
 
 	tmp.cor.x = 0;
 	tmp.cor.y = 0;
 	tmp.cor.z = 10;
-	tmp.n_vec = vec_set_xyz(0, 0, 1);
-	tmp.con = 10;
+	tmp.n_vec = vec_set_xyz(0, 0, -1);
+	tmp.con = -10;
 	cy.center.x = 0;
 	cy.center.y = 0;
 	cy.center.z = 0;
 	cy.diameter = 1;
 	cy.n_vec.x = 0;
-	cy.n_vec.y = 1;
-	cy.n_vec.z = 1;
+	cy.n_vec.y = -1;
+	cy.n_vec.z = -1;
+	cy.height = 5;
 	// Render
 	printf("P3\n%d %d\n255\n", image_width, image_height);
 	t_ray	ray;
@@ -85,8 +87,10 @@ int main(int argc, char **argv)
 	ray.orig.z = 0;
 	for (int j = 0; j < image_height; ++j) {
 		for (int i = 0; i < image_width; ++i) {
-			ray.dir = vec_unit_vec(vec_set_xyz(256, i - 128, j - 128));
-			if (!hit_cylinder(cy ,ray))
+			ray.dir = v_unit_vec(vec_set_xyz(256, i - 128, j - 128));
+			// if (!hit_plane(tmp, ray, &rec))
+			// 	printf("0 0 0\n");
+			if (!hit_cylinder(cy, ray, &rec))
 				printf("0 0 0\n");
 		}
 	}
