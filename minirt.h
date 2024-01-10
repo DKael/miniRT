@@ -48,6 +48,8 @@
 # define TYPE_SP 3
 # define TYPE_PL 4
 # define TYPE_CY 5
+# define KSN 64
+# define KS 0.5
 
 typedef int		t_bool;
 typedef t_vec	t_pnt;

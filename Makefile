@@ -15,7 +15,7 @@ SRCS =	main.c \
 		check_func.c \
 		color.c \
 		cylinder.c \
-		draw.c \
+		draw_bonus.c \
 		event.c \
 		free_resource.c \
 		gap.c \

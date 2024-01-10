@@ -51,11 +51,23 @@ t_color	color_add(t_color c1, t_color c2)
 
 	color_set(&tmp, c1.r + c2.r, c1.g + c2.g, c1.b + c2.b);
 	if (tmp.r > 255)
+	{
 		tmp.r = 255;
+		tmp.rr = 1.0;
+	}
+		
 	if (tmp.g > 255)
+	{
 		tmp.g = 255;
+		tmp.rg = 1.0;
+	}
+		
 	if (tmp.b > 255)
+	{
 		tmp.b = 255;
+		tmp.rb = 1.0;
+	}
+		
 	return (tmp);
 }
 
