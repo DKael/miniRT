@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:23:40 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/09/24 19:51:27 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:14:45 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# if !defined(TRUE) && !defined(FALSE)
+# ifndef TRUE
 #  define TRUE 1
+# endif
+# ifndef FALSE
 #  define FALSE 0
 # endif
 # ifndef T_NULL

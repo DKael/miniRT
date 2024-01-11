@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 20:16:13 by hyungdki          #+#    #+#             */
-/*   Updated: 2023/12/27 15:13:52 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:15:05 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # include <stdlib.h>
 
-# if !defined(TRUE) && !defined(FALSE)
+# ifndef TRUE
 #  define TRUE 1
+# endif
+# ifndef FALSE
 #  define FALSE 0
 # endif
 # ifndef T_NULL
