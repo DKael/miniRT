@@ -6,11 +6,16 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 11:10:56 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 17:33:41 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:18:46 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
+
+static inline double	degree_to_radian(double degree)
+{
+	return (degree * M_PI / 180);
+}
 
 static void	cam_init2(t_data *data, t_camera *ptr);
 
@@ -23,7 +28,7 @@ void	cam_init(t_data *data)
 
 	ptr = &data->cam;
 	ptr->focal_length = 10.0;
-	diagonal_len = tan((ptr->fov / 2.0)) * ptr->focal_length;
+	diagonal_len = tan((degree_to_radian(ptr->fov / 2.0))) * ptr->focal_length;
 	theta = atan(1.0 / data->aspect_ratio);
 	ptr->viewport_width = 2.0 * cos(theta) * diagonal_len;
 	ptr->viewport_height = 2.0 * sin(theta) * diagonal_len;

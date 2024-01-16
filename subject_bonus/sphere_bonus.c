@@ -6,11 +6,13 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:01:28 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 17:34:29 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:38:21 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
+
+static t_color sp_get_chk_brd_color(t_pnt pnt, t_chk_board chk);
 
 /*
 val[0] means a
@@ -43,8 +45,40 @@ t_bool	sp_hit(t_sp	sp, t_ray ray, t_gap gap, t_hit_rec *rec)
 	rec->t = val[5];
 	rec->pnt = ray_at(ray, val[5]);
 	rec->n_vec = v_mul(v_sub(rec->pnt, sp.center), 1 / sp.diameter);
-	rec->albedo = sp.color;
+	if (sp.is_chk_board == TRUE)
+		rec->albedo = sp_get_chk_brd_color(rec->n_vec, sp.chk);
+	else
+		rec->albedo = sp.color;
 	set_n_vec_dir(ray, rec);
 	rec->type = TYPE_SP;
 	return (TRUE);
+}
+
+static t_color sp_get_chk_brd_color(t_pnt pnt, t_chk_board chk)
+{
+	double	theta;
+	double	phi;
+	double	u;
+	double	v;
+
+	if (fabs(pnt.x) < EPSILON && fabs(pnt.y) < EPSILON)
+	{
+		u = 0.0;
+		if (pnt.z > 0)
+			v = 0.0;
+		else
+			v = 1.0;
+	}
+	if (pnt.z > 0)
+		theta = atan(sqrt(pnt.x * pnt.x + pnt.y * pnt.y) / pnt.z);
+	else if (pnt.z < 0)
+		theta = atan(sqrt(pnt.x * pnt.x + pnt.y * pnt.y) / pnt.z) + PI;
+	else
+		theta = PI / 2.0;
+	phi = atan2(pnt.y, pnt.x);
+	if (phi < 0)
+		phi += (2.0 * PI);
+	u = phi / (2.0 * PI);
+	v= theta / PI;
+	return (uv_pattern_at(chk, u, v));
 }

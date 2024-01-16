@@ -6,11 +6,13 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:01:28 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 17:34:22 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/16 21:31:19 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
+
+static t_color pl_get_chk_brd_color(t_pl *pl, t_hit_rec *rec);
 
 t_bool	pl_hit(t_pl pl, t_ray ray, t_gap gap, t_hit_rec *rec)
 {
@@ -29,7 +31,32 @@ t_bool	pl_hit(t_pl pl, t_ray ray, t_gap gap, t_hit_rec *rec)
 		rec->n_vec = pl.n_vec;
 	else
 		rec->n_vec = v_mul(pl.n_vec, -1);
-	rec->albedo = pl.color;
+	if (pl.is_chk_board == TRUE)
+		rec->albedo = pl_get_chk_brd_color(&pl, rec);
+	else
+		rec->albedo = pl.color;
 	rec->type = TYPE_PL;
 	return (TRUE);
+}
+
+static t_color pl_get_chk_brd_color(t_pl *pl, t_hit_rec *rec)
+{
+	t_vec	tmp;
+	double	u;
+	double	v;
+	
+	tmp = v_sub(rec->pnt, pl->cor);
+	u = tmp.x * pl->matrix[0][0] + tmp.y * pl->matrix[0][1]
+		+ tmp.z * pl->matrix[0][2];
+	v = tmp.x * pl->matrix[1][0] + tmp.y * pl->matrix[1][1]
+		+ tmp.z * pl->matrix[1][2];
+	if (u < 0)
+		u -= 1.0;
+	if (v < 0)
+		v -= 1.0;
+	u = fabs(u);
+	v = fabs(v);
+	u = fmod(u, pl->chk.width) / pl->chk.width;
+	v = fmod(v, pl->chk.height) / pl->chk.height;
+	return (uv_pattern_at(pl->chk, u, v));
 }

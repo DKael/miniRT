@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:03:10 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 17:34:15 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:34:27 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,14 @@ static inline int	read_rt_file1(t_data *data, int fd)
 		result = case_cy(data, bf);
 	free(bf);
 	return (result);
+}
+
+inline int	add_obj(t_data *data, void *obj)
+{
+	if (dll_content_add(&data->objs, obj, 0) == FALSE)
+	{
+		free(obj);
+		return (1);
+	}
+	return (0);
 }

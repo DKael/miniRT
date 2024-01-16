@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 18:05:37 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/16 19:59:46 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ typedef struct s_color
 	double	rb;
 }	t_color;
 
+typedef struct s_chk_board
+{
+	t_color	c1;
+	t_color	c2;
+	int		width;
+	int		height;
+}	t_chk_board;
+
 typedef struct s_ray
 {
 	t_pnt	orig;
@@ -112,29 +120,39 @@ typedef struct s_light
 
 typedef struct s_sp
 {
-	t_pnt	center;
-	double	diameter;
-	t_color	color;
+	t_pnt		center;
+	double		diameter;
+	t_color		color;
+	t_bool		is_chk_board;
+	t_chk_board chk;
 }	t_sp;
 
 typedef struct s_pl
 {
-	t_pnt	cor;
-	t_vec	n_vec;
-	t_color	color;
-	double	con;
+	t_pnt		cor;
+	t_vec		n_vec;
+	t_color		color;
+	double		con;
+	t_vec		du;
+	t_vec		dv;
+	t_bool		is_chk_board;
+	t_chk_board chk;
+	double		determinant;
+	double		matrix[2][3];
 }	t_pl;
 
 typedef struct s_cy
 {
-	t_pnt	center;
-	t_vec	n_vec;
-	double	diameter;
-	double	radius;
-	double	height;
-	t_color	color;
-	t_pnt	top;
-	t_pnt	bot;
+	t_pnt		center;
+	t_vec		n_vec;
+	double		diameter;
+	double		radius;
+	double		height;
+	t_color		color;
+	t_pnt		top;
+	t_pnt		bot;
+	t_bool		is_chk_board;
+	t_chk_board chk;
 }	t_cy;
 
 typedef struct s_hit_rec
@@ -145,6 +163,8 @@ typedef struct s_hit_rec
 	t_bool	from_outside;
 	t_color	albedo;
 	int		type;
+	double	u;
+	double	v;
 }	t_hit_rec;
 
 typedef struct s_gap
@@ -171,83 +191,88 @@ typedef struct s_data
 	int			al_cnt;
 	t_camera	cam;
 	int			cam_cnt;
-	t_light		l;
+	t_dll		lights;
 	int			l_cnt;
 	t_dll		objs;
 	t_color		*color_map;
 	int			aa_ratio;
 }	t_data;
 
-// anti_aliasing.c
+// anti_aliasing_bonus.c
 void	antialiasing(t_data *data);
-// camera.c
+// camera_bonus.c
 void	cam_init(t_data *data);
-// check_func.c
+// check_func_bonus.c
 int		extension_check(const char *file_name);
 void	essential_elements_chk(t_data *data);
 t_bool	check_real_num_str(char *str);
-// color1.c
+// checker_board_bonus.c
+t_color	uv_pattern_at(t_chk_board chk, double u, double v);
+// color1_bonus.c
 void	color_set(t_color *origin, int _r, int _g, int _b);
 t_color	color_make(int _r, int _g, int _b);
 t_color	color_add(t_color c1, t_color c2);
-// color2.c
+// color2_bonus.c
 t_bool	color_radius_chk(int rgb);
 t_color	color_apply_ratio(t_color ori, double ratio);
 t_color	color_reflection(t_color c1, t_color obj_color);
-// cylinder1.c
+// cylinder1_bonus.c
 t_bool	cy_hit(t_cy cy, t_ray ray, t_gap gap, t_hit_rec *rec);
 t_bool	is_pnt_in_cy(t_cy cy, t_pnt pnt);
-// cylinder2.c
+// cylinder2_bonus.c
 t_bool	cy_chk_top_hit(t_cy cy, t_ray ray, t_gap gap, t_hit_rec *rec);
 t_bool	cy_chk_bot_hit(t_cy cy, t_ray ray, t_gap gap, t_hit_rec *rec);
 t_bool	cy_chk_side_hit(t_cy cy, t_ray ray, t_gap gap, t_hit_rec *rec);
-// draw.c
+// draw_bonus.c
 void	draw(t_data *data);
 void	mlx_pixel_put_at_mem(t_data *data, int x, int y, t_color color);
-// event.c
+// event_bonus.c
 int		quit_program(int keycode, t_data *data);
 int		press_cross_on_window_frame(t_data *data);
-// free_resource.c
+// free_resource_bonus.c
 void	*ft_free(void **ptr);
 void	*free_2d_array1(void ***arr_ptr, int num);
 void	*free_2d_array2(void ***arr_ptr);
-// gap.c
+// gap_bonus.c
 void	gap_init(t_gap *gap);
 void	gap_set(t_gap *origin, double _t_min, double _t_max);
 t_gap	gap_make(double _t_min, double _t_max);
 t_bool	gap_contains(t_gap gap, double x);
 t_bool	gap_surrounds(t_gap gap, double x);
-// get_element_value1.c
+// get_element_value1_bonus.c
 int		element_split(char *buffer, char ***split_result, int cnt, char del);
 int		get_ratio(char *str, double *val);
 int		get_positive_double_value(char *str, double *val);
-// get_element_value2.c
+// get_element_value2_bonus.c
 int		get_rgb(char *str, t_color *color);
 int		get_cor(char *str, t_pnt *pnt);
 int		get_normalized_vec(char *str, t_vec *nvec);
 int		get_fov(char *str, double *val);
-// hit_record.c
+// get_element_value2_bonus.c
+int		get_chk_board_val(char **strs, int idx, t_chk_board *chk);
+// hit_record_bonus.c
 int		hit_chk(t_data *data, t_ray ray, t_gap gap, t_hit_rec *rec);
 void	set_n_vec_dir(t_ray ray, t_hit_rec *rec);
-// init.c
+// init_bonus.c
 void	data_init(t_data *data);
-// on_error.c
+// on_error_bonus.c
 void	read_error(t_data *data, int return_code, int fd);
 void	error_msg_write(char *msg);
 void	error_exit(t_data *data, char *msg);
 void	delete_obj(void *obj_ptr);
-// parsing1.c
+// parsing1_bonus.c
 void	read_rt_file(t_data *data, char *file_name);
-// plane.c
+int		add_obj(t_data *data, void *obj);
+// plane_bonus.c
 t_bool	pl_hit(t_pl pl, t_ray ray, t_gap gap, t_hit_rec *rec);
-// point.c
+// point_bonus.c
 double	dist_2_pnt(t_pnt p1, t_pnt p2);
 double	sqr_dist_2_pnt(t_pnt p1, t_pnt p2);
 t_bool	is_pnt_same(t_pnt p1, t_pnt p2);
-// ray.c
+// ray_bonus.c
 t_color	ray_color(t_data *data, t_ray r);
 t_pnt	ray_at(t_ray ray, double t);
-// sphere.c
+// sphere_bonus.c
 t_bool	sp_hit(t_sp	sp, t_ray ray, t_gap gap, t_hit_rec *rec);
 
 #endif

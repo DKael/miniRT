@@ -6,7 +6,7 @@
 #    By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 20:30:42 by hyungdki          #+#    #+#              #
-#    Updated: 2024/01/11 17:41:24 by hyungdki         ###   ########.fr        #
+#    Updated: 2024/01/16 20:16:15 by hyungdki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS_BONUS =	subject_bonus/minirt_bonus.c \
 				subject_bonus/anti_aliasing_bonus.c \
 				subject_bonus/camera_bonus.c \
 				subject_bonus/check_func_bonus.c \
+				subject_bonus/checker_board_bonus.c \
 				subject_bonus/color1_bonus.c \
 				subject_bonus/color2_bonus.c \
 				subject_bonus/cylinder1_bonus.c \
@@ -52,6 +53,7 @@ SRCS_BONUS =	subject_bonus/minirt_bonus.c \
 				subject_bonus/gap_bonus.c \
 				subject_bonus/get_element_value1_bonus.c \
 				subject_bonus/get_element_value2_bonus.c \
+				subject_bonus/get_element_value3_bonus.c \
 				subject_bonus/hit_record_bonus.c \
 				subject_bonus/init_bonus.c \
 				subject_bonus/on_error_bonus.c \
