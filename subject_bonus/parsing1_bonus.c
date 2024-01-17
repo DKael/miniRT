@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:03:10 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/15 15:34:27 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/17 20:47:01 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ extern int	case_l(t_data *data, char *bf);
 extern int	case_sp(t_data *data, char *bf);
 extern int	case_pl(t_data *data, char *bf);
 extern int	case_cy(t_data *data, char *bf);
+extern int	case_cn(t_data *data, char *bf);
 
 void	read_rt_file(t_data *data, char *file_name)
 {
@@ -62,6 +63,8 @@ static inline int	read_rt_file1(t_data *data, int fd)
 		result = case_pl(data, bf);
 	else if (bf[0] == 'c' && bf[1] == 'y' && bf[2] == ' ')
 		result = case_cy(data, bf);
+	else if (bf[0] == 'c' && bf[1] == 'n' && bf[2] == ' ')
+		result = case_cn(data, bf);
 	free(bf);
 	return (result);
 }

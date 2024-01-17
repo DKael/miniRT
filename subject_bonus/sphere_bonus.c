@@ -6,13 +6,13 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:01:28 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/15 17:38:21 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/17 21:04:37 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-static t_color sp_get_chk_brd_color(t_pnt pnt, t_chk_board chk);
+static t_color sp_get_chk_brd_color(t_pnt pnt, t_chk_board *chk);
 
 /*
 val[0] means a
@@ -22,15 +22,17 @@ val[3] means discriminant, half_b ^ 2 - a * c
 val[4] means root of discriminant, sqrt(discriminant)
 val[5] means solution of quadratic equation
 */
-t_bool	sp_hit(t_sp	sp, t_ray ray, t_gap gap, t_hit_rec *rec)
+t_bool	sp_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 {
+	t_sp	*sp;
 	t_vec	oc;
 	double	val[6];
 
-	oc = v_sub(ray.orig, sp.center);
+	sp = (t_sp *)ptr;
+	oc = v_sub(ray.orig, sp->center);
 	val[0] = v_len_squared(ray.dir);
 	val[1] = v_dot(oc, ray.dir);
-	val[2] = v_len_squared(oc) - sp.diameter * sp.diameter;
+	val[2] = v_len_squared(oc) - sp->diameter * sp->diameter;
 	val[3] = val[1] * val[1] - val[0] * val[2];
 	if (val[3] < 0)
 		return (FALSE);
@@ -44,17 +46,17 @@ t_bool	sp_hit(t_sp	sp, t_ray ray, t_gap gap, t_hit_rec *rec)
 	}
 	rec->t = val[5];
 	rec->pnt = ray_at(ray, val[5]);
-	rec->n_vec = v_mul(v_sub(rec->pnt, sp.center), 1 / sp.diameter);
-	if (sp.is_chk_board == TRUE)
-		rec->albedo = sp_get_chk_brd_color(rec->n_vec, sp.chk);
+	rec->n_vec = v_mul(v_sub(rec->pnt, sp->center), 1 / sp->diameter);
+	if (sp->is_chk_board == TRUE)
+		rec->albedo = sp_get_chk_brd_color(rec->n_vec, &sp->chk);
 	else
-		rec->albedo = sp.color;
+		rec->albedo = sp->color;
 	set_n_vec_dir(ray, rec);
 	rec->type = TYPE_SP;
 	return (TRUE);
 }
 
-static t_color sp_get_chk_brd_color(t_pnt pnt, t_chk_board chk)
+static t_color sp_get_chk_brd_color(t_pnt pnt, t_chk_board *chk)
 {
 	double	theta;
 	double	phi;

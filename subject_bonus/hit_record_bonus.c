@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:01:51 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/15 16:33:42 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/17 21:03:01 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,30 @@ int	hit_chk(t_data *data, t_ray ray, t_gap gap, t_hit_rec *rec)
 {
 	t_hit_rec	tmp_rec;
 	t_bool		hit_anything;
-	t_dllnode	*node_ptr;
+	t_dllnode	*n_ptr;
 	t_bool		result;
 
 	hit_anything = 0;
-	node_ptr = data->objs.head.back;
-	while (node_ptr != &(data->objs.tail))
+	n_ptr = data->objs.head.back;
+	while (n_ptr != &(data->objs.tail))
 	{
 		result = FALSE;
-		if (node_ptr->type == TYPE_SP)
-			result = sp_hit(*(t_sp *)node_ptr->contents, ray, gap, &tmp_rec);
-		else if (node_ptr->type == TYPE_PL)
-			result = pl_hit(*(t_pl *)node_ptr->contents, ray, gap, &tmp_rec);
-		else if (node_ptr->type == TYPE_CY)
-			result = cy_hit(*(t_cy *)node_ptr->contents, ray, gap, &tmp_rec);
+		// if (n_ptr->type == TYPE_SP)
+		// 	result = sp_hit(*(t_sp *)n_ptr->contents, ray, gap, &tmp_rec);
+		// else if (n_ptr->type == TYPE_PL)
+		// 	result = pl_hit(*(t_pl *)n_ptr->contents, ray, gap, &tmp_rec);
+		// else if (n_ptr->type == TYPE_CY)
+		// 	result = cy_hit(*(t_cy *)n_ptr->contents, ray, gap, &tmp_rec);
+		// else if (n_ptr->type == TYPE_CN)
+		// 	result = cn_hit(*(t_cn *)n_ptr->contents, ray, gap, &tmp_rec);
+		result =( data->funt_ptr[n_ptr->type - 3])(n_ptr->contents, ray, gap, &tmp_rec);
 		if (result == TRUE)
 		{
 			hit_anything = 1;
 			gap.t_max = tmp_rec.t;
 			(*rec) = tmp_rec;
 		}
-		node_ptr = node_ptr->back;
+		n_ptr = n_ptr->back;
 	}
 	return (hit_anything);
 }

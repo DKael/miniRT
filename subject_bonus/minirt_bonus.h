@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/17 15:53:01 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/17 21:12:07 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define TYPE_SP 3
 # define TYPE_PL 4
 # define TYPE_CY 5
+# define TYPE_CN 6
 # define KSN 64
 # define KS 0.5
 
@@ -157,6 +158,22 @@ typedef struct s_cy
 	t_vec		base_y;
 }	t_cy;
 
+typedef struct s_cn
+{
+	t_pnt		center;
+	t_vec		n_vec;
+	double		diameter;
+	double		radius;
+	double		height;
+	double		ratio;
+	t_color		color;
+	t_pnt		top;
+	t_bool		is_chk_board;
+	t_chk_board chk;
+	t_vec		base_x;
+	t_vec		base_y;
+}	t_cn;
+
 typedef struct s_hit_rec
 {
 	t_pnt	pnt;
@@ -198,6 +215,7 @@ typedef struct s_data
 	t_dll		objs;
 	t_color		*color_map;
 	int			aa_ratio;
+	t_bool		(*funt_ptr[4])(void *, t_ray, t_gap, t_hit_rec *);
 }	t_data;
 
 // anti_aliasing_bonus.c
@@ -209,7 +227,7 @@ int		extension_check(const char *file_name);
 void	essential_elements_chk(t_data *data);
 t_bool	check_real_num_str(char *str);
 // checker_board_bonus.c
-t_color	uv_pattern_at(t_chk_board chk, double u, double v);
+t_color	uv_pattern_at(t_chk_board *chk, double u, double v);
 // color1_bonus.c
 void	color_set(t_color *origin, int _r, int _g, int _b);
 t_color	color_make(int _r, int _g, int _b);
@@ -218,13 +236,15 @@ t_color	color_add(t_color c1, t_color c2);
 t_bool	color_radius_chk(int rgb);
 t_color	color_apply_ratio(t_color ori, double ratio);
 t_color	color_reflection(t_color c1, t_color obj_color);
+// cone_bonus.c
+t_bool	cn_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec);
 // cylinder1_bonus.c
-t_bool	cy_hit(t_cy cy, t_ray ray, t_gap gap, t_hit_rec *rec);
-t_bool	is_pnt_in_cy(t_cy cy, t_pnt pnt);
+t_bool	cy_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec);
+t_bool	is_pnt_in_cy(t_cy *cy, t_pnt pnt);
 // cylinder2_bonus.c
-t_bool	cy_chk_top_hit(t_cy cy, t_ray ray, t_gap gap, t_hit_rec *rec);
-t_bool	cy_chk_bot_hit(t_cy cy, t_ray ray, t_gap gap, t_hit_rec *rec);
-t_bool	cy_chk_side_hit(t_cy cy, t_ray ray, t_gap gap, t_hit_rec *rec);
+t_bool	cy_chk_top_hit(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec);
+t_bool	cy_chk_bot_hit(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec);
+t_bool	cy_chk_side_hit(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec);
 // draw_bonus.c
 void	draw(t_data *data);
 void	mlx_pixel_put_at_mem(t_data *data, int x, int y, t_color color);
@@ -266,7 +286,7 @@ void	delete_obj(void *obj_ptr);
 void	read_rt_file(t_data *data, char *file_name);
 int		add_obj(t_data *data, void *obj);
 // plane_bonus.c
-t_bool	pl_hit(t_pl pl, t_ray ray, t_gap gap, t_hit_rec *rec);
+t_bool	pl_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec);
 // point_bonus.c
 double	dist_2_pnt(t_pnt p1, t_pnt p2);
 double	sqr_dist_2_pnt(t_pnt p1, t_pnt p2);
@@ -275,6 +295,6 @@ t_bool	is_pnt_same(t_pnt p1, t_pnt p2);
 t_color	ray_color(t_data *data, t_ray r);
 t_pnt	ray_at(t_ray ray, double t);
 // sphere_bonus.c
-t_bool	sp_hit(t_sp	sp, t_ray ray, t_gap gap, t_hit_rec *rec);
+t_bool	sp_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec);
 
 #endif

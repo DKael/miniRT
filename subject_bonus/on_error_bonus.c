@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:04:16 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/15 14:39:49 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/17 21:29:00 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	error_exit(t_data *data, char *msg)
 	dll_clear(&data->objs, delete_obj);
 	dll_clear(&data->lights, delete_obj);
 	error_msg_write(msg);
+	system("leaks minirt");
 	exit(1);
 }
 

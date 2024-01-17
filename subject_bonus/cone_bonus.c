@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_board_bonus.c                              :+:      :+:    :+:   */
+/*   cone_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 17:34:37 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/17 21:05:05 by hyungdki         ###   ########.fr       */
+/*   Created: 2024/01/17 20:49:32 by hyungdki          #+#    #+#             */
+/*   Updated: 2024/01/17 21:28:52 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-t_color	uv_pattern_at(t_chk_board *chk, double u, double v)
+t_bool	cn_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 {
-	double	u2;
-	double	v2;
+    t_cn    *cn;
 
-	u2 = floor(u * chk->width);
-	v2 = floor(v * chk->height);
-	if ((int)(u2 + v2) % 2 == 0)
-		return chk->c1;
-	else
-		return chk->c2;
+    cn = (t_cn *)ptr;
+    return (FALSE);
 }

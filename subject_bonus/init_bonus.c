@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:07:56 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/15 16:08:10 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/17 20:58:52 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,8 @@ inline void	data_init(t_data *data)
 	data->win_y_nx = WINDOW_SIZE_Y * data->aa_ratio;
 	data->aspect_ratio = (double)data->win_x / (double)data->win_y;
 	data->color_map = T_NULL;
+	data->funt_ptr[0] = sp_hit;
+	data->funt_ptr[1] = pl_hit;
+	data->funt_ptr[2] = cy_hit;
+	data->funt_ptr[3] = cn_hit;
 }

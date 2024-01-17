@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:47:42 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/15 14:40:21 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/17 21:26:25 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	quit_program(int keycode, t_data *data)
 		dll_clear(&data->objs, delete_obj);
 		dll_clear(&data->lights, delete_obj);
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+		system("leaks minirt");
 		exit(0);
 	}
 	return (0);
@@ -31,5 +32,6 @@ int	press_cross_on_window_frame(t_data *data)
 	dll_clear(&data->objs, delete_obj);
 	dll_clear(&data->lights, delete_obj);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	system("leaks minirt");
 	exit(0);
 }
