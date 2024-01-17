@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:55:09 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/16 20:24:28 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:24:22 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ static inline int	case_pl2(t_data *data, char **spl, t_pl pl)
 	{
 		result = get_chk_board_val(spl, 4, &pl.chk);
 		pl.is_chk_board = TRUE;
+		pl.chk.width = pl.chk.width - (pl.chk.width % 2);
+		pl.chk.height = pl.chk.height - (pl.chk.height % 2);
 		calc_pl_du_dv(&pl);
 	}
 	else if (ft_strcmp(spl[3], "rgb") == 0)
@@ -132,7 +134,7 @@ static inline int	case_pl2(t_data *data, char **spl, t_pl pl)
 	return (0);
 }
 
-static void	calc_pl_du_dv(t_pl *pl)
+inline static void	calc_pl_du_dv(t_pl *pl)
 {
 	t_vec	tmp;
 
@@ -145,7 +147,7 @@ static void	calc_pl_du_dv(t_pl *pl)
 	else
 	{
 		pl->du = v_cross(tmp, pl->n_vec);
-		pl->dv = v_cross(pl->du, pl->n_vec);
+		pl->dv = v_cross(pl->n_vec, pl->du);
 	}
 	tmp = v_cross(pl->dv, pl->du);
 	pl->determinant = tmp.x + tmp.y + tmp.z;

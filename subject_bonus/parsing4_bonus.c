@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:01:33 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/15 16:01:45 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:11:20 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	case_cy2(t_data *data, char **spl, t_cy cy);
 static int	case_cy3(t_data *data, char **spl, t_cy cy);
 static int	case_cy4(t_data *data, t_cy cy);
+static void	calc_cy_base(t_cy *cy);
 
 int	case_cy(t_data *data, char *bf)
 {
@@ -73,6 +74,7 @@ static inline int	case_cy3(t_data *data, char **spl, t_cy cy)
 	{
 		result = get_chk_board_val(spl, 6, &cy.chk);
 		cy.is_chk_board = TRUE;
+		calc_cy_base(&cy);
 	}
 	else if (ft_strcmp(spl[5], "rgb") == 0)
 	{
@@ -99,4 +101,21 @@ static inline int	case_cy4(t_data *data, t_cy cy)
 		return (1);
 	data->objs.tail.front->type = TYPE_CY;
 	return (0);
+}
+
+inline static void	calc_cy_base(t_cy *cy)
+{
+	t_vec	tmp;
+
+	tmp = v_make(0, 0, 1);
+	if (cy->n_vec.x == 0 && cy->n_vec.y == 0)
+	{
+		cy->base_x = v_make(1, 0, 0);
+		cy->base_y = v_make(0, 1, 0);
+	}
+	else
+	{
+		cy->base_x = v_cross(tmp, cy->n_vec);
+		cy->base_y = v_cross(cy->n_vec, cy->base_x);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/16 19:59:46 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:53:01 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,8 @@ typedef struct s_cy
 	t_pnt		bot;
 	t_bool		is_chk_board;
 	t_chk_board chk;
+	t_vec		base_x;
+	t_vec		base_y;
 }	t_cy;
 
 typedef struct s_hit_rec
