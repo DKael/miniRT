@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/17 21:12:07 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:30:33 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,8 +236,12 @@ t_color	color_add(t_color c1, t_color c2);
 t_bool	color_radius_chk(int rgb);
 t_color	color_apply_ratio(t_color ori, double ratio);
 t_color	color_reflection(t_color c1, t_color obj_color);
-// cone_bonus.c
+// cone1_bonus.c
 t_bool	cn_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec);
+t_bool  is_pnt_in_cn(t_cn *cn, t_pnt pnt);
+// cone2_bonus.c
+t_bool	cn_chk_bot_hit(t_cn *cn, t_ray ray, t_gap gap, t_hit_rec *rec);
+t_bool	cn_chk_side_hit(t_cn *cn, t_ray ray, t_gap gap, t_hit_rec *rec);
 // cylinder1_bonus.c
 t_bool	cy_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec);
 t_bool	is_pnt_in_cy(t_cy *cy, t_pnt pnt);

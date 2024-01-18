@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:01:28 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/17 21:15:20 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:53:53 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ t_bool	is_pnt_in_cy(t_cy *cy, t_pnt pnt)
 
 	t = v_dot(cy->center, cy->n_vec) - v_dot(pnt, cy->n_vec);
 	tmp = v_add(pnt, v_mul(cy->n_vec, t));
-	if (sqr_dist_2_pnt(cy->center, tmp) - pow(cy->radius, 2 < EPSILON)
-		&& sqr_dist_2_pnt(pnt, tmp) - pow(cy->height / 2.0, 2) < EPSILON)
+	if (sqr_dist_2_pnt(cy->center, tmp) - pow(cy->radius, 2) < EPSILON
+		&& t * t - pow(cy->height / 2.0, 2) < EPSILON)
 		return (TRUE);
 	else
 		return (FALSE);

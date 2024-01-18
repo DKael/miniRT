@@ -6,7 +6,7 @@
 #    By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 20:30:42 by hyungdki          #+#    #+#              #
-#    Updated: 2024/01/17 21:29:27 by hyungdki         ###   ########.fr        #
+#    Updated: 2024/01/18 14:29:47 by hyungdki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ SRCS_BONUS =	subject_bonus/minirt_bonus.c \
 				subject_bonus/checker_board_bonus.c \
 				subject_bonus/color1_bonus.c \
 				subject_bonus/color2_bonus.c \
-				subject_bonus/cone_bonus.c \
+				subject_bonus/cone1_bonus.c \
+				subject_bonus/cone2_bonus.c \
 				subject_bonus/cylinder1_bonus.c \
 				subject_bonus/cylinder2_bonus.c \
 				subject_bonus/draw_bonus.c \
@@ -73,7 +74,7 @@ OBJS_BONUS = ${SRCS_BONUS:.c=.o}
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = "" #-Wall -Werror -Wextra
 
 NAME = minirt
 
