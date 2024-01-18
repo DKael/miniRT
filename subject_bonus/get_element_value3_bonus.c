@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:43:45 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/15 16:02:32 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/19 07:16:19 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ int	get_chk_board_val(char **strs, int idx, t_chk_board *chk)
 		|| ft_isdecimal(strs[idx + 3]) == FALSE)
 		return (3);
 	chk->width = ft_atoi(strs[idx + 2]);
+	chk->width = chk->width + (chk->width % 2);
 	chk->height = ft_atoi(strs[idx + 3]);
+	chk->height = chk->height + (chk->height % 2);
 	if (chk->width <= 0 || chk->height <= 0)
 		return (3);
 	return (0);

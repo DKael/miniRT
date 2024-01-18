@@ -6,13 +6,13 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:28:14 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/18 16:40:05 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/19 06:44:40 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-static t_vec	cn_get_side_n_vec(t_cn *cn, t_pnt meet);
+static t_vec	cn_get_side_n_vec(t_cn *cn, t_pnt meet, t_hit_rec *rec);
 static t_bool	cn_chk_side_hit2(t_cn *cn, t_ray ray,
 					t_hit_rec *rec, double *val);
 static t_color	cn_get_chk_brd_color1(t_cn *cn, t_hit_rec *rec);
@@ -83,7 +83,7 @@ static t_bool	cn_chk_side_hit2(t_cn *cn, t_ray ray,
 	rec->pnt = ray_at(ray, val[5]);
 	if (is_pnt_in_cn(cn, rec->pnt) == FALSE)
 		return (FALSE);
-	rec->n_vec = cn_get_side_n_vec(cn, rec->pnt);
+	rec->n_vec = cn_get_side_n_vec(cn, rec->pnt, rec);
 	if (rec->from_outside == FALSE)
 		rec->n_vec = v_mul(rec->n_vec, -1);
 	if (cn->is_chk_board == TRUE)
@@ -94,7 +94,7 @@ static t_bool	cn_chk_side_hit2(t_cn *cn, t_ray ray,
 	return (TRUE);
 }
 
-static t_vec	cn_get_side_n_vec(t_cn *cn, t_pnt meet)
+static t_vec	cn_get_side_n_vec(t_cn *cn, t_pnt meet, t_hit_rec *rec)
 {
 	t_vec	tmp1;
 	t_vec	tmp2;
@@ -108,7 +108,9 @@ static t_vec	cn_get_side_n_vec(t_cn *cn, t_pnt meet)
 		return (cn->n_vec);
 	val[1] = (cn->height - val[0]) / cn->ratio;
 	tmp2 = v_mul(cn->n_vec, val[0]);
-	a = v_mul(v_unit_vec(v_sub(tmp1, tmp2)), (cn->height - val[0]));
+	a = v_unit_vec(v_sub(tmp1, tmp2));
+	rec->cn_vec = a;
+	a = v_mul(a, (cn->height - val[0]));
 	b = v_mul(cn->n_vec, val[1]);
 	return (v_unit_vec(v_add(a, b)));
 }
@@ -120,10 +122,10 @@ static t_color	cn_get_chk_brd_color1(t_cn *cn, t_hit_rec *rec)
 	double	u;
 	double	v;
 
-	x = v_dot(cn->base_x, rec->n_vec);
-	y = v_dot(cn->base_y, rec->n_vec);
+	x = v_dot(cn->base_x, rec->cn_vec);
+	y = v_dot(cn->base_y, rec->cn_vec);
 	u = (atan2(y, x) + PI) / (2.0 * PI);
-	v = fabs(v_dot(cn->center, cn->n_vec) - v_dot(rec->pnt, cn->n_vec));
+	v = v_dot(v_sub(rec->pnt, cn->center), cn->n_vec);
 	v = v / cn->height;
 	return (uv_pattern_at(&cn->chk, u, v));
 }

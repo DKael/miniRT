@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/18 14:30:33 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/19 07:07:36 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,8 @@ typedef struct s_hit_rec
 	int		type;
 	double	u;
 	double	v;
+	double	h;
+	t_vec	cn_vec;
 }	t_hit_rec;
 
 typedef struct s_gap
