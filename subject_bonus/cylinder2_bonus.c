@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:54:04 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/18 16:53:52 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 01:25:22 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,13 @@ t_bool	cy_chk_top_hit(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec)
 			rec->n_vec = cy->n_vec;
 		else
 			rec->n_vec = v_mul(cy->n_vec, -1);
-		if (cy->is_chk_board == TRUE)
+		if (cy->suf == CHK)
 			rec->albedo = cy_get_chk_brd_color2(cy, rec, 1);
-		else
+		else if (cy->suf == RGB)
 			rec->albedo = cy->color;
 		rec->type = TYPE_CY;
+		rec->ks = cy->ks;
+		rec->ksn = cy->ksn;
 		return (TRUE);
 	}
 	return (FALSE);
@@ -66,11 +68,13 @@ t_bool	cy_chk_bot_hit(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec)
 			rec->n_vec = v_mul(cy->n_vec, -1);
 		else
 			rec->n_vec = cy->n_vec;
-		if (cy->is_chk_board == TRUE)
+		if (cy->suf == CHK)
 			rec->albedo = cy_get_chk_brd_color2(cy, rec, 0);
-		else
+		else if (cy->suf == RGB)
 			rec->albedo = cy->color;
 		rec->type = TYPE_CY;
+		rec->ks = cy->ks;
+		rec->ksn = cy->ksn;
 		return (TRUE);
 	}
 	return (FALSE);
@@ -109,11 +113,13 @@ static t_bool	cy_chk_side_hit2(t_cy *cy, t_ray ray,
 	rec->n_vec = cy_get_side_n_vec(cy, rec->pnt);
 	if (rec->from_outside == FALSE)
 		rec->n_vec = v_mul(rec->n_vec, -1);
-	if (cy->is_chk_board == TRUE)
+	if (cy->suf == CHK)
 		rec->albedo = cy_get_chk_brd_color1(cy, rec);
-	else
+	else if (cy->suf == RGB)
 		rec->albedo = cy->color;
 	rec->type = TYPE_CY;
+	rec->ks = cy->ks;
+	rec->ksn = cy->ksn;
 	return (TRUE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:01:28 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/17 21:04:37 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 01:22:42 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,16 @@ t_bool	sp_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 	rec->t = val[5];
 	rec->pnt = ray_at(ray, val[5]);
 	rec->n_vec = v_mul(v_sub(rec->pnt, sp->center), 1 / sp->diameter);
-	if (sp->is_chk_board == TRUE)
+	if (sp->suf == CHK)
 		rec->albedo = sp_get_chk_brd_color(rec->n_vec, &sp->chk);
-	else
+	else if (sp->suf == RGB)
 		rec->albedo = sp->color;
+	
+	
 	set_n_vec_dir(ray, rec);
 	rec->type = TYPE_SP;
+	rec->ks = sp->ks;
+	rec->ksn = sp->ksn;
 	return (TRUE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:33:03 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/15 16:56:28 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 00:50:56 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ static inline t_color	calc_specular(t_color l_color, t_hit_rec *rec,
 	spec = fmax(v_dot(v_unit_vec(v_mul(ray.dir, -1)), reflect.dir), 0.0);
 	if (spec == 0.0)
 		return (color_make(0, 0, 0));
-	spec = pow(spec, KSN);
-	specular = color_apply_ratio(l_color, KS);
+	spec = pow(spec, rec->ksn);
+	specular = color_apply_ratio(l_color, rec->ks);
 	specular = color_apply_ratio(specular, spec);
 	return (specular);
 }

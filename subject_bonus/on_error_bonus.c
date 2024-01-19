@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:04:16 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/19 07:07:38 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 01:32:07 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	error_exit(t_data *data, char *msg)
 {
 	dll_clear(&data->objs, delete_obj);
 	dll_clear(&data->lights, delete_obj);
+	dll_clear(&data->xpms, delete_obj);
 	error_msg_write(msg);
 	exit(1);
 }

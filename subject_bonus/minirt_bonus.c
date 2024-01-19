@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:44 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/18 16:40:33 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 01:31:38 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,11 @@ static void	make_window(t_data *data)
 	data->color_map = malloc(sizeof(t_color)
 			* (data->win_y_nx * data->win_x_nx));
 	if (data->color_map == T_NULL)
-		exit(1);
+		error_exit(data, "malloc error!");
 	draw(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	mlx_key_hook(data->win_ptr, quit_program, data);
 	mlx_hook(data->win_ptr, 17, 0, press_cross_on_window_frame, data);
 	mlx_loop(data->mlx_ptr);
 }
+

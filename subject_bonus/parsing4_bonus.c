@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:01:33 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/17 17:11:20 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 01:47:51 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,9 @@ int	case_cy(t_data *data, char *bf)
 {
 	char	**spl;
 	int		result;
-	int		cnt;
 	t_cy	cy;
 
-	cnt = 7;
-	if (ft_strstr(bf, "chk") != T_NULL)
-		cnt = 10;
-	result = element_split(bf, &spl, cnt, ' ');
+	result = type_split(bf, &spl, TYPE_CY, &cy.suf);
 	if (result != 0)
 		return (result);
 	result = get_cor(spl[1], &cy.center);
@@ -62,6 +58,18 @@ static inline int	case_cy2(t_data *data, char **spl, t_cy cy)
 		free_2d_array2((void ***)&spl);
 		return (result);
 	}
+	result = get_positive_double_value(spl[5], &cy.ksn);
+	if (result != 0)
+	{
+		free_2d_array2((void ***)&spl);
+		return (result);
+	}
+	result = get_ratio(spl[6], &cy.ks);
+	if (result != 0)
+	{
+		free_2d_array2((void ***)&spl);
+		return (result);
+	}
 	return (case_cy3(data, spl, cy));
 }
 
@@ -70,16 +78,31 @@ static inline int	case_cy3(t_data *data, char **spl, t_cy cy)
 	int		result;
 	
 	result = 2;
-	if (ft_strcmp(spl[5], "chk") == 0)
+	// if (ft_strcmp(spl[5], "chk") == 0)
+	// {
+	// 	result = get_chk_board_val(spl, 6, &cy.chk);
+	// 	cy.is_chk_board = TRUE;
+	// 	calc_cy_base(&cy);
+	// }
+	// else if (ft_strcmp(spl[5], "rgb") == 0)
+	// {
+	// 	result = get_rgb(spl[6], &cy.color);
+	// 	cy.is_chk_board = FALSE;
+	// }
+	if (cy.suf == CHK)
+		result = get_chk_board_val(spl, 8, &cy.chk);
+	else if (cy.suf == RGB)
+		result = get_rgb(spl[8], &cy.color);
+	else if (cy.suf == BM || cy.suf == BMT)
 	{
-		result = get_chk_board_val(spl, 6, &cy.chk);
-		cy.is_chk_board = TRUE;
-		calc_cy_base(&cy);
-	}
-	else if (ft_strcmp(spl[5], "rgb") == 0)
-	{
-		result = get_rgb(spl[6], &cy.color);
-		cy.is_chk_board = FALSE;
+		result = get_xpm_val(spl[8], data, &cy.bump_map);
+		if (result != 0)
+		{
+			free_2d_array2((void ***)&spl);
+			return (result);
+		}
+		if (cy.suf == BMT)
+			result = get_xpm_val(spl[9], data, &cy.texture);
 	}
 	free_2d_array2((void ***)&spl);
 	if (result != 0)
@@ -93,6 +116,7 @@ static inline int	case_cy4(t_data *data, t_cy cy)
 
 	cy.top = v_add(cy.center, v_mul(cy.n_vec, cy.height / 2.0));
 	cy.bot = v_sub(cy.center, v_mul(cy.n_vec, cy.height / 2.0));
+	calc_cy_base(&cy);
 	heap_cy = (t_cy *)malloc(sizeof(t_cy));
 	if (heap_cy == T_NULL)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:01:28 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/17 21:15:52 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 01:23:29 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,16 @@ t_bool	pl_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 		rec->n_vec = pl->n_vec;
 	else
 		rec->n_vec = v_mul(pl->n_vec, -1);
-	if (pl->is_chk_board == TRUE)
+	if (pl->suf == CHK)
 		rec->albedo = pl_get_chk_brd_color(pl, rec);
-	else
+	else if (pl->suf == RGB)
 		rec->albedo = pl->color;
+
+
+
 	rec->type = TYPE_PL;
+	rec->ks = pl->ks;
+	rec->ksn = pl->ksn;
 	return (TRUE);
 }
 

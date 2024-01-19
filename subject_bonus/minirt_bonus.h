@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/19 14:34:05 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 01:41:57 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@
 # define TYPE_PL 4
 # define TYPE_CY 5
 # define TYPE_CN 6
-# define KSN 64
-# define KS 0.5
 
 typedef int		t_bool;
 typedef t_vec	t_pnt;
@@ -73,16 +71,17 @@ enum e_color_mask
 	BLUE = 8
 };
 
-enum e_suf_type
+typedef enum e_suf_type
 {
 	RGB,
 	CHK,
 	BM,
 	BMT
-};
+} 	t_suf_type;
 
 typedef struct s_xpm_img
 {
+	char	*name;
 	void	*img_ptr;
 	char	*img_addr;
 	int		bpp;
@@ -143,12 +142,12 @@ typedef struct s_sp
 	t_pnt		center;
 	double		diameter;
 	t_color		color;
-	t_bool		is_chk_board;
-	e_suf_type	suf;
+	t_suf_type	suf;
 	t_chk_board chk;
 	double		ksn;
-	double	ks;
-	t_xpm_img	lst[2];
+	double		ks;
+	t_xpm_img	bump_map;
+	t_xpm_img	texture;
 }	t_sp;
 
 typedef struct s_pl
@@ -159,14 +158,14 @@ typedef struct s_pl
 	double		con;
 	t_vec		du;
 	t_vec		dv;
-	t_bool		is_chk_board;
-	e_suf_type	suf;
+	t_suf_type	suf;
 	t_chk_board chk;
 	double		determinant;
 	double		matrix[2][3];
 	double		ksn;
-	double	ks;
-	t_xpm_img	lst[2];
+	double		ks;
+	t_xpm_img	bump_map;
+	t_xpm_img	texture;
 }	t_pl;
 
 typedef struct s_cy
@@ -179,14 +178,14 @@ typedef struct s_cy
 	t_color		color;
 	t_pnt		top;
 	t_pnt		bot;
-	t_bool		is_chk_board;
-	e_suf_type	suf;
+	t_suf_type	suf;
 	t_chk_board chk;
 	t_vec		base_x;
 	t_vec		base_y;
 	double		ksn;
-	double	ks;
-	t_xpm_img	lst[2];
+	double		ks;
+	t_xpm_img	bump_map;
+	t_xpm_img	texture;
 }	t_cy;
 
 typedef struct s_cn
@@ -199,14 +198,14 @@ typedef struct s_cn
 	double		ratio;
 	t_color		color;
 	t_pnt		top;
-	t_bool		is_chk_board;
-	e_suf_type	suf;
+	t_suf_type	suf;
 	t_chk_board chk;
 	t_vec		base_x;
 	t_vec		base_y;
 	double		ksn;
-	double	ks;
-	t_xpm_img	lst[2];
+	double		ks;
+	t_xpm_img	bump_map;
+	t_xpm_img	texture;
 }	t_cn;
 
 typedef struct s_hit_rec
@@ -214,6 +213,8 @@ typedef struct s_hit_rec
 	t_pnt	pnt;
 	t_vec	n_vec;
 	double	t;
+	double	ks;
+	double	ksn;
 	t_bool	from_outside;
 	t_color	albedo;
 	int		type;
@@ -253,6 +254,7 @@ typedef struct s_data
 	t_color		*color_map;
 	int			aa_ratio;
 	t_bool		(*funt_ptr[4])(void *, t_ray, t_gap, t_hit_rec *);
+	t_dll		xpms;
 }	t_data;
 
 // anti_aliasing_bonus.c
@@ -304,6 +306,7 @@ t_bool	gap_contains(t_gap gap, double x);
 t_bool	gap_surrounds(t_gap gap, double x);
 // get_element_value1_bonus.c
 int		element_split(char *buffer, char ***split_result, int cnt, char del);
+int		type_split(char *buffer, char ***split_result, int type, t_suf_type *suf);
 int		get_ratio(char *str, double *val);
 int		get_positive_double_value(char *str, double *val);
 // get_element_value2_bonus.c
@@ -311,8 +314,9 @@ int		get_rgb(char *str, t_color *color);
 int		get_cor(char *str, t_pnt *pnt);
 int		get_normalized_vec(char *str, t_vec *nvec);
 int		get_fov(char *str, double *val);
-// get_element_value2_bonus.c
+// get_element_value3_bonus.c
 int		get_chk_board_val(char **strs, int idx, t_chk_board *chk);
+int		get_xpm_val(char *str, t_data *data, t_xpm_img *img);
 // hit_record_bonus.c
 int		hit_chk(t_data *data, t_ray ray, t_gap gap, t_hit_rec *rec);
 void	set_n_vec_dir(t_ray ray, t_hit_rec *rec);

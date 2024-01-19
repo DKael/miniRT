@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:43:45 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/19 07:16:19 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 00:52:27 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,13 @@ int	get_chk_board_val(char **strs, int idx, t_chk_board *chk)
 	chk->height = chk->height + (chk->height % 2);
 	if (chk->width <= 0 || chk->height <= 0)
 		return (3);
+	return (0);
+}
+
+int	get_xpm_val(char *str, t_data *data, t_xpm_img *img)
+{
+	
+
+
 	return (0);
 }

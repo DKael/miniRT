@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:28:14 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/19 06:44:40 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 01:24:13 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,13 @@ t_bool	cn_chk_bot_hit(t_cn *cn, t_ray ray, t_gap gap, t_hit_rec *rec)
 			rec->n_vec = v_mul(cn->n_vec, -1);
 		else
 			rec->n_vec = cn->n_vec;
-		if (cn->is_chk_board == TRUE)
+		if (cn->suf == CHK)
 			rec->albedo = cn_get_chk_brd_color2(cn, rec);
-		else
+		else if (cn->suf == RGB)
 			rec->albedo = cn->color;
 		rec->type = TYPE_CN;
+		rec->ks = cn->ks;
+		rec->ksn = cn->ksn;
 		return (TRUE);
 	}
 	return (FALSE);
@@ -86,11 +88,17 @@ static t_bool	cn_chk_side_hit2(t_cn *cn, t_ray ray,
 	rec->n_vec = cn_get_side_n_vec(cn, rec->pnt, rec);
 	if (rec->from_outside == FALSE)
 		rec->n_vec = v_mul(rec->n_vec, -1);
-	if (cn->is_chk_board == TRUE)
+	// if (cn->is_chk_board == TRUE)
+	// 	rec->albedo = cn_get_chk_brd_color1(cn, rec);
+	// else
+	// 	rec->albedo = cn->color;
+	if (cn->suf == CHK)
 		rec->albedo = cn_get_chk_brd_color1(cn, rec);
-	else
+	else if (cn->suf == RGB)
 		rec->albedo = cn->color;
 	rec->type = TYPE_CN;
+	rec->ks = cn->ks;
+	rec->ksn = cn->ksn;
 	return (TRUE);
 }
 
