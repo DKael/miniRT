@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/19 07:07:36 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/19 14:34:05 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,6 @@
 
 typedef int		t_bool;
 typedef t_vec	t_pnt;
-
-typedef struct s_spherical_cor
-{
-	double	r;
-	double	theta;
-	double	phi;
-}	t_spherical_cor;
 typedef struct s_color
 {
 	int		r;
@@ -72,6 +65,32 @@ typedef struct s_color
 	double	rg;
 	double	rb;
 }	t_color;
+
+enum e_color_mask
+{
+	RED = 16,
+	GREEN = 8,
+	BLUE = 8
+};
+
+enum e_suf_type
+{
+	RGB,
+	CHK,
+	BM,
+	BMT
+};
+
+typedef struct s_xpm_img
+{
+	void	*img_ptr;
+	char	*img_addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	int		height;
+	int		width;
+}	t_xpm_img;
 
 typedef struct s_chk_board
 {
@@ -125,7 +144,11 @@ typedef struct s_sp
 	double		diameter;
 	t_color		color;
 	t_bool		is_chk_board;
+	e_suf_type	suf;
 	t_chk_board chk;
+	double		ksn;
+	double	ks;
+	t_xpm_img	lst[2];
 }	t_sp;
 
 typedef struct s_pl
@@ -137,9 +160,13 @@ typedef struct s_pl
 	t_vec		du;
 	t_vec		dv;
 	t_bool		is_chk_board;
+	e_suf_type	suf;
 	t_chk_board chk;
 	double		determinant;
 	double		matrix[2][3];
+	double		ksn;
+	double	ks;
+	t_xpm_img	lst[2];
 }	t_pl;
 
 typedef struct s_cy
@@ -153,9 +180,13 @@ typedef struct s_cy
 	t_pnt		top;
 	t_pnt		bot;
 	t_bool		is_chk_board;
+	e_suf_type	suf;
 	t_chk_board chk;
 	t_vec		base_x;
 	t_vec		base_y;
+	double		ksn;
+	double	ks;
+	t_xpm_img	lst[2];
 }	t_cy;
 
 typedef struct s_cn
@@ -169,9 +200,13 @@ typedef struct s_cn
 	t_color		color;
 	t_pnt		top;
 	t_bool		is_chk_board;
+	e_suf_type	suf;
 	t_chk_board chk;
 	t_vec		base_x;
 	t_vec		base_y;
+	double		ksn;
+	double	ks;
+	t_xpm_img	lst[2];
 }	t_cn;
 
 typedef struct s_hit_rec
