@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:01:33 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 01:47:51 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 13:45:42 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,31 +78,20 @@ static inline int	case_cy3(t_data *data, char **spl, t_cy cy)
 	int		result;
 	
 	result = 2;
-	// if (ft_strcmp(spl[5], "chk") == 0)
-	// {
-	// 	result = get_chk_board_val(spl, 6, &cy.chk);
-	// 	cy.is_chk_board = TRUE;
-	// 	calc_cy_base(&cy);
-	// }
-	// else if (ft_strcmp(spl[5], "rgb") == 0)
-	// {
-	// 	result = get_rgb(spl[6], &cy.color);
-	// 	cy.is_chk_board = FALSE;
-	// }
 	if (cy.suf == CHK)
 		result = get_chk_board_val(spl, 8, &cy.chk);
 	else if (cy.suf == RGB)
 		result = get_rgb(spl[8], &cy.color);
-	else if (cy.suf == BM || cy.suf == BMT)
+	else if (cy.suf == IM || cy.suf == BMT)
 	{
-		result = get_xpm_val(spl[8], data, &cy.bump_map);
+		result = get_xpm_val(spl[8], data, &cy.im);
 		if (result != 0)
 		{
 			free_2d_array2((void ***)&spl);
 			return (result);
 		}
 		if (cy.suf == BMT)
-			result = get_xpm_val(spl[9], data, &cy.texture);
+			result = get_xpm_val(spl[9], data, &cy.bmt);
 	}
 	free_2d_array2((void ***)&spl);
 	if (result != 0)

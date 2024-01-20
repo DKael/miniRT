@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:04:16 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 01:32:07 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 14:05:06 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	read_error(t_data *data, int return_code, int fd)
 		msg = "Mutiple light exist!";
 	else if (return_code == 7)
 		msg = "vector not normalized!";
+	else if (return_code == 8)
+		msg = "Invalide xpm file!";
 	close(fd);
 	error_exit(data, msg);
 }
@@ -53,12 +55,23 @@ void	error_exit(t_data *data, char *msg)
 {
 	dll_clear(&data->objs, delete_obj);
 	dll_clear(&data->lights, delete_obj);
-	dll_clear(&data->xpms, delete_obj);
+	dll_clear(&data->xpms, delete_xpm_img);
 	error_msg_write(msg);
+	system("leaks minirt");
 	exit(1);
 }
 
 void	delete_obj(void *obj_ptr)
 {
 	free(obj_ptr);
+}
+
+void	delete_xpm_img(void *obj_ptr)
+{
+	t_xpm_img	*tmp;
+
+	tmp = (t_xpm_img *)obj_ptr;
+	mlx_destroy_image(tmp->mlx_ptr, tmp->img_ptr);
+	free(tmp->name);
+	free(tmp);
 }

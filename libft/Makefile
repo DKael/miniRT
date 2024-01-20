@@ -6,7 +6,7 @@
 #    By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 20:28:31 by hyungdki          #+#    #+#              #
-#    Updated: 2023/12/26 23:18:02 by hyungdki         ###   ########.fr        #
+#    Updated: 2024/01/20 13:35:42 by hyungdki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS =	ft_atof.c \
 		ft_atoll.c \
 		ft_bzero.c \
 		ft_calloc.c \
+		ft_clamp.c \
 		ft_isalnum.c \
 		ft_isalpha.c \
 		ft_isascii.c \

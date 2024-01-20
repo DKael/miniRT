@@ -6,13 +6,13 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:01:28 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 01:22:42 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 14:04:06 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-static t_color sp_get_chk_brd_color(t_pnt pnt, t_chk_board *chk);
+static void	sp_get_uv(t_pnt pnt, t_hit_rec *rec);
 
 /*
 val[0] means a
@@ -47,12 +47,16 @@ t_bool	sp_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 	rec->t = val[5];
 	rec->pnt = ray_at(ray, val[5]);
 	rec->n_vec = v_mul(v_sub(rec->pnt, sp->center), 1 / sp->diameter);
-	if (sp->suf == CHK)
-		rec->albedo = sp_get_chk_brd_color(rec->n_vec, &sp->chk);
-	else if (sp->suf == RGB)
+	if (sp->suf != RGB)
+	{
+		sp_get_uv(rec->n_vec, rec);
+		if (sp->suf == CHK)
+			rec->albedo = chk_color(&sp->chk, rec->u, rec->v);
+		else if (sp->suf == IM)
+			rec->albedo = im_color(sp->im, rec->u, rec->v);
+	}	
+	else
 		rec->albedo = sp->color;
-	
-	
 	set_n_vec_dir(ray, rec);
 	rec->type = TYPE_SP;
 	rec->ks = sp->ks;
@@ -60,20 +64,18 @@ t_bool	sp_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 	return (TRUE);
 }
 
-static t_color sp_get_chk_brd_color(t_pnt pnt, t_chk_board *chk)
+static void	sp_get_uv(t_pnt pnt, t_hit_rec *rec)
 {
 	double	theta;
 	double	phi;
-	double	u;
-	double	v;
 
 	if (fabs(pnt.x) < EPSILON && fabs(pnt.y) < EPSILON)
 	{
-		u = 0.0;
+		rec->u = 0.0;
 		if (pnt.z > 0)
-			v = 0.0;
+			rec->v = 0.0;
 		else
-			v = 1.0;
+			rec->v = 1.0;
 	}
 	if (pnt.z > 0)
 		theta = atan(sqrt(pnt.x * pnt.x + pnt.y * pnt.y) / pnt.z);
@@ -84,7 +86,6 @@ static t_color sp_get_chk_brd_color(t_pnt pnt, t_chk_board *chk)
 	phi = atan2(pnt.y, pnt.x);
 	if (phi < 0)
 		phi += (2.0 * PI);
-	u = phi / (2.0 * PI);
-	v= theta / PI;
-	return (uv_pattern_at(chk, u, v));
+	rec->u = phi / (2.0 * PI);
+	rec->v= theta / PI;
 }

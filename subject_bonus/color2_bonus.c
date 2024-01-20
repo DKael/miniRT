@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:27:10 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 17:33:48 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 13:07:12 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,11 @@ inline t_color	color_reflection(t_color c1, t_color obj_color)
 	return (color_make(c1.r * obj_color.rr,
 			c1.g * obj_color.rg,
 			c1.b * obj_color.rb));
+}
+
+inline t_color	pixel_to_color(int pixel_color)
+{
+	return (color_make((pixel_color >> RED) & 0xFF,
+			(pixel_color >> GREEN) & 0xFF,
+			(pixel_color >> BLUE) & 0xFF));
 }

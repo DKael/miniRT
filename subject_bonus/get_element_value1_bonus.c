@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:41:38 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 01:10:36 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 14:24:32 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ int	type_split(char *buffer, char ***split_result, int type, t_suf_type *suf)
 		cnt = surface_info + 2;
 		(*suf) = RGB;
 	}
-	else if (ft_strcmp((*split_result)[surface_info], "bm") == 0)
+	else if (ft_strcmp((*split_result)[surface_info], "im") == 0)
 	{
 		cnt = surface_info + 2;
-		(*suf) = BM;
+		(*suf) = IM;
 	}
 	else if (ft_strcmp((*split_result)[surface_info], "bmt") == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:54:04 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 01:25:22 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 14:03:20 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static t_vec	cy_get_side_n_vec(t_cy *cy, t_pnt meet);
 static t_bool	cy_chk_side_hit2(t_cy *cy, t_ray ray,
 					t_hit_rec *rec, double *val);
-static t_color	cy_get_chk_brd_color1(t_cy *cy, t_hit_rec *rec);
-static t_color	cy_get_chk_brd_color2(t_cy *cy, t_hit_rec *rec, int v);
+static void	cy_get_uv1(t_cy *cy, t_hit_rec *rec);
+static void	cy_get_uv2(t_cy *cy, t_hit_rec *rec, int v);
 
 t_bool	cy_chk_top_hit(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec)
 {
@@ -37,10 +37,18 @@ t_bool	cy_chk_top_hit(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec)
 			rec->n_vec = cy->n_vec;
 		else
 			rec->n_vec = v_mul(cy->n_vec, -1);
-		if (cy->suf == CHK)
-			rec->albedo = cy_get_chk_brd_color2(cy, rec, 1);
-		else if (cy->suf == RGB)
+
+		if (cy->suf != RGB)
+		{
+			cy_get_uv2(cy, rec, 1);
+			if (cy->suf == CHK)
+				rec->albedo = chk_color(&cy->chk, rec->u, rec->v);
+			else if (cy->suf == IM)
+				rec->albedo = im_color(cy->im, rec->u, rec->v);
+		}	
+		else
 			rec->albedo = cy->color;
+
 		rec->type = TYPE_CY;
 		rec->ks = cy->ks;
 		rec->ksn = cy->ksn;
@@ -68,9 +76,15 @@ t_bool	cy_chk_bot_hit(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec)
 			rec->n_vec = v_mul(cy->n_vec, -1);
 		else
 			rec->n_vec = cy->n_vec;
-		if (cy->suf == CHK)
-			rec->albedo = cy_get_chk_brd_color2(cy, rec, 0);
-		else if (cy->suf == RGB)
+		if (cy->suf != RGB)
+		{
+			cy_get_uv2(cy, rec, 0);
+			if (cy->suf == CHK)
+				rec->albedo = chk_color(&cy->chk, rec->u, rec->v);
+			else if (cy->suf == IM)
+				rec->albedo = im_color(cy->im, rec->u, rec->v);
+		}	
+		else
 			rec->albedo = cy->color;
 		rec->type = TYPE_CY;
 		rec->ks = cy->ks;
@@ -113,9 +127,15 @@ static t_bool	cy_chk_side_hit2(t_cy *cy, t_ray ray,
 	rec->n_vec = cy_get_side_n_vec(cy, rec->pnt);
 	if (rec->from_outside == FALSE)
 		rec->n_vec = v_mul(rec->n_vec, -1);
-	if (cy->suf == CHK)
-		rec->albedo = cy_get_chk_brd_color1(cy, rec);
-	else if (cy->suf == RGB)
+	if (cy->suf != RGB)
+	{
+		cy_get_uv1(cy, rec);
+		if (cy->suf == CHK)
+			rec->albedo = chk_color(&cy->chk, rec->u, rec->v);
+		else if (cy->suf == IM)
+			rec->albedo = im_color(cy->im, rec->u, rec->v);
+	}	
+	else
 		rec->albedo = cy->color;
 	rec->type = TYPE_CY;
 	rec->ks = cy->ks;
@@ -137,26 +157,22 @@ static t_vec	cy_get_side_n_vec(t_cy *cy, t_pnt meet)
 	return (v_unit_vec(result));
 }
 
-static t_color	cy_get_chk_brd_color1(t_cy *cy, t_hit_rec *rec)
+static void	cy_get_uv1(t_cy *cy, t_hit_rec *rec)
 {
 	double	x;
 	double	y;
-	double	u;
-	double	v;
 
 	x = v_dot(cy->base_x, rec->n_vec);
 	y = v_dot(cy->base_y, rec->n_vec);
-	u = (atan2(y, x) + PI) / (2.0 * PI);
-	v = fabs(v_dot(cy->bot, cy->n_vec) - v_dot(rec->pnt, cy->n_vec));
-	v = v / cy->height;
-	return (uv_pattern_at(&cy->chk, u, v));
+	rec->u = (atan2(y, x) + PI) / (2.0 * PI);
+	rec->v = fabs(v_dot(cy->bot, cy->n_vec) - v_dot(rec->pnt, cy->n_vec));
+	rec->v = rec->v / cy->height;
 }
 
-static t_color	cy_get_chk_brd_color2(t_cy *cy, t_hit_rec *rec, int v)
+static void	cy_get_uv2(t_cy *cy, t_hit_rec *rec, int v)
 {
 	double	x;
 	double	y;
-	double	u;
 	t_vec	tmp;
 
 	if (v == 1)
@@ -165,6 +181,6 @@ static t_color	cy_get_chk_brd_color2(t_cy *cy, t_hit_rec *rec, int v)
 		tmp = v_unit_vec(v_sub(rec->pnt, cy->bot));
 	x = v_dot(cy->base_x, tmp);
 	y = v_dot(cy->base_y, tmp);
-	u = (atan2(y, x) + PI) / (2.0 * PI);
-	return (uv_pattern_at(&cy->chk, u, v));
+	rec->u = (atan2(y, x) + PI) / (2.0 * PI);
+	rec->v = v;
 }

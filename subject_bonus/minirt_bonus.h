@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 01:41:57 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 13:46:45 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,21 @@ enum e_color_mask
 {
 	RED = 16,
 	GREEN = 8,
-	BLUE = 8
+	BLUE = 0
 };
 
 typedef enum e_suf_type
 {
 	RGB,
 	CHK,
-	BM,
+	IM,
 	BMT
 } 	t_suf_type;
 
 typedef struct s_xpm_img
 {
 	char	*name;
+	void	*mlx_ptr;
 	void	*img_ptr;
 	char	*img_addr;
 	int		bpp;
@@ -146,8 +147,8 @@ typedef struct s_sp
 	t_chk_board chk;
 	double		ksn;
 	double		ks;
-	t_xpm_img	bump_map;
-	t_xpm_img	texture;
+	t_xpm_img	*im;
+	t_xpm_img	*bmt;
 }	t_sp;
 
 typedef struct s_pl
@@ -164,8 +165,8 @@ typedef struct s_pl
 	double		matrix[2][3];
 	double		ksn;
 	double		ks;
-	t_xpm_img	bump_map;
-	t_xpm_img	texture;
+	t_xpm_img	*im;
+	t_xpm_img	*bmt;
 }	t_pl;
 
 typedef struct s_cy
@@ -184,8 +185,8 @@ typedef struct s_cy
 	t_vec		base_y;
 	double		ksn;
 	double		ks;
-	t_xpm_img	bump_map;
-	t_xpm_img	texture;
+	t_xpm_img	*im;
+	t_xpm_img	*bmt;
 }	t_cy;
 
 typedef struct s_cn
@@ -204,8 +205,8 @@ typedef struct s_cn
 	t_vec		base_y;
 	double		ksn;
 	double		ks;
-	t_xpm_img	bump_map;
-	t_xpm_img	texture;
+	t_xpm_img	*im;
+	t_xpm_img	*bmt;
 }	t_cn;
 
 typedef struct s_hit_rec
@@ -262,11 +263,9 @@ void	antialiasing(t_data *data);
 // camera_bonus.c
 void	cam_init(t_data *data);
 // check_func_bonus.c
-int		extension_check(const char *file_name);
+t_bool	extension_check(const char *file_name, const char *extention);
 void	essential_elements_chk(t_data *data);
 t_bool	check_real_num_str(char *str);
-// checker_board_bonus.c
-t_color	uv_pattern_at(t_chk_board *chk, double u, double v);
 // color1_bonus.c
 void	color_set(t_color *origin, int _r, int _g, int _b);
 t_color	color_make(int _r, int _g, int _b);
@@ -275,6 +274,7 @@ t_color	color_add(t_color c1, t_color c2);
 t_bool	color_radius_chk(int rgb);
 t_color	color_apply_ratio(t_color ori, double ratio);
 t_color	color_reflection(t_color c1, t_color obj_color);
+t_color	pixel_to_color(int pixel_color);
 // cone1_bonus.c
 t_bool	cn_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec);
 t_bool  is_pnt_in_cn(t_cn *cn, t_pnt pnt);
@@ -304,6 +304,9 @@ void	gap_set(t_gap *origin, double _t_min, double _t_max);
 t_gap	gap_make(double _t_min, double _t_max);
 t_bool	gap_contains(t_gap gap, double x);
 t_bool	gap_surrounds(t_gap gap, double x);
+// get_color_bonus.c
+t_color	chk_color(t_chk_board *chk, double u, double v);
+t_color	im_color(t_xpm_img *img, double u, double v);
 // get_element_value1_bonus.c
 int		element_split(char *buffer, char ***split_result, int cnt, char del);
 int		type_split(char *buffer, char ***split_result, int type, t_suf_type *suf);
@@ -316,7 +319,7 @@ int		get_normalized_vec(char *str, t_vec *nvec);
 int		get_fov(char *str, double *val);
 // get_element_value3_bonus.c
 int		get_chk_board_val(char **strs, int idx, t_chk_board *chk);
-int		get_xpm_val(char *str, t_data *data, t_xpm_img *img);
+int		get_xpm_val(char *file_name, t_data *data, t_xpm_img **ptr);
 // hit_record_bonus.c
 int		hit_chk(t_data *data, t_ray ray, t_gap gap, t_hit_rec *rec);
 void	set_n_vec_dir(t_ray ray, t_hit_rec *rec);
@@ -327,6 +330,7 @@ void	read_error(t_data *data, int return_code, int fd);
 void	error_msg_write(char *msg);
 void	error_exit(t_data *data, char *msg);
 void	delete_obj(void *obj_ptr);
+void	delete_xpm_img(void *obj_ptr);
 // parsing1_bonus.c
 void	read_rt_file(t_data *data, char *file_name);
 int		add_obj(t_data *data, void *obj);

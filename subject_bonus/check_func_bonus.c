@@ -6,27 +6,33 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:07:09 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 17:33:43 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 12:19:40 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-int	extension_check(const char *file_name)
+//test10.rt
+
+t_bool	extension_check(const char *file_name, const char *extention)
 {
 	int	idx;
+	int	idx2;
+	int	name_len;
+	int	ex_len;
 
+	name_len = ft_strlen(file_name);
+	ex_len = ft_strlen(extention);
+	if (name_len <= 1)
+		return (FALSE);
 	idx = -1;
-	while (file_name[++idx] != '\0')
-		;
-	if (idx < 3)
-		return (1);
-	if (file_name[idx - 3] == '.'
-		&& file_name[idx - 2] == 'r'
-		&& file_name[idx - 1] == 't')
-		return (0);
-	else
-		return (1);
+	idx2 = name_len - ex_len;
+	while (idx++ < ex_len)
+	{
+		if (file_name[idx2 + idx] != extention[idx])
+			return (FALSE);
+	}
+	return (TRUE);
 }
 
 void	essential_elements_chk(t_data *data)

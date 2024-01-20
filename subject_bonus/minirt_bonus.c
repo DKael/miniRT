@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:44 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 01:31:38 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 14:30:19 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		error_msg_write("Invalid argument number!");
-	if (extension_check(argv[1]))
+	if (extension_check(argv[1], ".rt") == FALSE)
 		error_exit(&data, "Invalid file extension!");
 	data_init(&data);
+	data.mlx_ptr = mlx_init();
+	if (data.mlx_ptr == T_NULL)
+		error_exit(&data, "mlx_init() error!");
 	read_rt_file(&data, argv[1]);
 	essential_elements_chk(&data);
 	make_window(&data);
@@ -30,9 +33,6 @@ int	main(int argc, char **argv)
 
 static void	make_window(t_data *data)
 {
-	data->mlx_ptr = mlx_init();
-	if (data->mlx_ptr == T_NULL)
-		error_exit(data, "mlx_init() error!");
 	data->win_ptr = mlx_new_window(data->mlx_ptr,
 			data->win_x, data->win_y, "miniRT");
 	if (data->win_ptr == T_NULL)

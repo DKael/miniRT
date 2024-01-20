@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 20:28:09 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 16:14:57 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 13:35:33 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int			ft_atoi(const char *str);
 long long	ft_atoll(const char *str);
 void		ft_bzero(void *s, size_t n);
 void		*ft_calloc(size_t count, size_t size);
+int			ft_clamp(int x, int min, int max);
 t_bool		ft_isalnum(int c);
 t_bool		ft_isalpha(int c);
 t_bool		ft_isascii(int c);

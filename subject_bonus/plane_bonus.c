@@ -6,13 +6,13 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:01:28 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 01:23:29 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 14:04:01 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-static t_color pl_get_chk_brd_color(t_pl *pl, t_hit_rec *rec);
+static void pl_get_uv(t_pl *pl, t_hit_rec *rec);
 
 t_bool	pl_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 {
@@ -32,38 +32,38 @@ t_bool	pl_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 	if (angle < 0)
 		rec->n_vec = pl->n_vec;
 	else
-		rec->n_vec = v_mul(pl->n_vec, -1);
-	if (pl->suf == CHK)
-		rec->albedo = pl_get_chk_brd_color(pl, rec);
-	else if (pl->suf == RGB)
+		rec->n_vec = v_mul(pl->n_vec, -1);\
+	if (pl->suf != RGB)
+	{
+		pl_get_uv(pl, rec);
+		if (pl->suf == CHK)
+			rec->albedo = chk_color(&pl->chk, rec->u, rec->v);
+		else if (pl->suf == IM)
+			rec->albedo = im_color(pl->im, rec->u, rec->v);
+	}
+	else
 		rec->albedo = pl->color;
-
-
-
 	rec->type = TYPE_PL;
 	rec->ks = pl->ks;
 	rec->ksn = pl->ksn;
 	return (TRUE);
 }
 
-static t_color pl_get_chk_brd_color(t_pl *pl, t_hit_rec *rec)
+static void pl_get_uv(t_pl *pl, t_hit_rec *rec)
 {
 	t_vec	tmp;
-	double	u;
-	double	v;
 	
 	tmp = v_sub(rec->pnt, pl->cor);
-	u = tmp.x * pl->matrix[0][0] + tmp.y * pl->matrix[0][1]
+	rec->u = tmp.x * pl->matrix[0][0] + tmp.y * pl->matrix[0][1]
 		+ tmp.z * pl->matrix[0][2];
-	v = tmp.x * pl->matrix[1][0] + tmp.y * pl->matrix[1][1]
+	rec->v = tmp.x * pl->matrix[1][0] + tmp.y * pl->matrix[1][1]
 		+ tmp.z * pl->matrix[1][2];
-	if (u < 0)
-		u -= 1.0;
-	if (v < 0)
-		v -= 1.0;
-	u = fabs(u);
-	v = fabs(v);
-	u = fmod(u, pl->chk.width) / pl->chk.width;
-	v = fmod(v, pl->chk.height) / pl->chk.height;
-	return (uv_pattern_at(&pl->chk, u, v));
+	if (rec->u < 0)
+		rec->u -= 1.0;
+	if (rec->v < 0)
+		rec->v -= 1.0;
+	rec->u = fabs(rec->u);
+	rec->v = fabs(rec->v);
+	rec->u = fmod(rec->u, pl->chk.width) / pl->chk.width;
+	rec->v = fmod(rec->v, pl->chk.height) / pl->chk.height;
 }

@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:01:33 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 01:48:05 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 13:45:35 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,31 +78,20 @@ static inline int	case_cn3(t_data *data, char **spl, t_cn cn)
 	int		result;
 	
 	result = 2;
-	// if (ft_strcmp(spl[5], "chk") == 0)
-	// {
-	// 	result = get_chk_board_val(spl, 6, &cn.chk);
-	// 	cn.is_chk_board = TRUE;
-	// 	calc_cn_base(&cn);
-	// }
-	// else if (ft_strcmp(spl[5], "rgb") == 0)
-	// {
-	// 	result = get_rgb(spl[6], &cn.color);
-	// 	cn.is_chk_board = FALSE;
-	// }
 	if (cn.suf == CHK)
 		result = get_chk_board_val(spl, 8, &cn.chk);
 	else if (cn.suf == RGB)
 		result = get_rgb(spl[8], &cn.color);
-	else if (cn.suf == BM || cn.suf == BMT)
+	else if (cn.suf == IM || cn.suf == BMT)
 	{
-		result = get_xpm_val(spl[8], data, &cn.bump_map);
+		result = get_xpm_val(spl[8], data, &cn.im);
 		if (result != 0)
 		{
 			free_2d_array2((void ***)&spl);
 			return (result);
 		}
 		if (cn.suf == BMT)
-			result = get_xpm_val(spl[9], data, &cn.texture);
+			result = get_xpm_val(spl[9], data, &cn.bmt);
 	}
 	free_2d_array2((void ***)&spl);
 	if (result != 0)

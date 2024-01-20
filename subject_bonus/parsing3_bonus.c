@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:55:09 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 01:47:30 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 13:45:55 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,16 @@ static inline int	case_sp2(t_data *data, char **spl, t_sp sp)
 		result = get_chk_board_val(spl, 6, &sp.chk);
 	else if (sp.suf == RGB)
 		result = get_rgb(spl[6], &sp.color);
-	else if (sp.suf == BM || sp.suf == BMT)
+	else if (sp.suf == IM || sp.suf == BMT)
 	{
-		result = get_xpm_val(spl[6], data, &sp.bump_map);
+		result = get_xpm_val(spl[6], data, &sp.im);
 		if (result != 0)
 		{
 			free_2d_array2((void ***)&spl);
 			return (result);
 		}
 		if (sp.suf == BMT)
-			result = get_xpm_val(spl[7], data, &sp.texture);
+			result = get_xpm_val(spl[7], data, &sp.bmt);
 	}
 	free_2d_array2((void ***)&spl);
 	if (result != 0)
@@ -133,28 +133,17 @@ static inline int	case_pl2(t_data *data, char **spl, t_pl pl)
 		result = get_chk_board_val(spl, 6, &pl.chk);
 	else if (pl.suf == RGB)
 		result = get_rgb(spl[6], &pl.color);
-	else if (pl.suf == BM || pl.suf == BMT)
+	else if (pl.suf == IM || pl.suf == BMT)
 	{
-		result = get_xpm_val(spl[6], data, &pl.bump_map);
+		result = get_xpm_val(spl[6], data, &pl.im);
 		if (result != 0)
 		{
 			free_2d_array2((void ***)&spl);
 			return (result);
 		}
 		if (pl.suf == BMT)
-			result = get_xpm_val(spl[7], data, &pl.texture);
+			result = get_xpm_val(spl[7], data, &pl.bmt);
 	}
-	// if (ft_strcmp(spl[3], "chk") == 0)
-	// {
-	// 	result = get_chk_board_val(spl, 4, &pl.chk);
-	// 	pl.is_chk_board = TRUE;
-	// 	calc_pl_du_dv(&pl);
-	// }
-	// else if (ft_strcmp(spl[3], "rgb") == 0)
-	// {
-	// 	result = get_rgb(spl[4], &pl.color);
-	// 	pl.is_chk_board = FALSE;
-	// }
 	free_2d_array2((void ***)&spl);
 	if (result != 0)
 		return (result);

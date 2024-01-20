@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_board_bonus.c                              :+:      :+:    :+:   */
+/*   ft_clamp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 17:34:37 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/17 21:05:05 by hyungdki         ###   ########.fr       */
+/*   Created: 2024/01/20 13:34:57 by hyungdki          #+#    #+#             */
+/*   Updated: 2024/01/20 13:35:51 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt_bonus.h"
+#include "libft.h"
 
-t_color	uv_pattern_at(t_chk_board *chk, double u, double v)
+int	ft_clamp(int x, int min, int max)
 {
-	double	u2;
-	double	v2;
-
-	u2 = floor(u * chk->width);
-	v2 = floor(v * chk->height);
-	if ((int)(u2 + v2) % 2 == 0)
-		return chk->c1;
-	else
-		return chk->c2;
+	if (x < min)
+		return (min);
+	if (x > max)
+		return (max);
+	return (x);
 }
