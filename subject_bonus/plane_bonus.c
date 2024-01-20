@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:01:28 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 14:04:01 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 18:24:13 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,21 @@ t_bool	pl_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 	{
 		pl_get_uv(pl, rec);
 		if (pl->suf == CHK)
-			rec->albedo = chk_color(&pl->chk, rec->u, rec->v);
+		{
+			if (rec->pl_u * rec->pl_v >= 0)
+				rec->albedo = chk_color(&pl->chk, rec->u, rec->v);
+			else
+				rec->albedo = chk_color2(&pl->chk, rec->u, rec->v);
+		}
 		else if (pl->suf == IM)
 			rec->albedo = im_color(pl->im, rec->u, rec->v);
+		else if (pl->suf == BMT)
+		{
+			rec->albedo = im_color(pl->im, rec->u, rec->v);
+			rec->du = pl->du;
+			rec->dv = pl->dv;
+			bmt_vec(pl->bmt, rec);
+		}	
 	}
 	else
 		rec->albedo = pl->color;
@@ -62,8 +74,8 @@ static void pl_get_uv(t_pl *pl, t_hit_rec *rec)
 		rec->u -= 1.0;
 	if (rec->v < 0)
 		rec->v -= 1.0;
-	rec->u = fabs(rec->u);
-	rec->v = fabs(rec->v);
-	rec->u = fmod(rec->u, pl->chk.width) / pl->chk.width;
-	rec->v = fmod(rec->v, pl->chk.height) / pl->chk.height;
+	rec->pl_u = rec->u;
+	rec->pl_v = rec->v;
+	rec->u = fmod(fabs(rec->u), pl->size) / pl->size;
+	rec->v = fmod(fabs(rec->v), pl->size) / pl->size;
 }

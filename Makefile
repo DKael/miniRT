@@ -6,7 +6,7 @@
 #    By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 20:30:42 by hyungdki          #+#    #+#              #
-#    Updated: 2024/01/20 13:17:56 by hyungdki         ###   ########.fr        #
+#    Updated: 2024/01/20 20:26:30 by hyungdki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ OBJS_BONUS = ${SRCS_BONUS:.c=.o}
 
 CC = cc
 
-CFLAGS = "" #-Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 
 NAME = minirt
 

@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 18:02:49 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:09:23 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct s_sp
 {
 	t_pnt	center;
 	double	diameter;
+	double	radius;
 	t_color	color;
 }	t_sp;
 

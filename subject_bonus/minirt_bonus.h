@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 13:46:45 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:08:50 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ typedef struct s_sp
 {
 	t_pnt		center;
 	double		diameter;
+	double		radius;
 	t_color		color;
 	t_suf_type	suf;
 	t_chk_board chk;
@@ -157,6 +158,7 @@ typedef struct s_pl
 	t_vec		n_vec;
 	t_color		color;
 	double		con;
+	int			size;
 	t_vec		du;
 	t_vec		dv;
 	t_suf_type	suf;
@@ -221,7 +223,11 @@ typedef struct s_hit_rec
 	int		type;
 	double	u;
 	double	v;
+	double	pl_u;
+	double	pl_v;
 	double	h;
+	t_vec	du;
+	t_vec	dv;
 	t_vec	cn_vec;
 }	t_hit_rec;
 
@@ -306,7 +312,9 @@ t_bool	gap_contains(t_gap gap, double x);
 t_bool	gap_surrounds(t_gap gap, double x);
 // get_color_bonus.c
 t_color	chk_color(t_chk_board *chk, double u, double v);
+t_color	chk_color2(t_chk_board *chk, double u, double v);
 t_color	im_color(t_xpm_img *img, double u, double v);
+void	bmt_vec(t_xpm_img *img, t_hit_rec *rec);
 // get_element_value1_bonus.c
 int		element_split(char *buffer, char ***split_result, int cnt, char del);
 int		type_split(char *buffer, char ***split_result, int type, t_suf_type *suf);
@@ -323,6 +331,7 @@ int		get_xpm_val(char *file_name, t_data *data, t_xpm_img **ptr);
 // hit_record_bonus.c
 int		hit_chk(t_data *data, t_ray ray, t_gap gap, t_hit_rec *rec);
 void	set_n_vec_dir(t_ray ray, t_hit_rec *rec);
+void	calc_du_dv(t_vec n_vec, t_vec *du, t_vec *dv);
 // init_bonus.c
 void	data_init(t_data *data);
 // on_error_bonus.c

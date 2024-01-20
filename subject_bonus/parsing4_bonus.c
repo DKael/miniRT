@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:01:33 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 13:45:42 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 15:48:18 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	case_cy2(t_data *data, char **spl, t_cy cy);
 static int	case_cy3(t_data *data, char **spl, t_cy cy);
 static int	case_cy4(t_data *data, t_cy cy);
-static void	calc_cy_base(t_cy *cy);
+//static void	calc_cy_base(t_cy *cy);
 
 int	case_cy(t_data *data, char *bf)
 {
@@ -105,7 +105,8 @@ static inline int	case_cy4(t_data *data, t_cy cy)
 
 	cy.top = v_add(cy.center, v_mul(cy.n_vec, cy.height / 2.0));
 	cy.bot = v_sub(cy.center, v_mul(cy.n_vec, cy.height / 2.0));
-	calc_cy_base(&cy);
+	calc_du_dv(cy.n_vec, &cy.base_x, &cy.base_y);
+	//calc_cy_base(&cy);
 	heap_cy = (t_cy *)malloc(sizeof(t_cy));
 	if (heap_cy == T_NULL)
 		return (1);
@@ -116,19 +117,19 @@ static inline int	case_cy4(t_data *data, t_cy cy)
 	return (0);
 }
 
-inline static void	calc_cy_base(t_cy *cy)
-{
-	t_vec	tmp;
+// inline static void	calc_cy_base(t_cy *cy)
+// {
+// 	t_vec	tmp;
 
-	tmp = v_make(0, 0, 1);
-	if (cy->n_vec.x == 0 && cy->n_vec.y == 0)
-	{
-		cy->base_x = v_make(1, 0, 0);
-		cy->base_y = v_make(0, 1, 0);
-	}
-	else
-	{
-		cy->base_x = v_cross(tmp, cy->n_vec);
-		cy->base_y = v_cross(cy->n_vec, cy->base_x);
-	}
-}
+// 	tmp = v_make(0, 0, 1);
+// 	if (cy->n_vec.x == 0 && cy->n_vec.y == 0)
+// 	{
+// 		cy->base_x = v_make(1, 0, 0);
+// 		cy->base_y = v_make(0, 1, 0);
+// 	}
+// 	else
+// 	{
+// 		cy->base_x = v_cross(tmp, cy->n_vec);
+// 		cy->base_y = v_cross(cy->n_vec, cy->base_x);
+// 	}
+// }

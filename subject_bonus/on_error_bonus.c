@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:04:16 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 14:05:06 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 16:11:07 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	read_error(t_data *data, int return_code, int fd)
 	else if (return_code == 7)
 		msg = "vector not normalized!";
 	else if (return_code == 8)
-		msg = "Invalide xpm file!";
+		msg = "Invalid xpm file!";
 	close(fd);
 	error_exit(data, msg);
 }

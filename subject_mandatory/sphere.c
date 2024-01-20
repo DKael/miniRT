@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:01:28 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 16:35:44 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:09:41 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_bool	sp_hit(t_sp	sp, t_ray ray, t_gap gap, t_hit_rec *rec)
 	oc = v_sub(ray.orig, sp.center);
 	val[0] = v_len_squared(ray.dir);
 	val[1] = v_dot(oc, ray.dir);
-	val[2] = v_len_squared(oc) - sp.diameter * sp.diameter;
+	val[2] = v_len_squared(oc) - sp.radius * sp.radius;
 	val[3] = val[1] * val[1] - val[0] * val[2];
 	if (val[3] < 0)
 		return (FALSE);
@@ -42,7 +42,7 @@ t_bool	sp_hit(t_sp	sp, t_ray ray, t_gap gap, t_hit_rec *rec)
 	}
 	rec->t = val[5];
 	rec->pnt = ray_at(ray, val[5]);
-	rec->n_vec = v_mul(v_sub(rec->pnt, sp.center), 1 / sp.diameter);
+	rec->n_vec = v_mul(v_sub(rec->pnt, sp.center), 1 / sp.radius);
 	rec->albedo = sp.color;
 	set_n_vec_dir(ray, rec);
 	rec->type = TYPE_SP;

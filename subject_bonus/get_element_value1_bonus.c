@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:41:38 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 14:24:32 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 17:02:45 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ int	type_split(char *buffer, char ***split_result, int type, t_suf_type *suf)
 	if (*split_result == T_NULL)
 		return (1);
 	
-	if (type == TYPE_SP || type == TYPE_PL)
+	if (type == TYPE_SP)
 		surface_info = 5;
+	else if (type == TYPE_PL)
+		surface_info = 6;
 	else if (type == TYPE_CY || type == TYPE_CN)
 		surface_info = 7;
 	idx = -1;

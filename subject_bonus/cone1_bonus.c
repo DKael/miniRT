@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 20:49:32 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/19 06:41:52 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 20:27:01 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ t_bool	cn_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 t_bool  is_pnt_in_cn(t_cn *cn, t_pnt pnt)
 {
     double	t;
-	double	abs_t;
     double  tr;
 	t_pnt	tmp;
 

@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:01:51 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/17 21:03:01 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 15:44:34 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@ int	hit_chk(t_data *data, t_ray ray, t_gap gap, t_hit_rec *rec)
 	while (n_ptr != &(data->objs.tail))
 	{
 		result = FALSE;
-		// if (n_ptr->type == TYPE_SP)
-		// 	result = sp_hit(*(t_sp *)n_ptr->contents, ray, gap, &tmp_rec);
-		// else if (n_ptr->type == TYPE_PL)
-		// 	result = pl_hit(*(t_pl *)n_ptr->contents, ray, gap, &tmp_rec);
-		// else if (n_ptr->type == TYPE_CY)
-		// 	result = cy_hit(*(t_cy *)n_ptr->contents, ray, gap, &tmp_rec);
-		// else if (n_ptr->type == TYPE_CN)
-		// 	result = cn_hit(*(t_cn *)n_ptr->contents, ray, gap, &tmp_rec);
 		result =( data->funt_ptr[n_ptr->type - 3])(n_ptr->contents, ray, gap, &tmp_rec);
 		if (result == TRUE)
 		{
@@ -49,4 +41,21 @@ void	set_n_vec_dir(t_ray ray, t_hit_rec *rec)
 	rec->from_outside = (v_dot(ray.dir, rec->n_vec) < 0);
 	if (rec->from_outside == FALSE)
 		rec->n_vec = v_mul(rec->n_vec, -1.0);
+}
+
+void	calc_du_dv(t_vec n_vec, t_vec *du, t_vec *dv)
+{
+	t_vec	tmp;
+
+	tmp = v_make(0, 0, 1);
+	if (n_vec.x == 0 && n_vec.y == 0)
+	{
+		*du = v_make(1, 0, 0);
+		*dv = v_make(0, 1, 0);
+	}
+	else
+	{
+		*du = v_cross(tmp, n_vec);
+		*dv = v_cross(n_vec, *du);
+	}
 }

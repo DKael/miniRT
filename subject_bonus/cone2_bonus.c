@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 14:28:14 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 14:03:53 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 16:28:11 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ t_bool	cn_chk_bot_hit(t_cn *cn, t_ray ray, t_gap gap, t_hit_rec *rec)
 				rec->albedo = chk_color(&cn->chk, rec->u, rec->v);
 			else if (cn->suf == IM)
 				rec->albedo = im_color(cn->im, rec->u, rec->v);
+			else if (cn->suf == BMT)
+			{
+				rec->albedo = im_color(cn->im, rec->u, rec->v);
+				calc_du_dv(rec->n_vec, &rec->du, &rec->dv);
+				bmt_vec(cn->bmt, rec);
+			}	
 		}	
 		else
 			rec->albedo = cn->color;
@@ -102,6 +108,12 @@ static t_bool	cn_chk_side_hit2(t_cn *cn, t_ray ray,
 			rec->albedo = chk_color(&cn->chk, rec->u, rec->v);
 		else if (cn->suf == IM)
 			rec->albedo = im_color(cn->im, rec->u, rec->v);
+		else if (cn->suf == BMT)
+		{
+			rec->albedo = im_color(cn->im, rec->u, rec->v);
+			calc_du_dv(rec->n_vec, &rec->du, &rec->dv);
+			bmt_vec(cn->bmt, rec);
+		}
 	}	
 	else
 		rec->albedo = cn->color;

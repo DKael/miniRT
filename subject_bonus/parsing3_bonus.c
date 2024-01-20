@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:55:09 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 13:45:55 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:08:16 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	case_sp(t_data *data, char *bf)
 		free_2d_array2((void ***)&spl);
 		return (result);
 	}
+	sp.radius = sp.diameter / 2.0;
 	result = get_positive_double_value(spl[3], &sp.ksn);
 	if (result != 0)
 	{
@@ -108,13 +109,24 @@ int	case_pl(t_data *data, char *bf)
 		return (result);
 	}
 	pl.con = v_dot(pl.cor, pl.n_vec);
-	result = get_positive_double_value(spl[3], &pl.ksn);
+	if (ft_isdecimal(spl[3]) == 0)
+	{
+		free_2d_array2((void ***)&spl);
+		return (2);
+	}
+	pl.size = ft_atoi(spl[3]);
+	if (pl.size < 1)
+	{
+		free_2d_array2((void ***)&spl);
+		return (2);
+	}
+	result = get_positive_double_value(spl[4], &pl.ksn);
 	if (result != 0)
 	{
 		free_2d_array2((void ***)&spl);
 		return (result);
 	}
-	result = get_ratio(spl[4], &pl.ks);
+	result = get_ratio(spl[5], &pl.ks);
 	if (result != 0)
 	{
 		free_2d_array2((void ***)&spl);
@@ -130,19 +142,19 @@ static inline int	case_pl2(t_data *data, char **spl, t_pl pl)
 
 	result = 2;
 	if (pl.suf == CHK)
-		result = get_chk_board_val(spl, 6, &pl.chk);
+		result = get_chk_board_val(spl, 7, &pl.chk);
 	else if (pl.suf == RGB)
-		result = get_rgb(spl[6], &pl.color);
+		result = get_rgb(spl[7], &pl.color);
 	else if (pl.suf == IM || pl.suf == BMT)
 	{
-		result = get_xpm_val(spl[6], data, &pl.im);
+		result = get_xpm_val(spl[7], data, &pl.im);
 		if (result != 0)
 		{
 			free_2d_array2((void ***)&spl);
 			return (result);
 		}
 		if (pl.suf == BMT)
-			result = get_xpm_val(spl[7], data, &pl.bmt);
+			result = get_xpm_val(spl[8], data, &pl.bmt);
 	}
 	free_2d_array2((void ***)&spl);
 	if (result != 0)
@@ -162,17 +174,7 @@ inline static void	calc_pl_du_dv(t_pl *pl)
 {
 	t_vec	tmp;
 
-	tmp = v_make(0, 0, 1);
-	if (pl->n_vec.x == 0 && pl->n_vec.y == 0)
-	{
-		pl->du = v_make(1, 0, 0);
-		pl->dv = v_make(0, 1, 0);
-	}
-	else
-	{
-		pl->du = v_cross(tmp, pl->n_vec);
-		pl->dv = v_cross(pl->n_vec, pl->du);
-	}
+	calc_du_dv(pl->n_vec, &pl->du, &pl->dv);
 	tmp = v_cross(pl->dv, pl->du);
 	pl->determinant = tmp.x + tmp.y + tmp.z;
 	pl->matrix[0][0] = pl->dv.z - pl->dv.y;

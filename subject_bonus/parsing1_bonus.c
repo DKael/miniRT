@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:03:10 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/19 07:07:39 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 20:27:42 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,10 @@ void	read_rt_file(t_data *data, char *file_name)
 {
 	int		fd;
 	int		result;
-	int		line;
 
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 		error_exit(data, "file open error!");
-	line = 1;
 	while (1)
 	{
 		result = read_rt_file1(data, fd);
@@ -38,7 +36,6 @@ void	read_rt_file(t_data *data, char *file_name)
 			break ;
 		else if (result != 0)
 			read_error(data, result, fd);
-		line++;
 	}
 	close(fd);
 }

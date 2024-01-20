@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:55:09 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 16:34:36 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:09:32 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	case_sp(t_data *data, char *bf)
 		free_2d_array2((void ***)&spl);
 		return (result);
 	}
+	sp.radius = sp.diameter / 2.0;
 	return (case_sp2(data, spl, sp));
 }
 

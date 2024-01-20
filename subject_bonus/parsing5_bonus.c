@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:01:33 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 13:45:35 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 15:49:15 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	case_cn2(t_data *data, char **spl, t_cn cn);
 static int	case_cn3(t_data *data, char **spl, t_cn cn);
 static int	case_cn4(t_data *data, t_cn cn);
-static void	calc_cn_base(t_cn *cn);
+//static void	calc_cn_base(t_cn *cn);
 
 int	case_cn(t_data *data, char *bf)
 {
@@ -105,7 +105,8 @@ static inline int	case_cn4(t_data *data, t_cn cn)
 
 	cn.top = v_add(cn.center, v_mul(cn.n_vec, cn.height));
 	cn.ratio = cn.height / cn.radius;
-	calc_cn_base(&cn);
+	//calc_cn_base(&cn);
+	calc_du_dv(cn.n_vec, &cn.base_x, &cn.base_y);
 	heap_cn = (t_cn *)malloc(sizeof(t_cn));
 	if (heap_cn == T_NULL)
 		return (1);
@@ -116,19 +117,19 @@ static inline int	case_cn4(t_data *data, t_cn cn)
 	return (0);
 }
 
-inline static void	calc_cn_base(t_cn *cn)
-{
-	t_vec	tmp;
+// inline static void	calc_cn_base(t_cn *cn)
+// {
+// 	t_vec	tmp;
 
-	tmp = v_make(0, 0, 1);
-	if (cn->n_vec.x == 0 && cn->n_vec.y == 0)
-	{
-		cn->base_x = v_make(1, 0, 0);
-		cn->base_y = v_make(0, 1, 0);
-	}
-	else
-	{
-		cn->base_x = v_cross(tmp, cn->n_vec);
-		cn->base_y = v_cross(cn->n_vec, cn->base_x);
-	}
-}
+// 	tmp = v_make(0, 0, 1);
+// 	if (cn->n_vec.x == 0 && cn->n_vec.y == 0)
+// 	{
+// 		cn->base_x = v_make(1, 0, 0);
+// 		cn->base_y = v_make(0, 1, 0);
+// 	}
+// 	else
+// 	{
+// 		cn->base_x = v_cross(tmp, cn->n_vec);
+// 		cn->base_y = v_cross(cn->n_vec, cn->base_x);
+// 	}
+// }

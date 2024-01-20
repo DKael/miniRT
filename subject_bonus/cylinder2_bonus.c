@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:54:04 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 14:03:20 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 16:27:47 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ t_bool	cy_chk_top_hit(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec)
 				rec->albedo = chk_color(&cy->chk, rec->u, rec->v);
 			else if (cy->suf == IM)
 				rec->albedo = im_color(cy->im, rec->u, rec->v);
+			else if (cy->suf == BMT)
+			{
+				rec->albedo = im_color(cy->im, rec->u, rec->v);
+				calc_du_dv(rec->n_vec, &rec->du, &rec->dv);
+				bmt_vec(cy->bmt, rec);
+			}
 		}	
 		else
 			rec->albedo = cy->color;
@@ -83,6 +89,12 @@ t_bool	cy_chk_bot_hit(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec)
 				rec->albedo = chk_color(&cy->chk, rec->u, rec->v);
 			else if (cy->suf == IM)
 				rec->albedo = im_color(cy->im, rec->u, rec->v);
+			else if (cy->suf == BMT)
+			{
+				rec->albedo = im_color(cy->im, rec->u, rec->v);
+				calc_du_dv(rec->n_vec, &rec->du, &rec->dv);
+				bmt_vec(cy->bmt, rec);
+			}
 		}	
 		else
 			rec->albedo = cy->color;
@@ -134,6 +146,12 @@ static t_bool	cy_chk_side_hit2(t_cy *cy, t_ray ray,
 			rec->albedo = chk_color(&cy->chk, rec->u, rec->v);
 		else if (cy->suf == IM)
 			rec->albedo = im_color(cy->im, rec->u, rec->v);
+		else if (cy->suf == BMT)
+		{
+			rec->albedo = im_color(cy->im, rec->u, rec->v);
+			calc_du_dv(rec->n_vec, &rec->du, &rec->dv);
+			bmt_vec(cy->bmt, rec);
+		}
 	}	
 	else
 		rec->albedo = cy->color;
