@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 19:08:50 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:37:46 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef enum e_suf_type
 	CHK,
 	IM,
 	BMT
-} 	t_suf_type;
+}	t_suf_type;
 
 typedef struct s_xpm_img
 {
@@ -145,7 +145,7 @@ typedef struct s_sp
 	double		radius;
 	t_color		color;
 	t_suf_type	suf;
-	t_chk_board chk;
+	t_chk_board	chk;
 	double		ksn;
 	double		ks;
 	t_xpm_img	*im;
@@ -162,7 +162,7 @@ typedef struct s_pl
 	t_vec		du;
 	t_vec		dv;
 	t_suf_type	suf;
-	t_chk_board chk;
+	t_chk_board	chk;
 	double		determinant;
 	double		matrix[2][3];
 	double		ksn;
@@ -182,7 +182,7 @@ typedef struct s_cy
 	t_pnt		top;
 	t_pnt		bot;
 	t_suf_type	suf;
-	t_chk_board chk;
+	t_chk_board	chk;
 	t_vec		base_x;
 	t_vec		base_y;
 	double		ksn;
@@ -202,7 +202,7 @@ typedef struct s_cn
 	t_color		color;
 	t_pnt		top;
 	t_suf_type	suf;
-	t_chk_board chk;
+	t_chk_board	chk;
 	t_vec		base_x;
 	t_vec		base_y;
 	double		ksn;
@@ -283,20 +283,12 @@ t_color	color_reflection(t_color c1, t_color obj_color);
 t_color	pixel_to_color(int pixel_color);
 // cone1_bonus.c
 t_bool	cn_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec);
-t_bool  is_pnt_in_cn(t_cn *cn, t_pnt pnt);
-// cone2_bonus.c
-t_bool	cn_chk_bot_hit(t_cn *cn, t_ray ray, t_gap gap, t_hit_rec *rec);
-t_bool	cn_chk_side_hit(t_cn *cn, t_ray ray, t_gap gap, t_hit_rec *rec);
+t_bool	is_pnt_in_cn(t_cn *cn, t_pnt pnt);
 // cylinder1_bonus.c
 t_bool	cy_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec);
 t_bool	is_pnt_in_cy(t_cy *cy, t_pnt pnt);
-// cylinder2_bonus.c
-t_bool	cy_chk_top_hit(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec);
-t_bool	cy_chk_bot_hit(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec);
-t_bool	cy_chk_side_hit(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec);
 // draw_bonus.c
 void	draw(t_data *data);
-void	mlx_pixel_put_at_mem(t_data *data, int x, int y, t_color color);
 // event_bonus.c
 int		quit_program(int keycode, t_data *data);
 int		press_cross_on_window_frame(t_data *data);
@@ -317,7 +309,6 @@ t_color	im_color(t_xpm_img *img, double u, double v);
 void	bmt_vec(t_xpm_img *img, t_hit_rec *rec);
 // get_element_value1_bonus.c
 int		element_split(char *buffer, char ***split_result, int cnt, char del);
-int		type_split(char *buffer, char ***split_result, int type, t_suf_type *suf);
 int		get_ratio(char *str, double *val);
 int		get_positive_double_value(char *str, double *val);
 // get_element_value2_bonus.c
@@ -328,6 +319,9 @@ int		get_fov(char *str, double *val);
 // get_element_value3_bonus.c
 int		get_chk_board_val(char **strs, int idx, t_chk_board *chk);
 int		get_xpm_val(char *file_name, t_data *data, t_xpm_img **ptr);
+// get_element_value4_bonus.c
+int		type_split(char *buffer, char ***split_result,
+			int type, t_suf_type *suf);
 // hit_record_bonus.c
 int		hit_chk(t_data *data, t_ray ray, t_gap gap, t_hit_rec *rec);
 void	set_n_vec_dir(t_ray ray, t_hit_rec *rec);
@@ -340,7 +334,7 @@ void	error_msg_write(char *msg);
 void	error_exit(t_data *data, char *msg);
 void	delete_obj(void *obj_ptr);
 void	delete_xpm_img(void *obj_ptr);
-// parsing1_bonus.c
+// parsing_bonus.c
 void	read_rt_file(t_data *data, char *file_name);
 int		add_obj(t_data *data, void *obj);
 // plane_bonus.c

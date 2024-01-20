@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:33:03 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 00:50:56 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:17:14 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ inline t_color	calc_light(t_data *data, t_ray ray, t_hit_rec *rec)
 	return (sum);
 }
 
-static inline t_ray	get_reflected_ray(t_ray ray, t_hit_rec *rec)
+inline static t_ray	get_reflected_ray(t_ray ray, t_hit_rec *rec)
 {
 	t_ray	next;
 
@@ -54,19 +54,19 @@ static inline t_ray	get_reflected_ray(t_ray ray, t_hit_rec *rec)
 	return (next);
 }
 
-static inline t_color	calc_diffuse(t_color l_color, t_hit_rec *rec, t_ray light)
+inline static t_color	calc_diffuse(t_color l_color, t_hit_rec *rec, t_ray l)
 {
 	double	kd;
 	t_color	diffuse;
 
-	kd = fmax(v_dot(rec->n_vec, v_mul(light.dir, -1)), 0.0);
+	kd = fmax(v_dot(rec->n_vec, v_mul(l.dir, -1)), 0.0);
 	if (kd == 0.0)
 		return (color_make(0, 0, 0));
 	diffuse = color_apply_ratio(l_color, kd);
 	return (diffuse);
 }
 
-static inline t_color	calc_specular(t_color l_color, t_hit_rec *rec,
+inline static t_color	calc_specular(t_color l_color, t_hit_rec *rec,
 	t_ray light, t_ray ray)
 {
 	t_color	specular;

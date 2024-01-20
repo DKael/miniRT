@@ -6,18 +6,14 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 11:10:56 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/15 17:18:46 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 21:07:59 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-static inline double	degree_to_radian(double degree)
-{
-	return (degree * M_PI / 180);
-}
-
-static void	cam_init2(t_data *data, t_camera *ptr);
+static void		cam_init2(t_data *data, t_camera *ptr);
+static double	degree_to_radian(double degree);
 
 void	cam_init(t_data *data)
 {
@@ -47,7 +43,7 @@ void	cam_init(t_data *data)
 	cam_init2(data, ptr);
 }
 
-static void	cam_init2(t_data *data, t_camera *ptr)
+inline static void	cam_init2(t_data *data, t_camera *ptr)
 {
 	ptr->pixel_du = v_mul(ptr->viewport_u,
 			1.0 / data->win_x_nx);
@@ -61,4 +57,9 @@ static void	cam_init2(t_data *data, t_camera *ptr)
 			v_mul(ptr->viewport_v, 0.5));
 	ptr->pixel00_loc = v_add(ptr->viewport_upper_left,
 			v_mul(v_add(ptr->pixel_du, ptr->pixel_dv), 0.5));
+}
+
+inline static double	degree_to_radian(double degree)
+{
+	return (degree * M_PI / 180);
 }

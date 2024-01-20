@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing2_bonus.c                                   :+:      :+:    :+:   */
+/*   parsing_a_c_l_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:47:04 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/15 14:38:51 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:16:49 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	case_c(t_data *data, char *bf)
 	return (case_c2(data, spl));
 }
 
-static inline int	case_c2(t_data *data, char **spl)
+inline static int	case_c2(t_data *data, char **spl)
 {
 	int	result;
 
@@ -101,7 +101,7 @@ int	case_l(t_data *data, char *bf)
 	return (case_l2(data, spl, l));
 }
 
-static inline int	case_l2(t_data *data, char **spl, t_light l)
+inline static int	case_l2(t_data *data, char **spl, t_light l)
 {
 	int		result;
 	t_light	*heap_l;

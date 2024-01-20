@@ -6,22 +6,15 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:01:28 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 19:09:49 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:19:43 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-static void	sp_get_uv(t_pnt pnt, t_hit_rec *rec);
+static t_bool	sp_hit2(t_sp *sp, t_ray ray, t_hit_rec *rec);
+static void		sp_get_uv(t_pnt pnt, t_hit_rec *rec);
 
-/*
-val[0] means a
-val[1] means half_b
-val[2] means c
-val[3] means discriminant, half_b ^ 2 - a * c
-val[4] means root of discriminant, sqrt(discriminant)
-val[5] means solution of quadratic equation
-*/
 t_bool	sp_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 {
 	t_sp	*sp;
@@ -46,6 +39,11 @@ t_bool	sp_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 	}
 	rec->t = val[5];
 	rec->pnt = ray_at(ray, val[5]);
+	return (sp_hit2(sp, ray, rec));
+}
+
+inline static t_bool	sp_hit2(t_sp *sp, t_ray ray, t_hit_rec *rec)
+{
 	rec->n_vec = v_mul(v_sub(rec->pnt, sp->center), 1 / sp->radius);
 	if (sp->suf != RGB)
 	{
@@ -59,8 +57,8 @@ t_bool	sp_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 			rec->albedo = im_color(sp->im, rec->u, rec->v);
 			calc_du_dv(rec->n_vec, &rec->du, &rec->dv);
 			bmt_vec(sp->bmt, rec);
-		}	
-	}	
+		}
+	}
 	else
 		rec->albedo = sp->color;
 	set_n_vec_dir(ray, rec);
@@ -93,5 +91,5 @@ static void	sp_get_uv(t_pnt pnt, t_hit_rec *rec)
 	if (phi < 0)
 		phi += (2.0 * PI);
 	rec->u = phi / (2.0 * PI);
-	rec->v= theta / PI;
+	rec->v = theta / PI;
 }

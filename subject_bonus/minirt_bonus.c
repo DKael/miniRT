@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:44 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 14:30:19 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 21:24:37 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,3 @@ static void	make_window(t_data *data)
 	mlx_hook(data->win_ptr, 17, 0, press_cross_on_window_frame, data);
 	mlx_loop(data->mlx_ptr);
 }
-

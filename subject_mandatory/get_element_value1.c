@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:41:38 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 16:33:39 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:16:49 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	element_split(char *buffer, char ***split_result, int cnt, char del)
 	return (0);
 }
 
-static inline void	remove_newline(char	*str)
+inline static void	remove_newline(char	*str)
 {
 	int	idx;
 

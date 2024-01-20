@@ -6,7 +6,7 @@
 #    By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 20:30:42 by hyungdki          #+#    #+#              #
-#    Updated: 2024/01/20 20:26:30 by hyungdki         ###   ########.fr        #
+#    Updated: 2024/01/20 22:32:41 by hyungdki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,11 @@ SRCS_BONUS =	subject_bonus/minirt_bonus.c \
 				subject_bonus/color2_bonus.c \
 				subject_bonus/cone1_bonus.c \
 				subject_bonus/cone2_bonus.c \
+				subject_bonus/cone3_bonus.c \
 				subject_bonus/cylinder1_bonus.c \
 				subject_bonus/cylinder2_bonus.c \
+				subject_bonus/cylinder3_bonus.c \
+				subject_bonus/cylinder4_bonus.c \
 				subject_bonus/draw_bonus.c \
 				subject_bonus/event_bonus.c \
 				subject_bonus/free_resource_bonus.c \
@@ -56,14 +59,16 @@ SRCS_BONUS =	subject_bonus/minirt_bonus.c \
 				subject_bonus/get_element_value1_bonus.c \
 				subject_bonus/get_element_value2_bonus.c \
 				subject_bonus/get_element_value3_bonus.c \
+				subject_bonus/get_element_value4_bonus.c \
 				subject_bonus/hit_record_bonus.c \
 				subject_bonus/init_bonus.c \
 				subject_bonus/on_error_bonus.c \
-				subject_bonus/parsing1_bonus.c \
-				subject_bonus/parsing2_bonus.c \
-				subject_bonus/parsing3_bonus.c \
-				subject_bonus/parsing4_bonus.c \
-				subject_bonus/parsing5_bonus.c \
+				subject_bonus/parsing_bonus.c \
+				subject_bonus/parsing_a_c_l_bonus.c \
+				subject_bonus/parsing_cn_bonus.c \
+				subject_bonus/parsing_cy_bonus.c \
+				subject_bonus/parsing_pl_bonus.c \
+				subject_bonus/parsing_sp_bonus.c \
 				subject_bonus/plane_bonus.c \
 				subject_bonus/point_bonus.c \
 				subject_bonus/ray1_bonus.c \

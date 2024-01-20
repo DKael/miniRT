@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 14:47:04 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 16:34:26 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:16:49 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	case_c(t_data *data, char *bf)
 	return (case_c2(data, spl));
 }
 
-static inline int	case_c2(t_data *data, char **spl)
+inline static int	case_c2(t_data *data, char **spl)
 {
 	int	result;
 
@@ -96,7 +96,7 @@ int	case_l(t_data *data, char *bf)
 	return (case_l2(data, spl));
 }
 
-static inline int	case_l2(t_data *data, char **spl)
+inline static int	case_l2(t_data *data, char **spl)
 {
 	int	result;
 

@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:01:51 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 15:44:34 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 21:24:04 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	hit_chk(t_data *data, t_ray ray, t_gap gap, t_hit_rec *rec)
 	while (n_ptr != &(data->objs.tail))
 	{
 		result = FALSE;
-		result =( data->funt_ptr[n_ptr->type - 3])(n_ptr->contents, ray, gap, &tmp_rec);
+		result = (data->funt_ptr[n_ptr->type - 3])(n_ptr->contents,
+				ray, gap, &tmp_rec);
 		if (result == TRUE)
 		{
 			hit_anything = 1;

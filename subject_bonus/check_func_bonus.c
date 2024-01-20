@@ -6,13 +6,11 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:07:09 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 12:19:40 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 21:08:59 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
-
-//test10.rt
 
 t_bool	extension_check(const char *file_name, const char *extention)
 {
@@ -35,7 +33,7 @@ t_bool	extension_check(const char *file_name, const char *extention)
 	return (TRUE);
 }
 
-void	essential_elements_chk(t_data *data)
+inline void	essential_elements_chk(t_data *data)
 {
 	if (data->al_cnt == 0)
 		error_exit(data, "Ambient lighting element not exist!");

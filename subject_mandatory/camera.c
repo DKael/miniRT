@@ -6,13 +6,13 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 11:10:56 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/15 17:18:41 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:16:49 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static inline double	degree_to_radian(double degree)
+inline static double	degree_to_radian(double degree)
 {
 	return (degree * M_PI / 180);
 }

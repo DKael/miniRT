@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 12:15:24 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 17:33:39 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 21:07:10 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	antialiasing(t_data *data)
 	}
 }
 
-static void	antialiasing2(t_data *data, int *x, int *y)
+inline static void	antialiasing2(t_data *data, int *x, int *y)
 {
 	t_color	c[2];
 	char	*dst;

@@ -6,13 +6,16 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:01:28 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/18 16:53:53 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 21:06:41 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
 static t_bool	cy_hit2(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec);
+extern t_bool	cy_chk_top_hit(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec);
+extern t_bool	cy_chk_bot_hit(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec);
+extern t_bool	cy_chk_side_hit(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec);
 
 t_bool	cy_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 {
@@ -32,7 +35,7 @@ t_bool	cy_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 	}
 }
 
-static t_bool	cy_hit2(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec)
+inline static t_bool	cy_hit2(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec)
 {
 	double	dot_result;
 
@@ -53,7 +56,7 @@ static t_bool	cy_hit2(t_cy *cy, t_ray ray, t_gap gap, t_hit_rec *rec)
 	}
 }
 
-t_bool	is_pnt_in_cy(t_cy *cy, t_pnt pnt)
+inline t_bool	is_pnt_in_cy(t_cy *cy, t_pnt pnt)
 {
 	double	t;
 	t_pnt	tmp;

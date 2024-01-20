@@ -6,13 +6,14 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:01:28 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 18:24:13 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:14:45 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-static void pl_get_uv(t_pl *pl, t_hit_rec *rec);
+static t_bool	pl_hit2(t_pl *pl, t_hit_rec *rec);
+static void		pl_get_uv(t_pl *pl, t_hit_rec *rec);
 
 t_bool	pl_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 {
@@ -32,7 +33,14 @@ t_bool	pl_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 	if (angle < 0)
 		rec->n_vec = pl->n_vec;
 	else
-		rec->n_vec = v_mul(pl->n_vec, -1);\
+		rec->n_vec = v_mul(pl->n_vec, -1);
+	rec->ks = pl->ks;
+	rec->ksn = pl->ksn;
+	return (pl_hit2(pl, rec));
+}
+
+inline static t_bool	pl_hit2(t_pl *pl, t_hit_rec *rec)
+{
 	if (pl->suf != RGB)
 	{
 		pl_get_uv(pl, rec);
@@ -51,20 +59,18 @@ t_bool	pl_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec)
 			rec->du = pl->du;
 			rec->dv = pl->dv;
 			bmt_vec(pl->bmt, rec);
-		}	
+		}
 	}
 	else
 		rec->albedo = pl->color;
 	rec->type = TYPE_PL;
-	rec->ks = pl->ks;
-	rec->ksn = pl->ksn;
 	return (TRUE);
 }
 
-static void pl_get_uv(t_pl *pl, t_hit_rec *rec)
+inline static void	pl_get_uv(t_pl *pl, t_hit_rec *rec)
 {
 	t_vec	tmp;
-	
+
 	tmp = v_sub(rec->pnt, pl->cor);
 	rec->u = tmp.x * pl->matrix[0][0] + tmp.y * pl->matrix[0][1]
 		+ tmp.z * pl->matrix[0][2];

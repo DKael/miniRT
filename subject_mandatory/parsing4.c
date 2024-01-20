@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:01:33 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 16:34:44 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:16:49 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	case_cy(t_data *data, char *buffer)
 	return (case_cy2(data, spl, cy));
 }
 
-static inline int	case_cy2(t_data *data, char **spl, t_cy cy)
+inline static int	case_cy2(t_data *data, char **spl, t_cy cy)
 {
 	int	result;
 
@@ -59,7 +59,7 @@ static inline int	case_cy2(t_data *data, char **spl, t_cy cy)
 	return (case_cy3(data, spl, cy));
 }
 
-static inline int	case_cy3(t_data *data, char **spl, t_cy cy)
+inline static int	case_cy3(t_data *data, char **spl, t_cy cy)
 {
 	int		result;
 	t_cy	*heap_cy;
