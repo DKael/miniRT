@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 21:14:29 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/21 13:30:25 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/21 13:32:31 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ inline static int	type_split2(char ***split, int suf_into, t_suf_type *suf)
 	idx = -1;
 	while ((*split)[++idx] != T_NULL)
 		;
-	if (idx < suf_into + 1)
+	if (idx < suf_into + 2)
 	{
 		free_2d_array2((void ***)split);
 		return (2);
