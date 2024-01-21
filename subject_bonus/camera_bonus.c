@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 11:10:56 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 21:07:59 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:18:36 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,13 @@ static double	degree_to_radian(double degree);
 void	cam_init(t_data *data)
 {
 	t_camera	*ptr;
-	double		diagonal_len;
-	double		theta;
 	t_vec		tmp_vec;
 
 	ptr = &data->cam;
 	ptr->focal_length = 10.0;
-	diagonal_len = tan((degree_to_radian(ptr->fov / 2.0))) * ptr->focal_length;
-	theta = atan(1.0 / data->aspect_ratio);
-	ptr->viewport_width = 2.0 * cos(theta) * diagonal_len;
-	ptr->viewport_height = 2.0 * sin(theta) * diagonal_len;
+	ptr->viewport_width = 2.0 * tan(degree_to_radian(ptr->fov / 2.0))
+		* ptr->focal_length;
+	ptr->viewport_height = ptr->viewport_width / data->aspect_ratio;
 	if (ptr->ori_vec.x == 0 && ptr->ori_vec.y == 0)
 	{
 		ptr->viewport_u = v_make(ptr->viewport_width * ptr->ori_vec.z, 0, 0);

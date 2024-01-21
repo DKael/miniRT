@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/21 13:39:37 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:22:20 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ typedef struct s_data
 
 // anti_aliasing.c
 void	antialiasing(t_data *data);
+void	normal_mode(t_data *data);
 // camera.c
 void	cam_init(t_data *data);
 // check_func.c

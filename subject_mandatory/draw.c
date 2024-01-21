@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 17:33:02 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 16:33:14 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:23:30 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,8 @@ void	draw(t_data *data)
 				= ray_color(data, tmp_ray);
 		}
 	}
-	antialiasing(data);
+	if (data->aa_ratio != 1)
+		antialiasing(data);
+	else
+		normal_mode(data);
 }

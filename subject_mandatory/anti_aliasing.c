@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 12:15:24 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/11 16:31:31 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/21 19:26:02 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,26 @@ static void	antialiasing2(t_data *data, int *x, int *y)
 	dst = data->img_addr + ((y[0] / data->aa_ratio) * data->size_line
 			+ (x[0] / data->aa_ratio) * (data->bpp / 8));
 	*(unsigned int *)dst = (c[0].r << 16) + (c[0].g << 8) + c[0].b;
+}
+
+void	normal_mode(t_data *data)
+{
+	int		x;
+	int		y;
+	char	*dst;
+	t_color	c;
+
+	y = 0;
+	while (y < data->win_y_nx)
+	{
+		x = 0;
+		while (x < data->win_x_nx)
+		{
+			c = data->color_map[data->win_x * y + x];
+			dst = data->img_addr + (y * data->size_line + x * (data->bpp / 8));
+			*(unsigned int *)dst = (c.r << 16) + (c.g << 8) + c.b;
+			x++;
+		}
+		y++;
+	}
 }
