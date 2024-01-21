@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 22:37:46 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/21 11:09:04 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,7 +260,7 @@ typedef struct s_data
 	t_dll		objs;
 	t_color		*color_map;
 	int			aa_ratio;
-	t_bool		(*funt_ptr[4])(void *, t_ray, t_gap, t_hit_rec *);
+	int			(*funt_ptr[4])(void *, t_ray, t_gap, t_hit_rec *);
 	t_dll		xpms;
 }	t_data;
 

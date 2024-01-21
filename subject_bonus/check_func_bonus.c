@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:07:09 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 21:08:59 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/21 11:02:21 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ inline void	essential_elements_chk(t_data *data)
 		error_exit(data, "Camera element not exist!");
 	if (data->l_cnt == 0)
 		error_exit(data, "Light element not exist!");
+	if (data->cam.fov == 0 || fabs(data->cam.fov - 180.0) < EPSILON)
+		error_exit(data, "Can't activate camera at FOV value 0 or 180");
 }
 
 t_bool	check_real_num_str(char *str)
