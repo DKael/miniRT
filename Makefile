@@ -6,7 +6,7 @@
 #    By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 20:30:42 by hyungdki          #+#    #+#              #
-#    Updated: 2024/01/20 22:32:41 by hyungdki         ###   ########.fr        #
+#    Updated: 2024/01/21 13:06:00 by hyungdki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,7 @@ CC = cc
 
 CFLAGS = -Wall -Werror -Wextra
 
-NAME = minirt
+NAME = miniRT
 
 INCLUDE = -I.
 
