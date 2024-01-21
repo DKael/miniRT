@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 19:09:23 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/21 13:39:37 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@
 # define TYPE_SP 3
 # define TYPE_PL 4
 # define TYPE_CY 5
-# define KSN 64
-# define KS 0.5
 
 typedef int		t_bool;
 typedef t_vec	t_pnt;
