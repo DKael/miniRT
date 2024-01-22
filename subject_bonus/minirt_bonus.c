@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:44 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 21:24:37 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:36:46 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,15 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	if (argc != 2)
+	{
 		error_msg_write("Invalid argument number!");
+		exit(1);
+	}
 	if (extension_check(argv[1], ".rt") == FALSE)
-		error_exit(&data, "Invalid file extension!");
+	{
+		error_msg_write("Invalid file extension!");
+		exit(1);
+	}
 	data_init(&data);
 	data.mlx_ptr = mlx_init();
 	if (data.mlx_ptr == T_NULL)
