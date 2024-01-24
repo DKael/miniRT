@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:04:54 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/21 19:31:51 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:43:27 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <math.h>
+# include <pthread.h>
 # include "../minilibx/mlx.h"
 # include "../minilibx/mlx_keycode.h"
 # include "../libgnl/get_next_line.h"
@@ -237,6 +238,14 @@ typedef struct s_gap
 	double	t_max;
 }	t_gap;
 
+typedef struct s_thrd_data
+{
+	pthread_t		id;
+	struct s_data	*data;
+	int				start_x;
+	int				start_y;
+}	t_thrd_data;
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
@@ -262,6 +271,12 @@ typedef struct s_data
 	int			aa_ratio;
 	int			(*funt_ptr[4])(void *, t_ray, t_gap, t_hit_rec *);
 	t_dll		xpms;
+	t_thrd_data	*thrd;
+	int			thrd_ratio;
+	int			thrd_width;
+	int			thrd_height;
+	int			thrd_num;
+	int			thrd_per_line;
 }	t_data;
 
 // anti_aliasing_bonus.c
@@ -289,7 +304,7 @@ t_bool	is_pnt_in_cn(t_cn *cn, t_pnt pnt);
 t_bool	cy_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec);
 t_bool	is_pnt_in_cy(t_cy *cy, t_pnt pnt);
 // draw_bonus.c
-void	draw(t_data *data);
+void	*draw(void *data);
 // event_bonus.c
 int		quit_program(int keycode, t_data *data);
 int		press_cross_on_window_frame(t_data *data);
@@ -349,5 +364,8 @@ t_color	ray_color(t_data *data, t_ray r);
 t_pnt	ray_at(t_ray ray, double t);
 // sphere_bonus.c
 t_bool	sp_hit(void *ptr, t_ray ray, t_gap gap, t_hit_rec *rec);
+// thread_func_bonus.c
+void	multi_thread_draw(t_data *data);
+void	all_threads_join(t_data *data, int cnt);
 
 #endif

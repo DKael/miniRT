@@ -6,24 +6,27 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 17:33:02 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/21 19:32:02 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:28:13 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt_bonus.h"
 
-void	draw(t_data *data)
+void	*draw(void *ptr)
 {
-	t_pnt	pixel_center;
-	t_ray	tmp_ray;
-	int		idx[2];
+	t_thrd_data	*thrd_data;
+	t_data		*data;
+	t_pnt		pixel_center;
+	t_ray		tmp_ray;
+	int			idx[2];
 
-	cam_init(data);
-	idx[0] = -1;
-	while (++idx[0] < data->win_y_nx)
+	thrd_data = (t_thrd_data *)ptr;
+	data = thrd_data->data;
+	idx[0] = thrd_data->start_y - 1;
+	while (++idx[0] < thrd_data->start_y + data->thrd_height)
 	{
-		idx[1] = -1;
-		while (++idx[1] < data->win_x_nx)
+		idx[1] = thrd_data->start_x - 1;
+		while (++idx[1] < thrd_data->start_x + data->thrd_width)
 		{
 			pixel_center = v_add(data->cam.pixel00_loc,
 					v_add(v_mul(data->cam.pixel_du, idx[1]),
@@ -34,8 +37,5 @@ void	draw(t_data *data)
 				= ray_color(data, tmp_ray);
 		}
 	}
-	if (data->aa_ratio != 1)
-		antialiasing(data);
-	else
-		normal_mode(data);
+	return (T_NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 19:47:42 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/20 21:11:33 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:39:36 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	quit_program(int keycode, t_data *data)
 	if (keycode == ESC_KEY)
 	{
 		free(data->color_map);
+		free(data->thrd);
 		dll_clear(&data->objs, delete_obj);
 		dll_clear(&data->lights, delete_obj);
 		dll_clear(&data->xpms, delete_xpm_img);
@@ -30,6 +31,7 @@ int	quit_program(int keycode, t_data *data)
 int	press_cross_on_window_frame(t_data *data)
 {
 	free(data->color_map);
+	free(data->thrd);
 	dll_clear(&data->objs, delete_obj);
 	dll_clear(&data->lights, delete_obj);
 	dll_clear(&data->xpms, delete_xpm_img);
