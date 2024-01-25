@@ -6,7 +6,7 @@
 /*   By: hyungdki <hyungdki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:07:09 by hyungdki          #+#    #+#             */
-/*   Updated: 2024/01/21 11:02:21 by hyungdki         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:21:03 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_bool	extension_check(const char *file_name, const char *extention)
 
 	name_len = ft_strlen(file_name);
 	ex_len = ft_strlen(extention);
-	if (name_len <= 1)
+	if (name_len < ex_len)
 		return (FALSE);
 	idx = -1;
 	idx2 = name_len - ex_len;
