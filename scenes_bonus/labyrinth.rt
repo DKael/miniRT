@@ -1,0 +1,27 @@
+A 0.1             255,255,255     
+
+C     0,300,60       0,-0.9912279006826351,-0.132163720091018       100 
+
+L 150,0,100     0.8                              255,255,255   
+
+L -150,0,100     0.8                              255,255,255 
+
+
+L 0,200,50    0.7  255,255,255
+
+
+cy 100,100,0  0,0,1   50  400  2 0.1  bmt ./input/block.xpm ./input/block_normal.xpm
+
+cy -100,100,0  0,0,1   50  400  2 0.1  bmt ./input/block.xpm ./input/block_normal.xpm
+
+cy 120,-100,0  0,0,1   50  400  2 0.1  bmt ./input/block.xpm ./input/block_normal.xpm
+
+cy -120,-100,0  0,0,1   50  400  2 0.1  bmt ./input/block.xpm ./input/block_normal.xpm
+
+pl  0,0,-50   0,0,1 100  2 0.1  bmt ./input/block.xpm ./input/block_normal.xpm
+
+pl  0,0,200   0,0,1 100  2 0.1  bmt ./input/block.xpm ./input/block_normal.xpm
+
+sp  0,0,40   50  128  0.6  bmt ./input/earthmap.xpm ./input/earthmap_normal.xpm
+
+cn 0,0,20  0,0,-1  30  60  64 0.5 bmt ./input/waffle.xpm  ./input/waffle_normal.xpm

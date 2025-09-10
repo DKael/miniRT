@@ -1,0 +1,67 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc 활성 파일 빌드",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-fdiagnostics-color=always",
+				"anti_aliasing_bonus.c",
+				"camera_bonus.c",
+				"check_func_bonus.c",
+                "cone1_bonus.c",
+                "cone2_bonus.c",
+                "cone3_bonus.c",
+				"color1_bonus.c",
+				"color2_bonus.c",
+				"cylinder1_bonus.c",
+				"cylinder2_bonus.c",
+                "cylinder3_bonus.c",
+                "cylinder4_bonus.c",
+				"draw_bonus.c",
+				"event_bonus.c",
+				"free_resource_bonus.c",
+				"gap_bonus.c",
+                "get_color_bonus.c",
+				"get_element_value1_bonus.c",
+				"get_element_value2_bonus.c",
+				"get_element_value3_bonus.c",
+                "get_element_value4_bonus.c",
+				"hit_record_bonus.c",
+				"init_bonus.c",
+				"on_error_bonus.c",
+                "parsing_a_c_l_bonus.c",
+				"parsing_bonus.c",
+				"parsing_cn_bonus.c",
+				"parsing_cy_bonus.c",
+				"parsing_pl_bonus.c",
+                "parsing_sp_bonus.c",
+				"plane_bonus.c",
+				"point_bonus.c",
+				"ray1_bonus.c",
+				"ray2_bonus.c",
+				"sphere_bonus.c",
+                "thread_func_bonus.c",
+                "-ldll",
+                "-lgnl", 
+                "-lft",
+                "-lvec",
+                "-L.",
+                "-lmlx",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "디버거에서 생성된 작업입니다."
+        }
+    ],
+    "version": "2.0.0"
+}

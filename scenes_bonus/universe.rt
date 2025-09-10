@@ -1,0 +1,36 @@
+A 0.1 255,255,255
+
+
+C     0,-300,60       0,0.9912279006826351,-0.132163720091018       120 
+
+
+L  0,0,200   0.8 255,255,255
+
+sp 0,0,0 1000  2 0.5  im ./images/milkyway.xpm
+
+
+sp 0,0,0 50 2 0.5  im ./images/sun.xpm 
+
+
+sp -80,0,0 5 2 0.5  im ./images/mercury.xpm 
+
+
+sp 100,0,0 10 2 0.5  im ./images/venus.xpm 
+
+
+sp 0,-120,0 10 2 0.5  im ./images/earthmap.xpm 
+
+
+sp -50,140,0 11 2 0.5  im ./images/mars.xpm 
+
+
+sp 114,114,0 40 2 0.5  im ./images/jupiter.xpm 
+
+
+sp 128,-128,0 35 2 0.5  im ./images/saturn.xpm 
+
+
+sp -142,142,0 30 2 0.5  im ./images/uranus.xpm 
+
+
+sp -157,-157,0 30 2 0.5  im ./images/neptune.xpm 

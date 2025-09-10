@@ -1,0 +1,30 @@
+# Ambient lightning
+A "lighting ratio [0, 1]" "color [0, 255]"
+
+# Camera
+C "position" "orientation vector [-1, 1]" "FOV [0, 180]"
+
+# Light
+L "position" "brightness ratio [0, 1]" "color [0, 255]"
+
+# Objects bonus
+"object default rule" rgb "default color [0, 255]"
+
+"object default rule" ck "default color [0, 255]" "checker color [0, 255]" "checker pixel width" "checker pixel height" 
+
+"object default rule" im "texture image"
+
+"object default rule" bmt "texture image" "normal map image"
+
+# Objects default rule
+# Sphere
+sp "center" "diameter" "ksn [0, INF)" "ks [0, 1]" 
+
+# Plane
+pl "position" "normal vector [-1, 1]" "size" "ksn [0, INF)" "ks [0, 1]" 
+
+# Cylinder
+cy "position" "normal vector [-1, 1]" "diameter" "height" "ksn [0, INF)" "ks [0, 1]" 
+
+# Cone
+co "position" "normal vector [-1, 1]" "diameter" "height" "ksn [0, INF)" "ks [0, 1]" 
