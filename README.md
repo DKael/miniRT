@@ -70,11 +70,11 @@ make        # 기본 빌드
 make bonus  # 보너스 기능 포함 빌드
 
 # 2. 실행
-./miniRT scenes/test11.rt
-./miniRT scenes/test10.rt
+./miniRT scenes_mandatory/scene1.rt
+./miniRT scenes_bonus/labyrinth.rt
 ```
 * .rt 파일을 입력으로 받아 장면(Scene)을 구성
-* 장면 파일(scene.rt)에서 해상도, 광원, 카메라, 객체 등을 설정 가능
+* 장면 파일(scene.rt)에서 광원, 카메라, 객체 등을 설정 가능
 
 ---
 
