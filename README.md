@@ -80,13 +80,23 @@ make bonus  # 보너스 기능 포함 빌드
 
 ## 6️⃣ 렌더링 예시 사진
 
-<img width="1279" height="1023" alt="miniRT1" src="https://github.com/user-attachments/assets/165b107a-64eb-4b9d-84a6-420da388f42e" />
+<img width="1392" height="1164" alt="스크린샷 2025-09-10 오후 5 58 10" src="https://github.com/user-attachments/assets/09494ea2-d4fc-47ee-ae28-779a9b2631ae" />
 
-<img width="1277" height="1022" alt="miniRT3" src="https://github.com/user-attachments/assets/f36e536a-ae32-4a36-8be7-056c343a9a34" />
+<img width="1392" height="1164" alt="스크린샷 2025-09-10 오후 5 59 50" src="https://github.com/user-attachments/assets/a92d4ca5-f249-4969-9dee-c6ecea98aa73" />
 
-<img width="1392" height="1164" alt="miniRT4" src="https://github.com/user-attachments/assets/b4e4b973-ca5d-4b35-a262-1228cfd2e7c8" />
+<img width="1392" height="1164" alt="스크린샷 2025-09-10 오후 5 58 21" src="https://github.com/user-attachments/assets/8216a325-18c8-4e86-859e-7328c429ed3d" />
 
-<img width="1278" height="1023" alt="miniRT2" src="https://github.com/user-attachments/assets/07dd0963-3019-4877-9173-f46159c44a66" />
+<img width="1392" height="1164" alt="스크린샷 2025-09-10 오후 5 59 38" src="https://github.com/user-attachments/assets/bb332b8b-8b25-4ac5-8b09-f081cf4554dc" />
+
+<img width="1392" height="1164" alt="스크린샷 2025-09-10 오후 5 59 12" src="https://github.com/user-attachments/assets/e16c4827-5ea8-4144-be6a-161fa0111a77" />
+
+<img width="1392" height="1164" alt="스크린샷 2025-09-10 오후 5 59 03" src="https://github.com/user-attachments/assets/675588ed-3939-4efb-9b0a-be1a4dd0fa1b" />
+
+<img width="1392" height="1164" alt="스크린샷 2025-09-10 오후 5 58 52" src="https://github.com/user-attachments/assets/0d60beb6-a10f-4cfe-9cb7-566ae48fa36a" />
+
+<img width="1392" height="1164" alt="스크린샷 2025-09-10 오후 5 59 30" src="https://github.com/user-attachments/assets/87f06231-85f0-45a9-bd57-a6101e42d136" />
+
+<img width="1392" height="1164" alt="스크린샷 2025-09-10 오후 5 58 40" src="https://github.com/user-attachments/assets/8bab7827-88c5-4d91-8916-fdda9a7e6d3e" />
 
 
 ---
